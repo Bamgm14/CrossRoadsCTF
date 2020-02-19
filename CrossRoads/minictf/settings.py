@@ -1,3 +1,4 @@
+
 """
 Django settings for minictf project.
 
@@ -25,7 +26,7 @@ SECRET_KEY = '1' #Keep it secret.. set env on herokuapp with name 'KEY'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','192.168.0.234']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
