@@ -3,10 +3,10 @@ This is the CrossRoadsCTF, Host at Global Public School during CrossRoads. This 
 Make Sure To Add Your MYSQL Username and Password in the Views of Web of Crossroads Directory.
 Just Run The CTFManager To Set Up The Server and all
 Also Default Settings:
-<b>
+<p>
 IP=127.0.0.1
-</b><b>
+</p><p>
 Website Port=8000
-</b><b>
+</p><p>
 Background Program Port=31337
-</b>
+</p>
