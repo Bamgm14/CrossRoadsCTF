@@ -1,0 +1,120 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Substitution Cipher - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#introduction" title="Introduction" class="md-nav__link">
+Introduction
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#caesar-cipher" title="Caesar cipher" class="md-nav__link">
+Caesar cipher
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/crypto/caesar-cipher.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567872382638" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1>Substitution Cipher</h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">¶</a></h2>
+<p>Substitution cipher is an encryption scheme, in which position of 
+plaintext units are altered, keeping the sequence same. Basically it 
+means that each character of the message is substituted with a different
+ character to make the ciphertext It is the oldest and simplest way of 
+encrypting data.</p>
+<p>Some popular examples of substitution ciphers are: Caesar cipher, ROT13 etc</p>
+<h3 id="caesar-cipher">Caesar cipher<a class="headerlink" href="#caesar-cipher" title="Permanent link">¶</a></h3>
+<p>Caesar cipher is one of the oldest and simplest method used for 
+secret communication. The cipher is named after Julius Caesar who used 
+it to send secret messages to his generals. It is a monoalphabetic 
+cipher which means a single character is encrypted at a time. It is also
+ a shift cipher which means that each letter of the plaintext is shifted
+ by a fixed number down the alphabet to get the corresponding 
+ciphertext.
+So if alphabet ‘a’ is to be encrypted using key 3 then it will be 
+encrypted as, <code>’a’ + 3 = ‘d’</code>.</p>
+<p>Here's a diagrammatic represntation of the same:
+<img alt="PICTURE" src="{% static "bi0s_wiki/asda.png" %}"></p>
+<p>Let us understand the concept better using this example ,</p>
+<p>Suppose Alice and Bob want to send messages to each other through an 
+insecure channel. They wanted to use the “simplest” way of encrypting 
+the messages so they agreed upon using Caesar cipher. Hence Alice sets a
+ key of 3. She wants to send “HELLO”, so she replaces each alphabet with
+ the corresponding 4<sup>th</sup> alphabet that is, <code>‘H’ -&gt; ‘K’</code> , <code>‘E’ -&gt; ‘H’</code> , <code>‘L’ -&gt; ‘O’</code> , <code>‘L’ -&gt; ‘O’</code> , <code>‘O’ -&gt; ‘R’</code></p>
+<p>Finally, plaintext: <code>“HELLO”</code> → ciphertext: <code>“KHOOR”</code></p>
+<p>To decrypt the message Bob is going to backshift the ciphertext with 
+the given key. As no one else has the key, no one can know the message 
+and hence security is ensured. But this is not true in the present 
+world. As the key length is limited to maximum of 26. Thus, breaking the
+ caesar cipher becomes easier. It can be brute forced easily to find the
+ actual message. Also the repetition of same alphabets makes patterns 
+and gives the attacker a clue to break it.</p>
+<div class="admonition quote">
+<p class="admonition-title">ROT13</p>
+<p>ROT13 is a special case in Caesar cipher. ROT13 stands for “rotate by
+ 13” i.e it always replaces each plaintext character with the 
+corresponding 13<sup>th</sup> alphabet. To put it simply it is a case of
+ caesar cipher where the key is taken as 13. You can see that as 13 is 
+the half of 26, it made to sense to some to take the key as 13, which is
+ most distant from 0 or 26. One can get the plaintext by re-doing the 
+same operation as explained above. Even ROT13 isn’t secure like Caesar 
+cipher. It can be broken easily. ROT13 was earlier used in net.jokes 
+newsgroup in the early 1980s.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">ROT13</span><span class="p">(</span><span class="n">ROT13</span><span class="p">(</span><span class="n">X</span><span class="p">))</span> <span class="o">==</span> <span class="n">X</span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+</div>
+<p>For example,
+<code>‘M’ -&gt; ‘Z’</code> , <code>‘I’ -&gt; ‘V’</code> , <code>‘D’ -&gt; ‘Q’</code> , <code>‘D’ -&gt; ‘Q’</code> , <code>‘L’ -&gt; ‘Y’</code> , <code>’E’-&gt;’R’</code></p>
+<p>Finally, plaintext: <code>”MIDDLE”</code> → ciphertext: <code>“ZVQQYR”</code></p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/crypto/stream-cipher/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Introduction
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/crypto/transpostion-cipher/" title="Transposition Cipher" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Transposition Cipher
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

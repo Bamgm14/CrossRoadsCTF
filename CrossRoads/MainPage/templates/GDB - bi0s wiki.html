@@ -1,0 +1,128 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>GDB - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/reversing/essentials/gdb.md" title="Edit this page" class="md-icon md-content__icon"></a>
+<h1>GDB</h1>
+<details class="tip"><summary>Challenge Binary</summary><p><strong><a href="https://wiki.bi0s.in/reversing/essentials/gdb/resource/crackme">crackme</a></strong> </p>
+</details>
+<p>After downloading the above file go to the directory where the file is present and type <code>chmod +x crackme</code> in the terminal to make the file executable. </p>
+<p>First, load the file into gdb by typing gdb filename <code>in your terminal</code>.
+ For this, you have to be in the directory where the file is located. 
+Here my filename is crackme. Once the file is loaded, to see all the 
+functions defined in the file type <code>info functions</code> </p>
+<p><a href="https://wiki.bi0s.in/reversing/essentials/imgs/gdb1.png"><img alt="" src="{% static "bi0s_wiki/gdb1.png" %}"></a></p>
+<p>We have the <strong>main</strong> function defined. Let's see the disassembly of the main function by typing disassemble main. We get something like this </p>
+<p><a href="https://wiki.bi0s.in/reversing/essentials/imgs/gdb2.png"><img alt="" src="{% static "bi0s_wiki/gdb2.png" %}"></a></p>
+<p>Now the disassembly of the main function is in AT&amp;T format, we'll change that into Intel format by typing <code>set disassembly-flavor intel</code> (I prefer Intel format :D ). </p>
+<p>Now let's see the disassembly of the main function by typing <code>disassemble main</code>. It will be like this. </p>
+<p><a href="https://wiki.bi0s.in/reversing/essentials/imgs/gdb3.png"><img alt="" src="{% static "bi0s_wiki/gdb3.png" %}"></a></p>
+<p>On observing the disassembly of the main function, we can say that 
+there are 4 compare statements. Let's see what is actually happening at 
+those compare staetments by putting break points at those 4 locations. 
+To put the break point type <code>b*address</code>.The corresponding addresses are to the left side of the instruction(something like 0xaaaaaaaa).</p>
+<p>Now let's run the program by giving some random input (say 'hello') . Type <code>run hello</code> to run the program with 'hello' as the input.</p>
+<p><a href="https://wiki.bi0s.in/reversing/essentials/imgs/gdb4.png"><img alt="" src="{% static "bi0s_wiki/gdb4.png" %}"></a></p>
+<p>Now the program is halted at the 1<sup>st</sup> breakpoint. Now type disas main. </p>
+<p><a href="https://wiki.bi0s.in/reversing/essentials/imgs/gdb5.png"><img alt="" src="{% static "bi0s_wiki/gdb5.png" %}"></a></p>
+<p>The small arrow indicates the next instruction to be executed. The 
+comparison is between al and 0x62. Let's see what is in al. To see what 
+is present in al type print $al.</p>
+<p><a href="https://wiki.bi0s.in/reversing/essentials/imgs/gdb6.png"><img alt="" src="{% static "bi0s_wiki/gdb6.png" %}"></a></p>
+<p>It gives us 104 (0x68 hex ).It is nothing but the <strong>ASCII</strong> value of the 1<sup>st</sup> byte of our input (hello) which is 'h'. It is being compared with 0x62 (98) <strong>ASCII</strong> value of letter 'b'.Let's manually see what happens next.Type <code>ni</code> to proceed to the next instruction. As our input doesn't match with 0x62, <code>jne 0x8048464</code> this jump instruction is executed and the program control jumps to the instruction at 0x8048464.(Type <code>x/x $eip</code> whenever you want to see what instruction is going to be executed next or where the program control is right now. or just type <code>disas main</code>)</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span> <span class="mi">0</span><span class="nv">x08048464</span> <span class="o">&lt;+</span><span class="mi">96</span><span class="o">&gt;</span>  :  <span class="nv">mov</span>    <span class="nv">DWORD</span> <span class="nv">PTR</span> [<span class="nv">esp</span>],<span class="mi">0</span><span class="nv">x8048558</span>
+
+ <span class="mi">0</span><span class="nv">x0804846b</span> <span class="o">&lt;+</span><span class="mi">103</span><span class="o">&gt;</span>:  <span class="k">call</span>      <span class="nl">0x8048310</span> <span class="o">&lt;</span><span class="nv">puts</span>@<span class="nv">plt</span><span class="o">&gt;</span>
+
+ <span class="mi">0</span><span class="nv">x08048470</span> <span class="o">&lt;+</span><span class="mi">108</span><span class="o">&gt;</span>:  <span class="nv">mov</span>    <span class="nv">DWORD</span> <span class="nv">PTR</span> [<span class="nv">esp</span>],<span class="mi">0</span><span class="nv">xffffffff</span>
+
+ <span class="mi">0</span><span class="nv">x08048477</span> <span class="o">&lt;+</span><span class="mi">115</span><span class="o">&gt;</span>:  <span class="k">call</span>      <span class="nl">0x8048330</span> <span class="o">&lt;</span><span class="k">exit</span>@<span class="nv">plt</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>These 4 instructions will be executed, "You Lose" is printed on to the screen and program exits normally.</p>
+<p>Now we have concluded that our 1<sup>st</sup> letter must be 'b'. Similarly, there are 3 more compare statements.</p>
+<p>Let's run the program again by giving 'b' as the 1<sup>st</sup> letter in our input(say 'bell'). Type <code>r bell</code> .</p>
+<p><a href="https://wiki.bi0s.in/reversing/essentials/imgs/gdb7.png"><img alt="" src="{% static "bi0s_wiki/gdb7.png" %}"></a></p>
+<p>Now as the 1<sup>st</sup> letter of our input is 'b', <code>jne 0x8048464</code> this instruction is not executed and it successfully goes to the next breakpoint.</p>
+<p>Type <code>c</code> continue and then see where our program control is.</p>
+<p><a href="https://wiki.bi0s.in/reversing/essentials/imgs/gdb8.png"><img alt="" src="{% static "bi0s_wiki/gdb8.png" %}"></a></p>
+<p>Now our instruction pointer is at the 2<sup>nd</sup> breakpoint. Here lets see what is in al. Type print <code>$al</code>.</p>
+<p><a href="https://wiki.bi0s.in/reversing/essentials/imgs/gdb9.png"><img alt="" src="{% static "bi0s_wiki/gdb9.png" %}"></a></p>
+<p>We get 101 (0x65), that is the <strong>ASCII</strong> value of 'e' which is the 2<sup>nd</sup> letter of our input. It is being compared with 0x6c (108), <strong>ASCII</strong> value of 'l'. So our 2<sup>nd</sup> letter has got to be 'l'.</p>
+<p>Similarly, there are 2 more compare statements which take the 3<sup>rd</sup> byte and the 4<sup>th</sup> byte of our input and check them with 0x61(97 <strong>ASCII</strong> value for 'a') and 0x68(104 <strong>ASCII</strong> value for 'h') respectively. </p>
+<p>So our input must be "blah". </p>
+<p>Now get out of gdb by pressing ctrl+z. Then run the file by giving 
+'blah' as the input. Type ./crackme blahto run the file with 'blah' as 
+input. </p>
+<p><a href="https://wiki.bi0s.in/reversing/essentials/imgs/gdb10.png"><img alt="" src="{% static "bi0s_wiki/gdb10.png" %}"></a></p>
+<p>The challenge is complete. "You win"</p>
+<details class="tip"><summary>Tasks</summary><p>Now you have reached a crucial point. This is what you were waiting
+for.This is the first real RE challenge that you will be facing.</p>
+<p>You are going to be provided with the bomb labs binary. You need to pass
+the stages 1 - 6 to defuse the bomb. And there is also a secret level.</p>
+<p>Tools that can be used :</p>
+<ul>
+<li>Gdb</li>
+<li>
+<p>python</p>
+</li>
+<li>
+<p>Additionally you can store the inputs of the stages that you have
+already found out in a file let's assume it is <code>inp</code>. Now the next time
+you are running the binary you can run it as <code>r &lt; inp</code> in gdb and you
+can save the hassle of typing the previous inputs</p>
+</li>
+</ul>
+<p>Also keep in mind that you can't patch or change the values of any
+registers at any point of time. The solution requires you to find out
+exactly the password of each stage.</p>
+<p>Submit the passwords of each stage as a single file which when run
+<code>./bomblabs &lt; inp</code> should clear all the stages.</p>
+<ul>
+<li><a href="https://wiki.bi0s.in/reversing/essentials/gdb/resource/bomblab">bomblabs</a></li>
+</ul>
+</details>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/reversing/asm/" title="x86 assembly programming" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+x86 assembly programming
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/reversing/radare/" title="radare" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+radare
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

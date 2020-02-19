@@ -1,0 +1,91 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Introduction - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#what-is-memory-forensics" title="What is Memory Forensics?" class="md-nav__link">
+What is Memory Forensics?
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#what-is-a-memory-dump" title="What is a memory dump?" class="md-nav__link">
+What is a memory dump?
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#so-how-do-we-dump-memory-of-a-system" title="So how do we dump memory of a system?" class="md-nav__link">
+So how do we dump memory of a system?
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/forensics/memory-forensics.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871972475" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="memory-forensics">Memory Forensics<a class="headerlink" href="#memory-forensics" title="Permanent link">¶</a></h1>
+<h3 id="what-is-memory-forensics">What is Memory Forensics?<a class="headerlink" href="#what-is-memory-forensics" title="Permanent link">¶</a></h3>
+<p>To put it simply,
+Memory Forensics is the analysis of volatile and non-volatile data of a compromised comupter. It involves the acquistion of data
+from a computer.
+<strong>Volatile Memory</strong> is the memory used by the system or OS during the time the device is powered on.
+To put it simply, the data stored in&nbsp;RAM(Random Access Memory) can be called as volatile memory.
+This includes all web browsing activity, encryption keys, network connections or injected code fragments.</p>
+<p>Non-volatile memory is the data which is stored in the hard drive of the computer.</p>
+<p>Before 2008, Forensic Analysts used to rely primarily on non-volatile data for recovery of data and for detecting a malware's
+activity.</p>
+<p>These days, the importance of volatile memory analysis has become really important. So important that many of the malwares like
+<strong>stuxnet</strong> were discovered in the volatile memeory dumps of the compromised systems.</p>
+<h3 id="what-is-a-memory-dump">What is a memory dump?<a class="headerlink" href="#what-is-a-memory-dump" title="Permanent link">¶</a></h3>
+<p>Memory dump is the snapshot of the current running state of a system. It is a capture of everything running inside a system.
+This includes processes, loaded modules, opened pictures, password hashes and even text typed in the terminal.
+These dumps can be of crucial importance because it'll help us to detect what the attacker did to the system.</p>
+<h3 id="so-how-do-we-dump-memory-of-a-system">So how do we dump memory of a system?<a class="headerlink" href="#so-how-do-we-dump-memory-of-a-system" title="Permanent link">¶</a></h3>
+<p>Simple.
+To dump your RAM, there are tools like&nbsp;FTK Imager,&nbsp;DumpIt&nbsp;etc., when we consider a windows system.
+The primarily used tool is DumpIt. It is very easy to use. It has a command line interface and if you press "y", it'll dump the
+memory in the very folder where the DumpIt application is present.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/forensics/wireshark/" title="Basic Wireshark Usage" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Basic Wireshark Usage
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/forensics/volatility/" title="Volatility" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Volatility
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

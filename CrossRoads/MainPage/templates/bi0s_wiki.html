@@ -1,0 +1,87 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>bi0s wiki</title>
+{% endblock %}
+{% block content %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#introduction" title="Introduction" class="md-nav__link">
+Introduction
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#motivation-for-team-bi0s" title="Motivation for team bi0s" class="md-nav__link">
+Motivation for team bi0s
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#what-is-a-ctf" title="What is a CTF ?" class="md-nav__link">
+What is a CTF ?
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#the-contents-of-this-wiki" title="The contents of this wiki" class="md-nav__link">
+The contents of this wiki
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/index.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871350281" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="welcome-to-bi0s-wiki">Welcome to bi0s wiki<a class="headerlink" href="#welcome-to-bi0s-wiki" title="Permanent link">¶</a></h1>
+
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">¶</a></h2>
+<p>This wiki is hosted by Team <a href="http://bi0s.in/">bi0s</a><img name="kl_1567871350281" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">, the ethical hacking team of <a href="https://www.amrita.edu/amritapuri/">Amrita Vishwa Vidyapeetham, Amritapuri Campus</a><img name="kl_1567871350281" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">. It is aimed to give beginners an overview about the different areas of cybersecurity and CTF’s.</p>
+<h2 id="motivation-for-team-bi0s">Motivation for team bi0s<a class="headerlink" href="#motivation-for-team-bi0s" title="Permanent link">¶</a></h2>
+<p>Cybersecurity is the practice of protecting systems, networks, and 
+programs from digital attacks and knowledge in this area can reduce the 
+chances of your data being stolen and misused. Team bi0s is working on 
+making the youth of India skilled in the area of cybersecurity. </p>
+<h2 id="what-is-a-ctf">What is a CTF ?<a class="headerlink" href="#what-is-a-ctf" title="Permanent link">¶</a></h2>
+<p>CTF (Capture The Flag) is an information security competitions.It 
+involves solving challenges based on different areas of cybersecurity. 
+CTF’s can help beginners get an idea about the world of cybersecurity 
+and help experts practice their skills.</p>
+<h2 id="the-contents-of-this-wiki">The contents of this wiki<a class="headerlink" href="#the-contents-of-this-wiki" title="Permanent link">¶</a></h2>
+<p>This wiki consists of basic information about the different areas of cybersecurity like</p>
+<ul>
+<li><a href="https://wiki.bi0s.in/reversing/intro/">Reverse Engineering</a></li>
+<li><a href="https://wiki.bi0s.in/pwning/stack-overflow/intro/">Binary Exploitation</a></li>
+<li><a href="https://wiki.bi0s.in/crypto/introduction/">Cryptography</a></li>
+<li><a href="https://wiki.bi0s.in/web/intro/">Web Exploitation</a></li>
+<li><a href="https://wiki.bi0s.in/forensics/intro/">Forensic Analysis</a></li>
+</ul>
+<p>This wiki will hopefully provide necessary resources for a beginner 
+to get started in the areas of cybersecurity and will help in getting 
+better at CTF’s.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/python/intro/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Introduction
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

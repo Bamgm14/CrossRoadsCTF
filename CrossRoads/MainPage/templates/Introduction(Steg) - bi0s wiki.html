@@ -1,0 +1,76 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Introduction - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 506px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#what-is-steganography" title="What is steganography?" class="md-nav__link">
+What is steganography?
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#why-is-steganography-used" title="Why is steganography used?" class="md-nav__link">
+Why is steganography used?
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/forensics/steganography.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871858744" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="introduction"><strong>Introduction</strong><a class="headerlink" href="#introduction" title="Permanent link">¶</a></h1>
+<h4 id="what-is-steganography">What is steganography?<a class="headerlink" href="#what-is-steganography" title="Permanent link">¶</a></h4>
+<p>Steganography is an amazing art of hiding data inside images, videos etc.
+The advantage that steganography has over cryptography is that the hidden data does not attract serious attention.
+However, when someone sees a cryptographic data, they'll immediately recognize that this data is encrypted.
+Though the extraction of the hidden message is difficult in cryptography, steganographic data looks less malicious!!</p>
+<h4 id="why-is-steganography-used">Why is steganography used?<a class="headerlink" href="#why-is-steganography-used" title="Permanent link">¶</a></h4>
+<p>Let us consider that a person "A" is sending something secret to person "B". Let us consider that the agent who is going to
+transfer this secret is "C". If "A" uses some kind of cryptographic techniques, "C" will definitely notice that some sort of a
+secret message is getting transferred and he'll try all possible way to decrypt it. So "A" has to use some technique so that "C"
+won't bother into examining the hidden message. This is why steganography is used. The message which is to be transferred will
+definitely look less malicious.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/forensics/image-forensics/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Introduction
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/forensics/Tools/" title="Basic Tools" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Basic Tools
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

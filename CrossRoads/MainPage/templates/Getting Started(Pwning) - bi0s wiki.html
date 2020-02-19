@@ -1,0 +1,175 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Getting Started - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/pwning/getting_started.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871657281" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="before-getting-started">Before Getting Started<a class="headerlink" href="#before-getting-started" title="Permanent link">¶</a></h1>
+<h2 id="running-a-executable">Running a Executable<a class="headerlink" href="#running-a-executable" title="Permanent link">¶</a></h2>
+<p>Here we will look into how to run a executable file from the terminal . </p>
+<p>So open terminal , for ubuntu users you can press the shortcut <code>Ctrl+Alt+T</code> ( Press <code>Control</code> , <code>Alt</code> and <code>T</code> keys simultaneous ).</p>
+<p>Let's check what is inside the current directory </p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ ls
+bof.c bof
+</pre></div>
+</td></tr></tbody></table>
+<p>So there are two files <code>bof.c</code> and <code>bof</code> . The <code>ls</code> command printed out the list of all the files in the current directory.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ <span class="nv">file</span> <span class="nv">bof</span>.<span class="nv">c</span>
+<span class="nv">stack</span><span class="o">-</span><span class="nv">example</span>.<span class="nv">c</span>: <span class="nv">C</span> <span class="nv">source</span>, <span class="nv">ASCII</span> <span class="nv">text</span>
+
+$ <span class="nv">file</span> <span class="nv">bof</span> 
+<span class="nv">bof</span><span class="o">/</span><span class="nv">bof</span>: <span class="nv">ELF</span> <span class="mi">32</span><span class="o">-</span><span class="nv">bit</span> <span class="nv">LSB</span> <span class="nv">shared</span> <span class="nv">object</span>, <span class="nv">Intel</span> <span class="mi">80386</span>, <span class="nv">version</span> <span class="mi">1</span> <span class="ss">(</span><span class="nv">SYSV</span><span class="ss">)</span>, <span class="nv">dynamically</span> <span class="nv">linked</span>, <span class="nv">interpreter</span> <span class="o">/</span><span class="nv">lib</span><span class="o">/</span><span class="nv">ld</span><span class="o">-</span><span class="nv">linux</span>.<span class="nv">so</span>.<span class="mi">2</span>, <span class="k">for</span> <span class="nv">GNU</span><span class="o">/</span><span class="nv">Linux</span> <span class="mi">2</span>.<span class="mi">6</span>.<span class="mi">24</span>, <span class="nv">BuildID</span>[<span class="nv">sha1</span>]<span class="o">=</span><span class="nv">ed643dfe8d026b7238d3033b0d0bcc499504f273</span>, <span class="nv">not</span> <span class="nv">stripped</span>
+</pre></div>
+</td></tr></tbody></table>
+<p><code>file</code> Command show us that . One is a text files and other is a ELF executable .</p>
+<p>Lets try to run the binary.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="err">$</span><span class="p">.</span><span class="o">/</span><span class="n">bof</span>
+<span class="n">bash</span><span class="p">:</span> <span class="p">.</span><span class="o">/</span><span class="n">bof</span><span class="p">:</span> <span class="n">Permission</span> <span class="n">denied</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>In Linux to run a executable file , the file should have the 
+executable permission set , and if you try to run a file which does not 
+have this permission set it will give a permission denied error , To 
+assign executable premission to a file chmod command is used.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_3"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="p">.</span><span class="o">/</span><span class="n">bof</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>The above command gives the file <code>bof</code> executable permission. Now you can run <code>./bof</code> inside your terminal to run.</p>
+<h2 id="computer-memory">Computer Memory<a class="headerlink" href="#computer-memory" title="Permanent link">¶</a></h2>
+<p>The computer you are using is like a powerful calculator. For a 
+computer to perform tasks it has to store data or the input we enter 
+through a keybord, its just like how the brain works; to think, make 
+decisions, and act, it has to be supplied with knowledge through the 
+sense organs which is stored in our memory.</p>
+<p>In information security, it is key to understand how data is stored in memory. One among the many basic concepts is endianess.</p>
+<h3 id="bit">Bit<a class="headerlink" href="#bit" title="Permanent link">¶</a></h3>
+<p>Bit is smallest unit of information for a computer.
+A bit can either be 0 or 1 and thus can represent 2 values.</p>
+<h3 id="byte">Byte<a class="headerlink" href="#byte" title="Permanent link">¶</a></h3>
+<p>A collection of 8 bits make up a byte.
+Each bit can represent 2 values, 8 bits combined can represent (2^8) values.</p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="codehilite" id="__code_4"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre><span></span>    <span class="mi">1</span> <span class="n">bit</span> <span class="o">-</span> <span class="mi">0</span>       <span class="mi">0</span>       <span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span> <span class="n">values</span>
+            <span class="mi">1</span>       <span class="mi">1</span>
+
+    <span class="mi">2</span> <span class="n">bit</span> <span class="o">-</span> <span class="mo">00</span>      <span class="mi">0</span>       <span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">4</span> <span class="n">values</span>
+            <span class="mo">01</span>      <span class="mi">1</span>
+            <span class="mi">10</span>      <span class="mi">2</span>
+            <span class="mi">11</span>      <span class="mi">3</span>       
+
+    <span class="mi">3</span> <span class="n">bit</span> <span class="o">-</span> <span class="mo">000</span>     <span class="mi">0</span>       <span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="mi">8</span> <span class="n">values</span>
+            <span class="mo">001</span>     <span class="mi">1</span>
+            <span class="mo">010</span>     <span class="mi">2</span>
+            <span class="mo">011</span>     <span class="mi">3</span>
+            <span class="mi">100</span>     <span class="mi">4</span>
+            <span class="mi">101</span>     <span class="mi">5</span>
+            <span class="mi">110</span>     <span class="mi">6</span>
+            <span class="mi">111</span>     <span class="mi">7</span>           
+
+<span class="n">As</span> <span class="n">you</span> <span class="n">can</span> <span class="n">see</span> <span class="n">here</span> <span class="mi">2</span> <span class="n">bits</span> <span class="n">have</span> <span class="mi">4</span> <span class="n">combinations</span> <span class="n">with</span> <span class="mi">0</span> <span class="n">and</span> <span class="mi">1</span><span class="p">,</span> <span class="n">letting</span> <span class="n">us</span> <span class="n">represent</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span>
+<span class="mi">2</span><span class="p">,</span><span class="mf">3.</span>
+
+<span class="mi">3</span> <span class="n">bits</span> <span class="n">have</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span> <span class="n">bits</span> <span class="n">have</span> <span class="mi">16</span><span class="p">,</span> <span class="n">so</span> <span class="n">on</span> <span class="n">and</span> <span class="mi">8</span> <span class="n">bits</span> <span class="n">have</span> <span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="mi">8</span><span class="p">)</span> <span class="o">=</span> <span class="mi">256</span> <span class="n">combinations</span><span class="p">.</span>
+</pre></div>
+</td></tr></tbody></table>
+<strong>Thus we can store 256 values using a byte ranging from [0 - 255] or [0x00 - 0xff]</strong><p></p>
+<blockquote>
+<p>For convenience we wil be using hex values.</p>
+</blockquote>
+<h3 id="significant-byte">Significant byte<a class="headerlink" href="#significant-byte" title="Permanent link">¶</a></h3>
+<p>When considering a hexadecimal value like 0x10203040 having 4 bytes, the <strong>most significant byte</strong> is the starting byte <strong>0x10</strong> and the <strong>least significant byte</strong> is the last byte <strong>0x40</strong> </p>
+<h2 id="endianess">Endianess<a class="headerlink" href="#endianess" title="Permanent link">¶</a></h2>
+<p><strong>Endianess is the order in which bytes are stored in memory</strong></p>
+<p>There are two ways to doing it; <strong>big endian</strong> and <strong>little endian</strong>.</p>
+<h5 id="big-endian">Big Endian<a class="headerlink" href="#big-endian" title="Permanent link">¶</a></h5>
+<p>Storing data starting from the most significant byte
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite" id="__code_5"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">address</span> <span class="o">=</span> <span class="mh">0x1000</span>        <span class="n">value</span> <span class="o">=</span> <span class="mh">0x10203040</span>
+    <span class="mh">0x10000</span> <span class="o">:</span> <span class="mh">0x10</span>
+    <span class="mh">0x10001</span> <span class="o">:</span> <span class="mh">0x20</span>
+    <span class="mh">0x10002</span> <span class="o">:</span> <span class="mh">0x30</span>
+    <span class="mh">0x10003</span> <span class="o">:</span> <span class="mh">0x40</span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+<h5 id="little-endian">Little Endian<a class="headerlink" href="#little-endian" title="Permanent link">¶</a></h5>
+<p>Storing data starting from the least significant byte
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite" id="__code_6"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">address</span> <span class="o">=</span> <span class="mh">0x1000</span>        <span class="n">value</span> <span class="o">=</span> <span class="mh">0x10203040</span>
+    <span class="mh">0x10000</span> <span class="o">:</span> <span class="mh">0x40</span>
+    <span class="mh">0x10001</span> <span class="o">:</span> <span class="mh">0x30</span>
+    <span class="mh">0x10002</span> <span class="o">:</span> <span class="mh">0x30</span>
+    <span class="mh">0x10003</span> <span class="o">:</span> <span class="mh">0x10</span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p>Endianess of a computer is specific to the architecture.</p>
+<blockquote>
+<p>An intel 0x86 architecture follows the little endian</p>
+</blockquote>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/pwning/intro/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Introduction
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/pwning/stack/intro/" title="Introduction to Stack" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Introduction to Stack
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

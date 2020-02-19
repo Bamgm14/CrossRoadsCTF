@@ -1,0 +1,65 @@
+{% extends "MainPage/base.html" %}
+{% block Back %}
+<section id="banner">
+<div class="inner">
+<h1><a href=''>Help Wanted!</a></h1>
+
+<p><b>THE WONDER PROJECT </b>Alice Needs Your Help</p>
+</div>
+{% load static %}
+<video autoplay="autoplay" loop="" muted="muted" playsinline="" src="{% static "MainPage/banner.mp4" %}"></video>
+</section>
+<!-- Highlights -->
+
+<section class="wrapper">
+<div class="inner">
+<header class="special">
+<h2>CrossRoadsCTF</h2>
+
+<p><b>CrossRoadsCTF</b> is a simple capture the flag challenge ;this will give you a basic knowledge of hacking</p>
+<h3><a href='bi0s_wiki/'>Start From Here!</a></h3>
+</header>
+
+<div class="highlights">
+{% for x in info %}
+<section>
+<div class="content">
+<header>
+<h3><a href="{{x.url}}">{{x.title}}</a></h3>
+</header>
+<p>{{x.desc}}</p>
+</div>
+</section>
+{% endfor %}
+</div>
+</section>
+</div>
+<div style="text-align: center;"><p>Flag format:"CRsCTF{f1@gs0metxt}"</p></div>
+</section>
+<h1 style="text-align: center;"><a class="logo" href='/accounts/register/'>Register Now!</a></h1>
+<!-- CTA -->
+<section class="wrapper" id="cta">
+<div class="inner">
+<h2>About CrossRoadsCTF</h2>
+
+<p>Probably CTF means Capture the flag is traditionally an outdoor game 
+where two teams each have a flag and the objective is to capture the 
+other team's flag, located at the team's " base," and bring it safely 
+back to their own base. But this is not like this. You Have The Tools, You Have
+To Get The Flag Hidden in the questions.In any case, Alice Needs your help, Solve the puzzles and get the maximum points you can!</p>
+</div>
+</section>
+<section class="wrapper">
+<div class="inner">
+<header class="special">
+<h2>CTF competittion</h2>
+
+<p>Capture the Flag (CTF) is a special kind of information security 
+competitions. There are three common types of CTFs: Jeopardy, 
+Attack-Defence and mixed. Jeopardy-style CTFs has a couple of questions 
+(tasks) in range of categories. For example, Web, Forensic, Crypto, 
+Binary or something else.</p>
+</header>
+</div>
+</section>
+{% endblock Back %}

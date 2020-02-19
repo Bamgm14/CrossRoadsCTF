@@ -1,0 +1,175 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>LSB Encoding - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/forensics/LSB.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871900766" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="least-significant-bit-encoding">Least Significant Bit Encoding<a class="headerlink" href="#least-significant-bit-encoding" title="Permanent link">¶</a></h1>
+<h2 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">¶</a></h2>
+<p><strong>What is LSB ?</strong></p>
+<p><img alt="Least Significat Bit" src="{% static "bi0s_wiki/Lsb.png" %}"> <strong>LSB</strong>, the <strong>least significant bit</strong>
+ is the lowest bit in a series of numbers in binary; which is located at
+ the far right of a string. For example, in the binary number: 10111001,
+ the least significant bit is the far right 1.</p>
+<p>As binary numbers are largely used in computing and other related 
+areas, wherein the least significant bit holds importance, especially 
+when it comes to transmission of binary numbers.</p>
+<p>Digital data is computed in binary format, where the rightmost digit 
+is considered the lowest digit whereas the leftmost is considered the 
+highest digit. In positional notation, the least significant bit is also
+ known as the rightmost bit. It is the opposite of the most significant 
+bit, which carries the highest value in a multiple-bit binary number as 
+well as the number which is farthest to the right. In a multi-bit binary
+ number, the significance of a bit decreases as it approaches the least 
+significant bit. Since it is binary, the most significant bit can be 
+either 1 or 0. The least significant bit is frequently employed in hash 
+functions, checksums and pseudorandom number generators.</p>
+<p><img alt="img" src="{% static "bi0s_wiki/pic.jpg" %}"></p>
+<p>When a transmission of binary data is being done, the least 
+significant bit is the one which is transmitted first, followed by other
+ bits of increasing significance.</p>
+<p>The number of image pixels in a <strong>PNG</strong> file is generally composed of <strong>RGB</strong>
+ three primary colours (red, green, and blue). Each colour occupies 8 
+bits, and the value ranges from 0x00 to 0xFF, that is, there are 256 
+colours, which contain a total of 256 to the third power. Thus there are
+ 16777216 colours in total.</p>
+<p>The human eye can distinguish about 10 million different colours, 
+which means that the human eye can't distinguish the remaining 6 million
+ colours. LSB steganography is to modify the lowest binary bit (LSB) of 
+RGB colour components, each colour will have 8 bits, LSB steganography 
+is to modify the lowest bit in the number of pixels, and human eyes will
+ not notice before and after this change, each pixel can carry 3 bits of
+ information.</p>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">¶</a></h2>
+<h3 id="picoctf_2017-little-school-bus">PicoCTF_2017: Little School Bus<a class="headerlink" href="#picoctf_2017-little-school-bus" title="Permanent link">¶</a></h3>
+<p><strong>Description:</strong></p>
+<p>Can you help me find the data in this <a href="https://wiki.bi0s.in/forensics/img/lb.bmp">Little-School-Bus</a>?</p>
+<p><strong>Hint:</strong></p>
+<p>Look at least significant bit encoding!!</p>
+<h4 id="solution">Solution<a class="headerlink" href="#solution" title="Permanent link">¶</a></h4>
+<p>As the Hint suggests the problem is related to LSB Encoding, The leftmost digit in binary is called the LSB digit</p>
+<p>As mentioned earlier LSB encoding is done by changing the LSB bit of 
+the colour, however, this slight variation is not noticeable. Thus by 
+changing the LSB bit, we can hide data inside a file.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>xxd -b ./littleschoolbus.bmp <span class="p">|</span> head -n <span class="m">20</span>
+</pre></div>
+</td></tr></tbody></table>
+Gives,<p></p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="m">00000000</span>: <span class="m">01000010</span> <span class="m">01001101</span> <span class="m">11100010</span> <span class="m">01001011</span> <span class="m">00000010</span> <span class="m">00000000</span>  BM.K..
+<span class="m">00000006</span>: <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00110110</span> <span class="m">00000000</span>  ....6.
+0000000c: <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00101000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span>  ..<span class="o">(</span>...
+<span class="m">00000012</span>: <span class="m">11111100</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">11000111</span> <span class="m">00000000</span>  ......
+<span class="m">00000018</span>: <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000001</span> <span class="m">00000000</span> <span class="m">00011000</span> <span class="m">00000000</span>  ......
+0000001e: <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">10101100</span> <span class="m">01001011</span>  .....K
+<span class="m">00000024</span>: <span class="m">00000010</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span>  ......
+0000002a: <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span>  ......
+<span class="m">00000030</span>: <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span>  ......
+<span class="m">00000036</span>: <span class="m">11111110</span> <span class="m">11111111</span> <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111111</span>  ......
+0000003c: <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111111</span> <span class="m">11111111</span> <span class="m">11111110</span>  ......
+<span class="m">00000042</span>: <span class="m">11111111</span> <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111111</span>  ......
+<span class="m">00000048</span>: <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111111</span>  ......
+0000004e: <span class="m">11111110</span> <span class="m">11111111</span> <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111111</span>  ......
+<span class="m">00000054</span>: <span class="m">11111111</span> <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111111</span> <span class="m">11111111</span> <span class="m">11111111</span>  ......
+0000005a: <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111111</span> <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111111</span>  ......
+<span class="m">00000060</span>: <span class="m">11111111</span> <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111111</span> <span class="m">11111110</span>  ......
+<span class="m">00000066</span>: <span class="m">11111110</span> <span class="m">11111111</span> <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111111</span>  ......
+0000006c: <span class="m">11111110</span> <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111111</span> <span class="m">11111111</span> <span class="m">11111110</span>  ......
+<span class="m">00000072</span>: <span class="m">11111111</span> <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111111</span>  ......
+</pre></div>
+</td></tr></tbody></table>
+Taking the LSB bit after the many zero,<p></p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="m">00000036</span>: <span class="m">11111110</span> <span class="m">11111111</span> <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111111</span>  ......
+0000003c: <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111111</span> <span class="m">11111111</span> <span class="m">11111110</span>  ......
+<span class="m">00000042</span>: <span class="m">11111111</span> <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111111</span>  ......
+<span class="m">00000048</span>: <span class="m">11111111</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111110</span> <span class="m">11111111</span>  ......
+</pre></div>
+</td></tr></tbody></table>
+8 bit gives
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_3"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="m">01100110</span> <span class="m">01101100</span>
+</pre></div>
+</td></tr></tbody></table>
+Which in ascii is <code>fl</code>?<p></p>
+<p>Now we script ,
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite" id="__code_4"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="nv">binary_data</span> <span class="o">=</span> open<span class="o">(</span><span class="s2">"littleschoolbus.bmp"</span>,<span class="s2">"rb"</span><span class="o">)</span> <span class="c1"># Open the file binary mode</span>
+binary_data.seek<span class="o">(</span><span class="m">54</span><span class="o">)</span>  <span class="c1">#seek to 54 bytes these bytes does not contain any data</span>
+<span class="nv">data</span> <span class="o">=</span> binary_data.read<span class="o">()</span> <span class="c1"># read the binary data</span>
+<span class="nv">l</span> <span class="o">=</span> <span class="o">[]</span>
+<span class="k">for</span> i in data:
+    l.append<span class="o">(</span>bin<span class="o">(</span>i<span class="o">)[</span>-1<span class="o">])</span>  <span class="c1">#make a list of LSB bit</span>
+<span class="k">for</span> i in range<span class="o">(</span><span class="m">0</span>,500,8<span class="o">)</span>:
+    print<span class="o">(</span>chr<span class="o">(</span>int<span class="o">(</span><span class="s1">''</span>.join<span class="o">(</span>l<span class="o">[</span>i:i+8<span class="o">])</span>,2<span class="o">))</span>,end<span class="o">=</span><span class="s1">''</span><span class="o">)</span> <span class="c1"># print the character</span>
+</pre></div>
+</td></tr></tbody></table>
+Which gives the flag !!<p></p>
+<p>flag{remember_kids_protect_your_headers_afb3}</p>
+<h4 id="footnote">Footnote :<a class="headerlink" href="#footnote" title="Permanent link">¶</a></h4>
+<ol>
+<li><a href="http://www.aaronmiller.in/thesis/">LSB</a>
+<li><a href="http://www.devdungeon.com/content/working-binary-data-python">Python Binary File I/O</a>
+</ol>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/forensics/ToolsContd/" title="Basic Tools Contd." class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Basic Tools Contd.
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/forensics/network-forensics/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Introduction
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

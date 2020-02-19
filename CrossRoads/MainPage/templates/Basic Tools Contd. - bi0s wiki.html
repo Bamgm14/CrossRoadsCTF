@@ -1,0 +1,833 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Basic Tools Contd. - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#peepdf" title="Peepdf" class="md-nav__link">
+Peepdf
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#installation" title="Installation" class="md-nav__link">
+Installation
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#usage" title="Usage" class="md-nav__link">
+Usage
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#example" title="Example" class="md-nav__link">
+Example
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#pngcheck" title="Pngcheck" class="md-nav__link">
+Pngcheck
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#installation_1" title="Installation" class="md-nav__link">
+Installation
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#usage_1" title="Usage" class="md-nav__link">
+Usage
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#references" title="References" class="md-nav__link">
+References
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#john-the-ripper" title="John The Ripper" class="md-nav__link">
+John The Ripper
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#installation_2" title="Installation" class="md-nav__link">
+Installation
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#usage_2" title="Usage" class="md-nav__link">
+Usage
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#example_1" title="Example" class="md-nav__link">
+Example
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#references_1" title="References" class="md-nav__link">
+References
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#fcrackzip" title="Fcrackzip" class="md-nav__link">
+Fcrackzip
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#installation_3" title="Installation" class="md-nav__link">
+Installation
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#usage_3" title="Usage" class="md-nav__link">
+Usage
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#example_2" title="Example" class="md-nav__link">
+Example
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#references_2" title="References" class="md-nav__link">
+References
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#audacity" title="Audacity" class="md-nav__link">
+Audacity
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#installation_4" title="Installation" class="md-nav__link">
+Installation
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#usage_4" title="Usage" class="md-nav__link">
+Usage
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#example_3" title="Example" class="md-nav__link">
+Example
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#references_3" title="References" class="md-nav__link">
+References
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#sonic-visualiser" title="Sonic Visualiser" class="md-nav__link">
+Sonic Visualiser
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#installation_5" title="Installation" class="md-nav__link">
+Installation
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#usage_5" title="Usage" class="md-nav__link">
+Usage
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#example_4" title="Example" class="md-nav__link">
+Example
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#references_4" title="References" class="md-nav__link">
+References
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#pdf-crack" title="PDF Crack" class="md-nav__link">
+PDF Crack
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#installation_6" title="Installation" class="md-nav__link">
+Installation
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#usage_6" title="Usage" class="md-nav__link">
+Usage
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#example_5" title="Example" class="md-nav__link">
+Example
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#deep-sound" title="Deep Sound" class="md-nav__link">
+Deep Sound
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#installation_7" title="Installation" class="md-nav__link">
+Installation
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#usage_7" title="Usage" class="md-nav__link">
+Usage
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#example_6" title="Example" class="md-nav__link">
+Example
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#reference" title="Reference" class="md-nav__link">
+Reference
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#jsteg" title="Jsteg" class="md-nav__link">
+Jsteg
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#installation_8" title="Installation" class="md-nav__link">
+Installation
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#usage_8" title="Usage" class="md-nav__link">
+Usage
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#hiding-data" title="Hiding data" class="md-nav__link">
+Hiding data
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#revealing-data" title="Revealing data" class="md-nav__link">
+Revealing data
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#references_5" title="References" class="md-nav__link">
+References
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#zsteg" title="Zsteg" class="md-nav__link">
+Zsteg
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#installation_9" title="Installation" class="md-nav__link">
+Installation
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#usage_9" title="Usage" class="md-nav__link">
+Usage
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#references_6" title="References" class="md-nav__link">
+References
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#tweak-png" title="Tweak PNG" class="md-nav__link">
+Tweak PNG
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#installation_10" title="Installation" class="md-nav__link">
+Installation
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#usage_10" title="Usage" class="md-nav__link">
+Usage
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#references_7" title="References" class="md-nav__link">
+References
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/forensics/ToolsContd.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871892411" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="basic-tools-contd"><strong>Basic Tools Contd.</strong><a class="headerlink" href="#basic-tools-contd" title="Permanent link">¶</a></h1>
+<h3 id="peepdf"><strong>Peepdf</strong><a class="headerlink" href="#peepdf" title="Permanent link">¶</a></h3>
+<p>Peepdf is a Python based tool to explore PDF files in order to find out if the file can be harmful or not. The
+aim of this tool is to provide all the necessary components that a security researcher could need in a
+PDF analysis without using 3 or 4 tools to make all the tasks. With peepdf it's possible to see all the
+objects in the document showing the suspicious elements, supports all the most used filters and
+encodings, it can parse different versions of a file, object streams and encrypted files.</p>
+<h4 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">¶</a></h4>
+<p>Download the tool from the official <a href="https://github.com/jesparza/peepdf">Github Repo</a><img name="kl_1567871892411" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12"></p>
+<h4 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ ./peepdf.py -i pdffile.pdf
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">¶</a></h4>
+<p>We will now see how to extract an embedded object file in PDFs</p>
+<p><img alt="Image" src="{% static "bi0s_wiki/screenshot1.png" %}"></p>
+<p>As we can see there is no suspiction in the pdf file when viewed normally in a pdf viewer.</p>
+<p>So now lets load the pdf file in <strong>peepdf</strong></p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ ./peepdf.py -i nothing.pdf
+File: nothing.pdf
+MD5: 56572d46b09ef2b3de1faa4c9d5e1cb0
+SHA1: 99b73b7d87815f669d54bb1c430b703d4ae827a4
+SHA256: 98d1aa64f417da1a331b18c3b57d8d25e642c8f23a661e5298730c01d0a04ad2
+Size: <span class="m">925647</span> bytes
+Version: <span class="m">1</span>.1
+Binary: True
+Linearized: False
+Encrypted: False
+Updates: <span class="m">0</span>
+Objects: <span class="m">8</span>
+Streams: <span class="m">2</span>
+URIs: <span class="m">0</span>
+Comments: <span class="m">0</span>
+Errors: <span class="m">0</span>
+
+Version <span class="m">0</span>:
+    Catalog: <span class="m">1</span>
+    Info: No
+    Objects <span class="o">(</span><span class="m">8</span><span class="o">)</span>: <span class="o">[</span><span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span>, <span class="m">5</span>, <span class="m">6</span>, <span class="m">7</span>, <span class="m">8</span><span class="o">]</span>
+    Streams <span class="o">(</span><span class="m">2</span><span class="o">)</span>: <span class="o">[</span><span class="m">5</span>, <span class="m">8</span><span class="o">]</span>
+        Encoded <span class="o">(</span><span class="m">1</span><span class="o">)</span>: <span class="o">[</span><span class="m">8</span><span class="o">]</span>
+    Suspicious elements:
+        /Names <span class="o">(</span><span class="m">1</span><span class="o">)</span>: <span class="o">[</span><span class="m">1</span><span class="o">]</span>
+        /EmbeddedFiles: <span class="o">[</span><span class="m">1</span><span class="o">]</span>
+        /EmbeddedFile: <span class="o">[</span><span class="m">8</span><span class="o">]</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>As we can see there is an embedded file in the pdf.</p>
+<p>So now we need to extract the embedded file using the stream command as follows,</p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span>PPDF&gt; stream <span class="m">8</span> &gt; embedfile
+</pre></div>
+</td></tr></tbody></table>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_3"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ file embedfile
+embedfile: PNG image data, <span class="m">960</span> x <span class="m">640</span>, <span class="m">8</span>-bit/color RGB, non-interlaced
+$ xdg-open embedfile
+</pre></div>
+</td></tr></tbody></table>
+We can see that there is an Image embedded in the pdf.<p></p>
+<p><img alt="Embedded Image" src="{% static "bi0s_wiki/embedfile.png" %}"></p>
+<h3 id="pngcheck"><strong>Pngcheck</strong><a class="headerlink" href="#pngcheck" title="Permanent link">¶</a></h3>
+<p>A tool to test PNG image files for corruption, display size, type, compression info.</p>
+<p>pngcheck is the official PNG tester and debugger. Originally designed
+ simply to test the CRCs within a PNG image file (e.g., to check for 
+ASCII rather than binary transfer), it
+has been extended to check and optionally print almost all the 
+information about a PNG
+image and to verify that it conforms to the PNG specification. It also 
+includes partial
+support for MNG animations.</p>
+<p>It can dump the chunk-level information in the image in 
+human-readable form. For example, it can be used to print the basic 
+stats about an image (dimensions, bit depth, etc.); to
+list the color and transparency info in its palette; or to extract the 
+embedded text
+annotations. All PNG and JNG chunks are supported, plus almost all MNG 
+chunks (everything
+but PAST, DISC, tERm, DROP, DBYK, and ORDR). This is a command-line 
+program with batch
+capabilities.</p>
+<h4 id="installation_1">Installation<a class="headerlink" href="#installation_1" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_4"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo apt install pngcheck
+</pre></div>
+</td></tr></tbody></table>
+<p>We will now use pngcheck with the following Image
+<img alt="image.png" src="{% static "bi0s_wiki/image.png" %}"></p>
+<h4 id="usage_1">Usage<a class="headerlink" href="#usage_1" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="codehilite" id="__code_5"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ pngcheck -v image.png
+File: image.png <span class="o">(</span><span class="m">40711</span> bytes<span class="o">)</span>
+  chunk IHDR at offset 0x0000c, length <span class="m">13</span>
+    <span class="m">2560</span> x <span class="m">1440</span> image, <span class="m">32</span>-bit RGB+alpha, non-interlaced
+  chunk bKGD at offset 0x00025, length <span class="m">6</span>
+    <span class="nv">red</span> <span class="o">=</span> 0x00ee, <span class="nv">green</span> <span class="o">=</span> 0x00ee, <span class="nv">blue</span> <span class="o">=</span> 0x00ee
+  chunk pHYs at offset 0x00037, length <span class="m">9</span>: 2835x2835 pixels/meter <span class="o">(</span><span class="m">72</span> dpi<span class="o">)</span>
+  chunk IDAT at offset 0x0004c, length <span class="m">8192</span>
+    zlib: deflated, 32K window, maximum compression
+  chunk IDAT at offset 0x02058, length <span class="m">8192</span>
+  chunk IDAT at offset 0x04064, length <span class="m">8192</span>
+  chunk IDAT at offset 0x06070, length <span class="m">8192</span>
+  chunk IDAT at offset 0x0807c, length <span class="m">7799</span>
+  chunk IEND at offset 0x09eff, length <span class="m">0</span>
+No errors detected in image.png <span class="o">(</span><span class="m">9</span> chunks, <span class="m">99</span>.7% compression<span class="o">)</span>.
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="references">References<a class="headerlink" href="#references" title="Permanent link">¶</a></h4>
+<p>For more information about the tool,</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_6"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ man pngcheck
+</pre></div>
+</td></tr></tbody></table>
+<h3 id="john-the-ripper"><strong>John The Ripper</strong><a class="headerlink" href="#john-the-ripper" title="Permanent link">¶</a></h3>
+<p>John the Ripper is a fast password cracker, currently available for many flavors of Unix, Windows, DOS,
+and OpenVMS. Its primary purpose is to detect weak Unix passwords. Besides several crypt(3) password hash
+types most commonly found on various Unix systems, supported out of the box are Windows LM hashes, plus
+lots of other hashes and ciphers in the community-enhanced version. John can almost crack all password encrypted archives.</p>
+<h4 id="installation_2">Installation<a class="headerlink" href="#installation_2" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_7"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo snap install john-the-ripper
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="usage_2">Usage<a class="headerlink" href="#usage_2" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_8"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ zip2john file.zip
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">¶</a></h4>
+<details class="question"><summary>Example file</summary><ul>
+<li><a href="https://wiki.bi0s.in/forensics/Challenges/flag.zip">File Transfer</a></li>
+</ul>
+</details>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_9"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ zip2john flag.zip
+flag.zip:<span class="nv">$zip2$*</span><span class="m">0</span>*1*0*47690c81c096c3c8*4d21*1f*7b9718219de608c6c2d860c4cf5566471d3d4bb5c73b5449ab75ac357c185c*6114d207125db9159c6a*$/zip2$:::::flag.zip
+</pre></div>
+</td></tr></tbody></table>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_10"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ zip2john flag.zip &gt;&gt; hash.txt
+</pre></div>
+</td></tr></tbody></table>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite" id="__code_11"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ john hash.txt
+
+Warning: detected <span class="nb">hash</span> <span class="nb">type</span> <span class="s2">"ZIP"</span>, but the string is also recognized as <span class="s2">"zip-opencl"</span>
+Use the <span class="s2">"--format=zip-opencl"</span> option to force loading these as that <span class="nb">type</span> instead
+Loaded <span class="m">1</span> password <span class="nb">hash</span> <span class="o">(</span>ZIP, WinZip <span class="o">[</span>PBKDF2-SHA1 8x SSE2<span class="o">])</span>
+Will run <span class="m">8</span> OpenMP threads
+Press <span class="s1">'q'</span> or Ctrl-C to abort, almost any other key <span class="k">for</span> status
+<span class="m">123321</span>           <span class="o">(</span>flag.zip<span class="o">)</span>
+1g <span class="m">0</span>:00:00:02 DONE <span class="m">2</span>/3 <span class="o">(</span><span class="m">2019</span>-04-26 <span class="m">17</span>:31<span class="o">)</span> <span class="m">0</span>.4651g/s 16946p/s 16946c/s 16946C/s <span class="m">123456</span>..MATT
+Use the <span class="s2">"--show"</span> option to display all of the cracked passwords reliably
+Session completed
+</pre></div>
+</td></tr></tbody></table>
+<p>So the password found is <strong>123321</strong>, similarly we can crack the archive compressions like 7z, Rar.</p>
+<h4 id="references_1">References<a class="headerlink" href="#references_1" title="Permanent link">¶</a></h4>
+<p>For more information about the tool,</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_12"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ man john
+</pre></div>
+</td></tr></tbody></table>
+<h3 id="fcrackzip"><strong>Fcrackzip</strong><a class="headerlink" href="#fcrackzip" title="Permanent link">¶</a></h3>
+<p>Fcrackzip is a password cracking tool for ZIP files. Fcrackzip cracks the password by <strong>Brute-Force Attack</strong> or by a <strong>Dictionary Attack</strong>.</p>
+<p>In a <strong>Brute-force Attack</strong> the attacker checks all the known combinations of passwords until the correct password founds.</p>
+<p><strong>Dictionary Attack</strong> involves providing a wordlist which contains a set of commonly used passwords.</p>
+<h4 id="installation_3">Installation<a class="headerlink" href="#installation_3" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_13"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo apt install fcrackzip
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="usage_3">Usage<a class="headerlink" href="#usage_3" title="Permanent link">¶</a></h4>
+<p>The general usage of fcrackzip for brute forcing the password is as follows.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_14"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ fcrackzip -v -b -u -p &lt;file_name.zip&gt;
+</pre></div>
+</td></tr></tbody></table>
+<ul>
+<li>-v for knowing what's going on in background. Commonly Know as <strong>verbose</strong>.</li>
+<li>-b for <strong>brute-forcing</strong>.</li>
+<li>-u for <strong>unzip</strong>.</li>
+<li>-p for setting the <strong>initial password</strong> for brute forcing or the file to supply password for dictionary attack.</li>
+<li>-D sets <strong>dictionary mode</strong> and reads passwords from a wordlist alphabetically.</li>
+</ul>
+<p>The general usage for the dictionary attack is as follows.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_15"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ fcrackzip -v -u -D -p &lt;path_to_wordlist_file&gt; &lt;file_name.zip&gt;
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p>The common wordlist which is publicly available is <a href="https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt">rockyou</a><img name="kl_1567871892411" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">.</p>
+<h5 id="example_2">Example<a class="headerlink" href="#example_2" title="Permanent link">¶</a></h5>
+<p>Here is an example, using a dictionary attack.
+On opening the zip file, we found that the file was protected.</p>
+<p><img alt="" src="{% static "bi0s_wiki/file1.png" %}"></p>
+<p>We used dictionary attack to find the password.</p>
+<p><img alt="" src="{% static "bi0s_wiki/file2.png" %}"></p>
+<p>In this way cracking the zip is possible when you don't know the password.</p>
+<h4 id="references_2">References<a class="headerlink" href="#references_2" title="Permanent link">¶</a></h4>
+<p>For more information about the tool,</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_16"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ man fcrackzip
+</pre></div>
+</td></tr></tbody></table>
+<h3 id="audacity"><strong>Audacity</strong><a class="headerlink" href="#audacity" title="Permanent link">¶</a></h3>
+<p>Audacity is a GUI based tool. It is an open-source audio editor and recording application software.</p>
+<h4 id="installation_4">Installation<a class="headerlink" href="#installation_4" title="Permanent link">¶</a></h4>
+<p>Audacity is available for Windows, macOS &amp; Linux. You can download <a href="https://www.audacityteam.org/download/">Audacity</a>
+<h4 id="usage_4">Usage<a class="headerlink" href="#usage_4" title="Permanent link">¶</a></h4>
+<p>Audacity can be used from the command line or by directly clicking the icon in applications.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_17"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ audacity &lt;file_name&gt;
+</pre></div>
+</td></tr></tbody></table>
+On opening a file with the audacity you would see something similar to it.
+<img alt="" src="{% static "bi0s_wiki/file4.png" %}"><p></p>
+<p>Audacity displays the audio files in a wave form. You change the 
+waveform into spectrogram by changing the layer into spectrogram. You 
+can do it by clicking the arrow next to the track name to switch from 
+waveform to spectrogram.</p>
+<p><img alt="" src="{% static "bi0s_wiki/file5.png" %}"></p>
+<p><strong>Spectrogram</strong> is a visual based view of representing 
+the signal strength, or “loudness”, of a signal over time at various 
+frequencies present in a particular waveform.</p>
+<p>There are so many effects like changing speed, pitch, tempo etc. By 
+clicking the effects option in the menu bar, you can see many options, 
+and users can apply the effect only in the selected area or the entire 
+track.</p>
+<h5 id="example_3">Example<a class="headerlink" href="#example_3" title="Permanent link">¶</a></h5>
+<p>In CTFs we come across quite a few audio challenges. Mostly, these 
+challenges are mainly about changing the layer to spectrogram or they 
+embedding some data in <strong>morse format</strong>.</p>
+<p><strong>Morse Code</strong> means converting the text into <strong>Dot-Dash</strong> format. You can use this <a href="https://morsecode.scphillips.com/translator.html">link</a> and get the message you wanted.
+In CTFs we get challenges which have the morse code or we see that morse code after changing the layer to spectrogram.</p>
+<p>An example for changing the layer to spectrogram, <img alt="" src="{% static "bi0s_wiki/file7.png" %}"></p>
+<p>An example for changing the layer and getting the morse code, <img alt="" src="{% static "bi0s_wiki/file9.png" %}">
+You can see some extra data above the separation of two tracks, that is nothing but morse. <strong>Big lines</strong> represent <strong>Dash</strong> and <strong>Small lines</strong> represent <strong>Dot</strong>, the space between them separates each letter. If you want a clear idea of each and every letter you can separate it with <strong>/ or |</strong>.</p>
+<p>The morse code for alphabets and number is as follows,</p>
+<p><img alt="" src="{% static "bi0s_wiki/morse.png" %}"></p>
+<h4 id="references_3">References<a class="headerlink" href="#references_3" title="Permanent link">¶</a></h4>
+<p>For more information about morse code and usage of Audacity,</p>
+<p>Visit <a href="https://en.wikipedia.org/wiki/Morse_code">Wikipedia</a>
+<h3 id="sonic-visualiser"><strong>Sonic Visualiser</strong><a class="headerlink" href="#sonic-visualiser" title="Permanent link">¶</a></h3>
+<p>Sonic-Visualiser is also a GUI based tool. It is similar to Audacity 
+but a bit more powerful than it. It is an application software for 
+viewing and analysing the contents of audio files.</p>
+<h4 id="installation_5">Installation<a class="headerlink" href="#installation_5" title="Permanent link">¶</a></h4>
+<p>Sonic Visualiser is available for Linux, OS/X, and Windows. You can download <a href="https://www.sonicvisualiser.org/download.html">Sonic-Visualiser</a>
+<h4 id="usage_5">Usage<a class="headerlink" href="#usage_5" title="Permanent link">¶</a></h4>
+<p>Sonic-Visualiser can be used from the command line or by directly clicking the icon in applications.</p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_18"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sonic-visualiser &lt;file_name&gt;
+</pre></div>
+</td></tr></tbody></table>
+On opening a file with the sonic visualiser you would see something similar to it.<p></p>
+<p><img alt="" src="{% static "bi0s_wiki/file10.png" %}"></p>
+<p>Similar to Audacity, Sonic-visualiser also has a feature of changing 
+layers like spectrogram. To do that, go to layer option in the option 
+menu. You can find so many features like spectrogram and some more 
+features like changing the speed of the audio etc, by clicking the 
+"playback" option in the option menu. We can view the morse code etc.</p>
+<p>Finally, after analysing both Audacity and Sonic-Visualiser, 
+Sonic-Visualiser has more flexibility of revealing the data in audio 
+files. </p>
+<h4 id="example_4">Example<a class="headerlink" href="#example_4" title="Permanent link">¶</a></h4>
+<p>Sonic visualiser reveals more information which can't be shown in the audacity also. Look at this example,</p>
+<p>When a file was opened in Audacity under spectrogram,</p>
+<p><img alt="" src="{% static "bi0s_wiki/file7.png" %}"></p>
+<p>When the same file was opened using sonic visualiser under spectrogram,</p>
+<p><img alt="" src="{% static "bi0s_wiki/file13.png" %}"></p>
+<p>In this way, sonic visualiser reveals the information present in the audio files.</p>
+<h4 id="references_4">References<a class="headerlink" href="#references_4" title="Permanent link">¶</a></h4>
+<p>Visit its <a href="https://www.sonicvisualiser.org/documentation.html">Documentation</a>
+<h3 id="pdf-crack"><strong>PDF Crack</strong><a class="headerlink" href="#pdf-crack" title="Permanent link">¶</a></h3>
+<p>PDF Crack is a tool for recovering the pass for <strong>Encrypted PDF files</strong>.
+<strong>Encrypted files</strong> means the metadata of the file was encrypted with some characters.</p>
+<p>It has some special features like:
+* Checks with the system password and also the user provided password.
+* It can crack password by <strong>brute-forcing</strong> method only for character sets and only when we provide the maximum and minimum length of the password.
+* Searches the password from the <strong>wordlist</strong>.
+* Optimized search for owner-password when user-password is known.</p>
+<h4 id="installation_6">Installation<a class="headerlink" href="#installation_6" title="Permanent link">¶</a></h4>
+<p>To install PDF Crack,
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_19"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo apt-get install pdfcrack
+</pre></div>
+</td></tr></tbody></table><p></p>
+<h4 id="usage_6">Usage<a class="headerlink" href="#usage_6" title="Permanent link">¶</a></h4>
+<p>The general usage of pdfcrack for brute-forcing is,</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_20"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ pdfcrack -f &lt;file_name&gt;
+</pre></div>
+</td></tr></tbody></table>
+<p>The genearal usage of pdfcrack when we provided a wordlist is,</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_21"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ pdfcrack -f &lt;file_name&gt; -w &lt;location_of_wordlist_file&gt;
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="example_5">Example<a class="headerlink" href="#example_5" title="Permanent link">¶</a></h4>
+<p>Here is an example, using a wordlist. On opening the PDF, we found that the file was protected.</p>
+<p><img alt="" src="{% static "bi0s_wiki/file14.png" %}"></p>
+<p>We used dictionary attack(using a wordlist) to find the password.</p>
+<p><img alt="" src="{% static "bi0s_wiki/file15.png" %}"></p>
+<p>In this way cracking the password of PDF files is done when you don't know/forget the password.</p>
+<p>If you unfortunately, click <strong>ctrl+c</strong> then it will save the process until you clicked into an another file called <strong>savedstate.sav</strong> in the directory where the PDF is present or the current directory.</p>
+<p><img alt="" src="{% static "bi0s_wiki/file16.png" %}"></p>
+<p>For further reference visit,
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_22"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_22 pre, #__code_22 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ man pdfcrack
+</pre></div>
+</td></tr></tbody></table><p></p>
+<h3 id="deep-sound"><strong>Deep Sound</strong><a class="headerlink" href="#deep-sound" title="Permanent link">¶</a></h3>
+<p>Deep Sound is a steganography tool and audio converter that hides the
+ information in audio files or audio/CD tracks. It is a windows tool. It
+ allows us to extract the secret hiding data from the audio files or CD 
+tracks. DeepSound also support encrypting secret files using <strong>AES-256</strong>(Advanced Encryption Standard) to improve data protection.</p>
+<h4 id="installation_7">Installation<a class="headerlink" href="#installation_7" title="Permanent link">¶</a></h4>
+<p>This tool can be installed from it's official <a href="http://jpinsoft.net/deepsound/download.aspx">site</a></p>
+<h4 id="usage_7">Usage<a class="headerlink" href="#usage_7" title="Permanent link">¶</a></h4>
+<p>On opening the Deep Sound after downloading it in Windows it looks something similar to this,<img alt="" src="{% static "bi0s_wiki/file18.png" %}"></p>
+<p>There you can see <strong>Open Carrier Files</strong> option, click 
+on it and choose a music file(of any type like wav, mp3, etc) which you 
+are choosing to embed secret files in it. Then click on <strong>Add Secret Files</strong> option next to it. And choose the embedding file. Then click <strong>Encode Secret Files</strong> option. then you will see a window something similar to this,<img alt="" src="{% static "bi0s_wiki/file28.png" %}"></p>
+<p>You can encode the secret file using a password also, by clicking the
+ tick mark, you will be able to see the password choosing option. <img alt="" src="{% static "bi0s_wiki/file29.png" %}"></p>
+<p>and chooose the password with which you are going to encrypt the file. After click <strong>Encode Secret Files</strong> option in the bottom, then it will save the encoded file in the output directory mentioned which you have mentioned.</p>
+<h4 id="example_6">Example<a class="headerlink" href="#example_6" title="Permanent link">¶</a></h4>
+<p>Here's an example of encoding a secret file into an audio file,</p>
+<p><img alt="" src="{% static "bi0s_wiki/file19.png" %}"></p>
+<p>Choose an audio file which you needed to embed a file.</p>
+<p><img alt="" src="{% static "bi0s_wiki/file20.png" %}"></p>
+<p>Choose the embedding file which you needed to embed it in the audio file.</p>
+<p><img alt="" src="{% static "bi0s_wiki/file21.png" %}"></p>
+<p>Click on the Encode secret files option and choose the output format.</p>
+<p><img alt="" src="{% static "bi0s_wiki/file23.png" %}"></p>
+<p>Then it will give an another file in the format you specified.</p>
+<p>Here's am example of decoding the secret file from the audio file,</p>
+<p><img alt="" src="{% static "bi0s_wiki/file25.png" %}"></p>
+<p>In the above picture you can see a file(<strong>1(1).wav</strong>) in Carrier audio files and in secret file name you can the embeded file and click the <strong>Extract secret files</strong> option, then it will decode the file present in that audio into an another file.</p>
+<p><img alt="" src="{% static "bi0s_wiki/file26.png" %}"></p>
+<p>By going to the directory mentioned in the <strong>Information</strong> window you will get the embedded file in the audio.</p>
+<h4 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">¶</a></h4>
+<p>For further information, visit the <a href="http://jpinsoft.net/DeepSound/Documentation.aspx">documentation</a>
+<h3 id="jsteg"><strong>Jsteg</strong><a class="headerlink" href="#jsteg" title="Permanent link">¶</a></h3>
+<p>Jsteg is a package for hiding data inside JPEG files with a technique known as <a href="https://en.wikipedia.org/wiki/Steganography">steganography</a>
+ of the image. The amount of data that can be hidden depends on the file
+ size of the jpeg; it takes about 10-14 bytes of jpeg to store each byte
+ of the hidden data.</p>
+<h4 id="installation_8">Installation<a class="headerlink" href="#installation_8" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_23"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_23 pre, #__code_23 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo wget -O /usr/bin/jsteg https://github.com/lukechampine/jsteg/releases/download/v0.1.0/jsteg-linux-amd64
+$ sudo chmod +x /usr/bin/jsteg
+$ sudo wget -O /usr/bin/slink https://github.com/lukechampine/jsteg/releases/download/v0.2.0/slink-linux-amd64
+$ chmod +x /usr/bin/slink
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="usage_8">Usage<a class="headerlink" href="#usage_8" title="Permanent link">¶</a></h4>
+<p>Jsteg tool can be initialised by typing the following command.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_24"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_24 pre, #__code_24 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ jsteg
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p><img alt="Image can't be displayed. Just try typing the above command." src="{% static "bi0s_wiki/jsteg.png" %}"></p>
+<h5 id="hiding-data">Hiding data<a class="headerlink" href="#hiding-data" title="Permanent link">¶</a></h5>
+<p>Now, let's hide some data using jsteg.
+Consider this image of Itachi.</p>
+<p><img alt="Sorry, the image can't be displayed." src="{% static "bi0s_wiki/Itachi.jpg" %}"></p>
+<p>Let the name of the file to be embedded be 'jsteg.txt'.</p>
+<p>The file to be embedded contains the following data.</p>
+<p><img alt="Jsteg is used for JPEG steganography." src="{% static "bi0s_wiki/jsteg_txt.png" %}"></p>
+<p>Commands to embed a file in the JPEG image is as follows.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_25"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_25 pre, #__code_25 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ jsteg hide &lt;in.jpg&gt; &lt;secret file name&gt; &lt;out.jpg&gt;
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p><img alt="Sorry, image can't be displayed." src="{% static "bi0s_wiki/Embed_syntax.png" %}"></p>
+<p>Now, the image looks like this.</p>
+<p><img alt="Sorry, image can't be displayed." src="{% static "bi0s_wiki/Itachi_embedded.jpg" %}"></p>
+<h5 id="revealing-data">Revealing data<a class="headerlink" href="#revealing-data" title="Permanent link">¶</a></h5>
+<p>The syntax for revealing data is as follows.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_26"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_26 pre, #__code_26 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ jsteg reveal &lt;in.jpg&gt; &lt;output file name&gt;
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p><img alt="Sorry, the image can't be displayed." src="{% static "bi0s_wiki/Reveal_syntax.png" %}"></p>
+<h4 id="references_5">References<a class="headerlink" href="#references_5" title="Permanent link">¶</a></h4>
+<p>For further reference , click <a href="https://godoc.org/github.com/lukechampine/jsteg">here</a>
+<h3 id="zsteg"><strong>Zsteg</strong><a class="headerlink" href="#zsteg" title="Permanent link">¶</a></h3>
+<p>Zsteg is also a tool like Jsteg but it is used to detect <em>LSB</em> steganography only in the case of <strong>PNG</strong> and <strong>BMP</strong> images. </p>
+<h4 id="installation_9">Installation<a class="headerlink" href="#installation_9" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_27"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_27 pre, #__code_27 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo apt install ruby
+$ sudo gem install zsteg
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="usage_9">Usage<a class="headerlink" href="#usage_9" title="Permanent link">¶</a></h4>
+<p>Zsteg tool can be initialised by typing the following command.</p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_28"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_28 pre, #__code_28 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ zsteg
+</pre></div>
+</td></tr></tbody></table>
+<img alt="Sorry, the image can't be displayed" src="{% static "bi0s_wiki/zsteg.png" %}"><p></p>
+<p>Now, let's see a challenge from Securinets CTF Quals 2019 in which the following <strong>PNG</strong> image is given .</p>
+<p><img alt="Sorry, the image can't be displayed" src="{% static "bi0s_wiki/pic.png" %}"></p>
+<p>Let's use zsteg on this image and see what happens. The syntax is as follows.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_29"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_29 pre, #__code_29 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ zsteg &lt;filename&gt;
+</pre></div>
+</td></tr></tbody></table>
+<p>Then the result can be seen below.</p>
+<p><img alt="Sorry , the image can't be displayed." src="{% static "bi0s_wiki/zsteg_analysis.png" %}"></p>
+<p>In the above result, we can find some meaningful data embedded in the
+ LSBs of the PNG image. This meaningful data helped in solving the 
+challenge.</p>
+<h4 id="references_6">References<a class="headerlink" href="#references_6" title="Permanent link">¶</a></h4>
+<p>For further reference of this tool, click <a href="https://www.aldeid.com/wiki/Zsteg">here</a>
+<h3 id="tweak-png"><strong>Tweak PNG</strong><a class="headerlink" href="#tweak-png" title="Permanent link">¶</a></h3>
+<p>TweakPNG is a low-level utility for examining and modifying PNG image
+ files. It supports Windows XP and higher. In order to make much use of 
+it, you have to be at least familiar with the internal format of PNG 
+files. This is a windows based tool so we need to install a tool called <strong>wine</strong> to run TweakPNG on Linux.</p>
+<h4 id="installation_10">Installation<a class="headerlink" href="#installation_10" title="Permanent link">¶</a></h4>
+<p>Installation for wine can be done by executing the following command.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_30"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_30 pre, #__code_30 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo apt install wine-stable
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p>TweakPNG executable can be downloaded from <a href="http://entropymine.com/jason/tweakpng/">here</a><img name="kl_1567871892411" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">.</p>
+<h4 id="usage_10">Usage<a class="headerlink" href="#usage_10" title="Permanent link">¶</a></h4>
+<p><img alt="Sorry, the image can't be displayed." src="{% static "bi0s_wiki/cat.png" %}"></p>
+<p>Let's open this <strong>PNG</strong> image in TweakPNG and examine it.
+Open 64-bit version of TweakPNG using wine. The syntax is as follows.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_31"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_31 pre, #__code_31 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ wine tweakpng.exe
+</pre></div>
+</td></tr></tbody></table>
+<p>Then the following window will be displayed.</p>
+<p><img alt="Sorry, the image can't be displayed." src="{% static "bi0s_wiki/TweakPNG.png" %}"></p>
+<p>Now, if the above cat image is opened in TweakPNG, the following window will be displayed.</p>
+<p><img alt="Sorry, the image can't be displayed." src="{% static "bi0s_wiki/TweakPNG_cat_data.png" %}"></p>
+<h4 id="references_7">References<a class="headerlink" href="#references_7" title="Permanent link">¶</a></h4>
+<p>For an in-depth understanding on PNG file structure , click <a href="http://www.libpng.org/pub/png/pngdocs.html">here</a></article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/forensics/Tools/" title="Basic Tools" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Basic Tools
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/forensics/LSB/" title="LSB Encoding" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+LSB Encoding
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

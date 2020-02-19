@@ -1,0 +1,255 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Volatility - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#offset" title="Offset" class="md-nav__link">
+Offset
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#pid" title="PID" class="md-nav__link">
+PID
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#ppid" title="PPID" class="md-nav__link">
+ PPID
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#plugins" title="Plugins" class="md-nav__link">
+Plugins
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#imageinfo" title="imageinfo" class="md-nav__link">
+imageinfo
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#pslist" title="pslist" class="md-nav__link">
+pslist
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#pstree" title="pstree" class="md-nav__link">
+pstree
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#cmdscan" title="cmdscan" class="md-nav__link">
+cmdscan
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#consoles" title="consoles" class="md-nav__link">
+consoles
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#filescan" title="filescan" class="md-nav__link">
+filescan
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#dumpfiles" title="dumpfiles" class="md-nav__link">
+dumpfiles
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#envars" title="envars" class="md-nav__link">
+envars
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#hashdump" title="hashdump" class="md-nav__link">
+hashdump
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/forensics/volatility.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871996479" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="volatility">Volatility<a class="headerlink" href="#volatility" title="Permanent link">¶</a></h1>
+<p>Volatility is a python based command line tool that helps in 
+analyzing virtual memory dumps. It provides a very good way to 
+understand the importance as well as the complexities involved in Memory
+ Forensics.</p>
+<p>To install volatility,
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>sudo apt install volatility
+</pre></div>
+</td></tr></tbody></table><p></p>
+<h2 id="offset">Offset<a class="headerlink" href="#offset" title="Permanent link">¶</a></h2>
+<p>The start of a file or the start of a memory address is called offset(by default, virtual offset).</p>
+<h2 id="pid">PID<a class="headerlink" href="#pid" title="Permanent link">¶</a></h2>
+<p>When a process is started, it is given a unique number called process
+ ID (PID) that identifies that process to the system. If you ever need 
+to kill a process, for example, you can refer to it by its PID. Since 
+each PID is unique, there is no ambiguity or risk of accidentally 
+killing the wrong process (unless you enter the wrong PID).</p>
+<h2 id="ppid">PPID<a class="headerlink" href="#ppid" title="Permanent link">¶</a></h2>
+<p>The PPID is the PID of the process’s parent. To understand this, let 
+us look at an example. Consider a process A with a PID 1. Suppose this 
+process calls upon another process say B. So as far as this scenario is 
+considered, B is actually a child process of A. So the PPID of B will be
+ the PID of A.</p>
+<h2 id="plugins">Plugins<a class="headerlink" href="#plugins" title="Permanent link">¶</a></h2>
+<p>A plugin is a software component that adds a specific feature to an 
+existing computer program. When a program supports plugins, it enables 
+customization. In volatility along with the profile, we give the plugins
+ as the input to get the desired output.</p>
+<h3 id="imageinfo">imageinfo<a class="headerlink" href="#imageinfo" title="Permanent link">¶</a></h3>
+<p>This particular command is most often used to identify the operating 
+system, service pack, and hardware architecture (32 or 64 bit).</p>
+<p>The imageinfo output tells you the suggested profile that you should 
+pass as the parameter to --profile=PROFILE when using other plugins. 
+There may be more than the one suggested profile and we must be careful 
+to select the correct one.
+<img alt="" src="{% static "bi0s_wiki/imageinfo.png" %}">
+As you can see this command helps you to know the suggested profiles, 
+the date and time dump image were created and no of processors.</p>
+<h3 id="pslist">pslist<a class="headerlink" href="#pslist" title="Permanent link">¶</a></h3>
+<p>This is a significantly used plugin which helps in listing the 
+details of the processes which were running when the dump was taken. 
+It&nbsp;shows the offset, process name, process ID(PID), the parent 
+process ID(PPID), number of threads, number of handles, and date/time 
+when the process started and exited.
+<img alt="" src="{% static "bi0s_wiki/pslist.png" %}">
+However,&nbsp;pslist fails to show hidden/terminated processes. The 
+plugin which solves this problem is psscan.&nbsp;Try it out!!</p>
+<h3 id="pstree">pstree<a class="headerlink" href="#pstree" title="Permanent link">¶</a></h3>
+<p>To view the process listing in tree form, use 
+the&nbsp;pstree&nbsp;command. This plugin uses the same approach 
+as&nbsp;pslist hence it'll not display the hidden/terminated processes.</p>
+<p>But the one advantage that this plugin gives is that we can easily identify the parent &amp; child processes.</p>
+<p><img alt="" src="{% static "bi0s_wiki/pstree.png" %}"></p>
+<h3 id="cmdscan">cmdscan<a class="headerlink" href="#cmdscan" title="Permanent link">¶</a></h3>
+<p>The cmdscan&nbsp;plugin searches the memory 
+for&nbsp;conhost.exe&nbsp;on Windows 7&nbsp;Operating systems. This is 
+one of the most powerful commands you can use to gain visibility into an
+ attackers actions on a victim system, whether they opened cmd.exe</p>
+<p>This plugin finds structures known as COMMAND_HISTORY by looking for a
+ known constant value (MaxHistory) and then applying sanity checks.</p>
+<p>To put it simply, you can see the content that the attacker typed in the command prompt.</p>
+<p><img alt="img" src="{% static "bi0s_wiki/cmdscan.png" %}"></p>
+<p>By default, the value in&nbsp;MAXHistory&nbsp;is set to 50. We can 
+change that. Also,&nbsp;cmdscan&nbsp;can print up to 50 commands. We can
+ increase that by adding&nbsp;&nbsp;--max_history=NUMBER along with the 
+plugin command.</p>
+<h3 id="consoles">consoles<a class="headerlink" href="#consoles" title="Permanent link">¶</a></h3>
+<p>To put it quite simply, consoles display the same content&nbsp;as&nbsp;cmdscan.</p>
+<p>However, the advantage that consoles&nbsp;gives is that it also 
+prints the&nbsp;output&nbsp;which was displayed for a specific 
+instruction given in the command prompt.</p>
+<h3 id="filescan">filescan<a class="headerlink" href="#filescan" title="Permanent link">¶</a></h3>
+<p>This will find open files even if a rootkit is hiding the files on 
+disk and if the rootkit hooks some API functions to hide the open 
+handles on a live system. The output shows the physical offset of the 
+FILE_OBJECT, file name, number of pointers to the object, number of 
+handles to the object, and the effective permissions granted to the 
+object.
+<img alt="img" src="{% static "bi0s_wiki/filescan_plugin.png" %}"></p>
+<h3 id="dumpfiles">dumpfiles<a class="headerlink" href="#dumpfiles" title="Permanent link">¶</a></h3>
+<p>An important concept that everyone who has worked on the study of 
+Operating Systems is the idea of&nbsp;caching.&nbsp;Files are cached in 
+memory for system performance as they are accessed and used. This 
+makes&nbsp;cache&nbsp;an important source for collecting valuable info.</p>
+<p>The dumpfiles plugin has many options. Let us have a look at what they are:
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span>-r REGEX, --regex<span class="o">=</span>REGEX
+                        Dump files matching REGEX
+  -i, --ignore-case     Ignore <span class="k">case</span> in pattern match
+  -o OFFSET, --offset<span class="o">=</span>OFFSET
+                        Dump files <span class="k">for</span> Process with physical address OFFSET
+  -Q PHYSOFFSET, --physoffset<span class="o">=</span>PHYSOFFSET
+                        Dump File Object at physical address PHYSOFFSET
+  -D DUMP_DIR, --dump-dir<span class="o">=</span>DUMP_DIR
+                        Directory in which to dump extracted files
+  -S SUMMARY_FILE, --summary-file<span class="o">=</span>SUMMARY_FILE
+                        File where to store summary information
+  -p PID, --pid<span class="o">=</span>PID     Operate on these Process IDs <span class="o">(</span>comma-separated<span class="o">)</span>
+  -n, --name            Include extracted filename in output file path
+  -u, --unsafe          Relax safety constraints <span class="k">for</span> more data
+  -F FILTER, --filter<span class="o">=</span>FILTER
+                        Filters to apply <span class="o">(</span>comma-separated<span class="o">)</span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+<h3 id="envars">envars<a class="headerlink" href="#envars" title="Permanent link">¶</a></h3>
+<p>To display a process’s environment variables, use the envars plugin. 
+Typically this will show the number of CPUs installed and the hardware 
+architecture, the process’s current directory, temporary directory, 
+session name, computer name, username, and various other interesting 
+artefacts.</p>
+<p><img alt="" src="{% static "bi0s_wiki/envars.png" %}"></p>
+<h3 id="hashdump">hashdump<a class="headerlink" href="#hashdump" title="Permanent link">¶</a></h3>
+<p>So here's the fun and exciting part. You can literally get the hashes
+ of the domain credentials stored in the registry using 
+hashdump.&nbsp;What I mean to say is that you can actually get the 
+passwords of the users. These will be mostly md5 hashes. These hashes 
+can be cracked by using online md5 hash crackers.</p>
+<p><img alt="" src="{% static "bi0s_wiki/hashdump.png" %}"></p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/forensics/memory-forensics/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Introduction
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/crypto/intro/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Introduction
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

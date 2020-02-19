@@ -1,0 +1,227 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Introduction - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#what-is-image-forensics" title="What is Image Forensics?" class="md-nav__link">
+What is Image Forensics?
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#file-signature" title="File Signature" class="md-nav__link">
+File Signature
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#chunks" title="Chunks" class="md-nav__link">
+Chunks
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#checksum" title="Checksum" class="md-nav__link">
+Checksum
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#lossless-compression" title="Lossless Compression" class="md-nav__link">
+Lossless Compression
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#lossy-compression" title="Lossy Compression" class="md-nav__link">
+Lossy Compression
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#metadata-of-an-image" title="Metadata Of An Image:" class="md-nav__link">
+Metadata Of An Image:
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#portable-network-graphics-png" title="Portable Network Graphics (PNG)" class="md-nav__link">
+Portable Network Graphics (PNG)
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#critical-chunks" title="Critical chunks" class="md-nav__link">
+Critical chunks
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#ancillary-chunks" title="Ancillary chunks" class="md-nav__link">
+Ancillary chunks
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#executable-and-linkable-format-elf" title="Executable and Linkable Format (ELF)" class="md-nav__link">
+Executable and Linkable Format (ELF)
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#zip" title="ZIP" class="md-nav__link">
+ZIP
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/forensics/image-forensics.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871841383" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="image-forensics"><strong>Image Forensics</strong><a class="headerlink" href="#image-forensics" title="Permanent link">¶</a></h1>
+<h4 id="what-is-image-forensics">What is Image Forensics?<a class="headerlink" href="#what-is-image-forensics" title="Permanent link">¶</a></h4>
+<p>To keep it very simple and straight, <strong>Image Forensics</strong> is a specific branch of cyber forensics which deals with a various number of attacks.</p>
+<p>Some of them include:</p>
+<ol>
+<li>
+<p>The authenticity of an image</p>
+<ul>
+<li>When we speak of authenticity, we are actually talking whether the image is properly structured or not. Sometimes the data
+preserved inside may be tampered. Forensic analysts are required to recover this tampered data to its original state.</li>
+</ul>
+</li>
+<li>
+<p>Detection of possible forgeries etc.</p>
+<ul>
+<li>Detecting forgeries of images is a really big thing in the tech industry because many confidential images or files may
+be stolen or unlawfully used for criminal purposes.</li>
+</ul>
+</li>
+</ol>
+<p>So let us look into some of the very basic definitions of the 
+technical terms used in this field to better understand the upcoming 
+topics.</p>
+<h4 id="file-signature">File Signature<a class="headerlink" href="#file-signature" title="Permanent link">¶</a></h4>
+<p>A typical file signature is something which defines the nature of a 
+file and also tells us about the specific features of the particular 
+file. This is also called as the file header or sometimes as the 
+checksum.</p>
+<p>So let us look at some examples:</p>
+<ol>
+<li>
+<p>PNG -&gt; <strong>89 50 4E 47 0D 0A 1A 0A</strong></p>
+</li>
+<li>
+<p>ZIP FILE -&gt; <strong>50 4B 03 04</strong> or <strong>50 4B 05 06</strong></p>
+</li>
+</ol>
+<p>The 'hex' values shown are also called as <strong>magic numbers.</strong></p>
+<h4 id="chunks">Chunks<a class="headerlink" href="#chunks" title="Permanent link">¶</a></h4>
+<p>Chunks are nothing but fragments of information used by different multimedia formats like <strong>PNG, MP3</strong> etc. Each chunk has its own header. The header usually describes the type and size of the chunk.</p>
+<p><img alt="" src="{% static "bi0s_wiki/Chunk_example.png" %}"></p>
+<p><strong>How important are chunks ?</strong></p>
+<p>So let us consider that you are trying to open an image using an MP3 
+player. Will the player open the image? No, right. It'll give me an 
+error message. Every application has a decoder which checks the type of 
+the chunks given. When it recognizes that the given chunks are 
+supported, it tries to give the desired output. So whenever it comes 
+across chunks of unknown format, it triggers an error message stating <strong>"Unsupported File Format"</strong></p>
+<h4 id="checksum">Checksum<a class="headerlink" href="#checksum" title="Permanent link">¶</a></h4>
+<p>Checksum is an integral value which represents the sum of correct 
+digits in a piece of data. Checksums help us to check the data integrity
+ of a file which is transmitted across the digital network. There are 
+many checksum algorithms. Checksum algorithms are employed in various 
+cybersecurity concepts like <strong>fingerprinting, cryptographic hash functions</strong> etc.</p>
+<h4 id="lossless-compression">Lossless Compression<a class="headerlink" href="#lossless-compression" title="Permanent link">¶</a></h4>
+<p>The name itself tells that there will be no loss of information when a
+ set of data is compressed. the lossless compression technique is used 
+for reducing the data size for storage.
+For example, png is a lossless compression and the advantages of a 
+lossless compression file format are that there is no loss of quality 
+each time it is opened or saved.</p>
+<h4 id="lossy-compression">Lossy Compression<a class="headerlink" href="#lossy-compression" title="Permanent link">¶</a></h4>
+<p>In lossy compression, it involves loss of information from the 
+original file when data is compressed. Lossy compression can result in 
+the smaller size of the file but it also removes some original pixels, 
+video frames, sound waves forever.
+For example, JPEG is lossy compression and the disadvantage is that each
+ time the image is saved it loses some amount of data and which 
+simultaneously degrades the image quality.</p>
+<h4 id="metadata-of-an-image">Metadata Of An Image:<a class="headerlink" href="#metadata-of-an-image" title="Permanent link">¶</a></h4>
+<p>Image metadata is a text information which gives information about 
+the details associated with the image. Some of these details are:
++ Size and resolution
++ The author of the image
++ The GPS data of this image
++ The time when the image was taken, last modified etc.</p>
+<p>So now let us look at the file format of a <strong>PNG</strong> image:</p>
+<h4 id="portable-network-graphics-png">Portable Network Graphics (PNG)<a class="headerlink" href="#portable-network-graphics-png" title="Permanent link">¶</a></h4>
+<p>A PNG is a graphical file format of an image which supports <strong>lossless compresion</strong>.</p>
+<p><strong>Magic Number</strong> -&gt; <strong>89 50 4E 47 0D 0A 1A 0A</strong></p>
+<p><img alt="" src="{% static "bi0s_wiki/PNG_File-Header.png" %}">
+So now let us look at the critical chunks of a PNG image:</p>
+<h4 id="critical-chunks">Critical chunks<a class="headerlink" href="#critical-chunks" title="Permanent link">¶</a></h4>
+<p><strong>IHDR</strong> -&gt; Describes image dimensions, color type, bit depth etc. It must be noted that this must be the first chunk (always).</p>
+<p><strong>PLTE</strong> -&gt; Contains the list of colours.</p>
+<p><strong>IDAT</strong> -&gt; Contains the image data.</p>
+<p><strong>IEND</strong> -&gt; Marks the end of the image.</p>
+<h4 id="ancillary-chunks">Ancillary chunks<a class="headerlink" href="#ancillary-chunks" title="Permanent link">¶</a></h4>
+<p>Ancillary chunks can be otherwise called as optional chunks. These 
+are the chunks which are generally ignored by decoders. Let us look at 
+some examples:</p>
+<p><strong>bKGD</strong> -&gt; Gives the default background colour.</p>
+<p><strong>dSIG</strong> -&gt; This chunk is used to store the digital signature of the image.</p>
+<p><strong>pHYS</strong> -&gt; Holds the pixel size and the ratio of dimensions of the image.</p>
+<div class="admonition note">
+<p class="admonition-title">All the ancillary chunks start with a small letter.</p>
+</div>
+<h4 id="executable-and-linkable-format-elf">Executable and Linkable Format (ELF)<a class="headerlink" href="#executable-and-linkable-format-elf" title="Permanent link">¶</a></h4>
+<p>The ELF file format is standard file format for executables, object codes, core dumps etc. for any UNIX based system.</p>
+<p><strong>Magic Number</strong> -&gt; <strong>7F 45 4c 46</strong></p>
+<p>The file header of an ELF file defines whether to use 32-bit or 
+64-bit addresses. ELF files are generally analysed using a tool called <strong>readelf</strong>.</p>
+<h4 id="zip">ZIP<a class="headerlink" href="#zip" title="Permanent link">¶</a></h4>
+<p>Zip is actually a file format which supports lossless data 
+compression. This file format achieves the compression of a file(s) 
+using a number of compression algorithms. DEFLATE is the most used 
+compression algorithm. Zip files have the file extension .zip or.ZIP.</p>
+<p><strong>Magic Number</strong> -&gt; <strong>50 4B 03 04</strong> and <strong>50 4B 05 06</strong>(for empty zip files)</p>
+<p><img alt="" src="{% static "bi0s_wiki/zip.png" %}"></p>
+<p>Zip files can be extracted using this command in the terminal.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ unzip file_name.zip
+</pre></div>
+</td></tr></tbody></table><p></p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/forensics/intro/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Introduction
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/forensics/steganography/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Introduction
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

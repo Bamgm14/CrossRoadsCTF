@@ -1,0 +1,17 @@
+<!doctype>
+<html>
+    <body>
+        <form>
+            <input type="text" name="q">
+            <input type="submit" name="Submit">
+        </form>
+        <h3>Items</h3>
+        <ul>
+        {% for x in rows %}
+            <li>{{x}}</li>
+        {% endfor %}
+        </ul>
+		<p>SQL Command={{ cmd }}</p>
+	<p>{{ e }}</p>
+    </body>
+</html>

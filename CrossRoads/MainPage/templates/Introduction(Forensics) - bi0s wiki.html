@@ -1,0 +1,118 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Introduction - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#what-is-cyber-forensics" title="What is Cyber Forensics?" class="md-nav__link">
+What is Cyber Forensics?
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/forensics/intro.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871814291" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="introduction"><strong>Introduction</strong><a class="headerlink" href="#introduction" title="Permanent link">¶</a></h1>
+<h3 id="what-is-cyber-forensics">What is Cyber Forensics?<a class="headerlink" href="#what-is-cyber-forensics" title="Permanent link">¶</a></h3>
+<p>Cyber Forensics is a science which deals with techniques used to track the <strong>footprints</strong>
+ left behind a cyber attack.
+Cyber forensics is directly linked to any cybercrime which has data loss
+ and recovery. Some examples include investigation on possible <strong>forged digital signatures, the authenticity of images, analysis of malicious software</strong> etc.</p>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
+<p>Cyber Forensics is a science which deals with techniques used to track the footprints left behind a cyber attack.</p>
+</div>
+<p>Let us go into more detail of the definition from a CTF perspective. 
+Any Capture The Flag contest usually has three prime categories of 
+digital forensics.
+They are:</p>
+<ul>
+<li><a href="https://wiki.bi0s.in/forensics/network-forensics/">Network Forensics</a></li>
+<li><a href="https://wiki.bi0s.in/forensics/image-forensics/">Image Forensics</a></li>
+<li><a href="https://wiki.bi0s.in/forensics/memory-forensics/">Memory Forensics</a></li>
+</ul>
+<h1 id="scope-of-forensics"><strong>Scope of Forensics</strong><a class="headerlink" href="#scope-of-forensics" title="Permanent link">¶</a></h1>
+<p>When we talk about employment, research or anything, Cyber Forensics 
+is one of the prime areas which comes into a security analyst's mind.
+Forensics is strongly employed in <strong>Incident Response, Malware Analysis, Data leak protection</strong>. Actually, to sum it up, every cybercrime is always related to cyber forensics.</p>
+<p>To really understand this, let us look into a very dangerous virus attack which almost started world war III.
+<strong>Stuxnet</strong> was a virus which was found lurking in the 
+systems which controlled nuclear centrifuges in Iran.
+Stuxnet had a stolen yet officially authorised digital signature which 
+acted as a very good camouflage. Stuxnet made the windows systems 
+constantly reboot or lead them to <strong>Blue Screen of Death</strong>.
+ Stuxnet could easily affect any computer which was linked to the 
+network. It was really difficult for security experts to trace it. It 
+severely affected the <strong>SCADA systems</strong> which were employed
+ in maintaining the rotation speed of the centrifuges.
+After heavy investigation, when several forensic analysts looked into 
+the SCADA network transfer, they found a malicious program being run 
+which altered the system processes. The main aspect which made Stuxnet 
+almost invisible was that it became active only when its target was 
+present or being run. Until then the virus remained dormant.
+So as you can see, Cyber forensics played a huge role in the detection 
+of the virus.</p>
+<p>Let us look at the trend of cyber attacks based on the analysis from January 2017-2018:</p>
+<p>Some handy definitions:</p>
+<ol>
+<li>
+<p><strong>Cyber Espionage</strong>: Use of computer networks to get access to confidential information held by important organizations.</p>
+</li>
+<li>
+<p><strong>Hacktivism</strong>: Act of hacking which is mainly done for a political purpose.</p>
+</li>
+<li>
+<p><strong>Cyber Warfare</strong>: Cyber attacks are done on state organizations to gain military secrets etc.</p>
+</li>
+</ol>
+<p><img alt="alt text" src="{% static "bi0s_wiki/Cyber_Attack_Stats.png" %}" title="January 2017">
+Cyber crimes are at 77% in 2017</p>
+<p>Now let us look at January 2018:
+<img alt="alt text" src="{% static "bi0s_wiki/2018-analysis.png" %}" title="January 2018"></p>
+<p>So as you can see, the percentage has increased to an alarming rate.</p>
+<p>So, folks, I hope you understand just how important cyber forensics is in the current world of cybersecurity.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/pwning/integer/" title="Integer Overflow" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Integer Overflow
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/forensics/image-forensics/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Introduction
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Hashing - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#hash-functions" title="HASH FUNCTIONS" class="md-nav__link">
+HASH FUNCTIONS
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/crypto/hash-function.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567872121832" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1>Hashing</h1>
+<h2 id="hash-functions">HASH FUNCTIONS<a class="headerlink" href="#hash-functions" title="Permanent link">¶</a></h2>
+<p>A cryptographic hash function takes a message of any size as 
+plaintext and gives out a fixed-sized string as ciphertext. The 
+ciphertext, is an alphanumeric string (containing both letters and 
+numerals) and is called a DIGEST.</p>
+<p><img alt="Picture" src="{% static "bi0s_wiki/hash_intro-1.png" %}"></p>
+<p>In hash functions, no key is used. It is also known as one-way 
+process as it is impossible to get the original message back once the 
+hashing operation is applied to the message.
+Message Digest(MD) and Secure Hash (SHA) are some of the popular hash 
+functions.
+For example,
+Using a MD5 hash, “<strong>a</strong>” can be written as “<strong>0cc175b9c0f1b6a831c399e269772661</strong>”
+Amazing! Isn’t it? But one thing to be noted is that the md5 hash is not an ENCRYPTION. It is just a fingerprint of your input.
+Similarly, using a SHA256 hash generator, we can get “<strong>a</strong>” as “<strong>87428FC522803D31065E7BCE3CF03FE475096631E5E07BBD7A0FDE60C4CF25C7</strong>”.</p>
+<p><img alt="Picture" src="{% static "bi0s_wiki/sha-1_example-1.png" %}"></p>
+<p>Every hash output is unique for a unique input and is the same for 
+same input. But, it is possible for the hash function to give the same 
+result for two different inputs.
+As mentioned before, hash functions are one-way functions, it is 
+practically impossible to reverse them, hence, can be used to generate 
+passwords which are really strong.
+Even though the generated hashes are really strong, there are a plenty 
+of online tools available to crack the hashes, CrackStation being one of
+ them.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/crypto/evolution/" title="Evolution" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Evolution
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/crypto/stream-cipher/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Introduction
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

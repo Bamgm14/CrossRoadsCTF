@@ -1,0 +1,47 @@
+{% extends 'navigationbar.html' %}
+
+{% load static %}
+
+{% block title %}
+	<title>CrossRoadsCTF</title>
+{% endblock %}
+
+{% block customcss %}
+	<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+{% endblock %}
+
+{% block custombody %}
+	<div class="container">
+		<div id="details">
+			<div class="row">
+				<div class="col-lg-10 col-md-6 col-sm-6 col-xs-12">
+					<h1>WELCOME TO MADHATTER's Maze</h1><br><br>
+					<p><font size="4"> Cyber department in Wonderland intercepted a message between soldiers and decoded to realise 
+					the long lost family of Mad Hatter is actualy being captured and imprisoned by the red Queen.<br> Alice seeks your help 
+					to rescue the Mad Hatter's family.</p>
+					<p><b>The rescue mission comprises of two parts </p>
+					<ol>
+						<li>Solve challenges to get a minimum of 62 points to retrieve the key</li>
+					</ol></b>
+					<p>Challenges are available in the following categories.</p>
+					<ol>
+						<li>Cryptography</li>
+						<li>Forensics</li>
+						<li>Binary Exploitation</li>
+						<li>Reverse Engineering</li>
+						<li>Uncategorized Challenges</li>
+						<li>Web</li>
+					</ol></font>
+					<p><b>NOTE:<br>The challenges are inspired by InCTFj,TamuCTF and picoCTF.<br> The platform is done in django.</b></p>
+				</div>
+				<div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" align="right">
+					
+					<p><b><a href="/challenges/admin/add" target="_blank">Admin Login</a></b></p>
+					<div><div><div>
+					<!-- W311, I DiD N0T 3xPect Y0u H3r3.... H4Ve A flag!>CRsCTF{1np3c7_3v3ryth1ng}<--->
+					</div></div></div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

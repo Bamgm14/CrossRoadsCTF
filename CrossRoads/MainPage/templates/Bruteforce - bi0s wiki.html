@@ -1,0 +1,75 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Bruteforce - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#bruteforce-sounds-like-a-force" title="Bruteforce: sounds like a force?" class="md-nav__link">
+Bruteforce: sounds like a force?
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/crypto/brute.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567872053573" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1>Bruteforce</h1>
+<h2 id="bruteforce-sounds-like-a-force">Bruteforce: sounds like a force?<a class="headerlink" href="#bruteforce-sounds-like-a-force" title="Permanent link">¶</a></h2>
+<p>What would you do if you are given a 4-digit padlock which opens only
+ when the entered 4 digits are right. The basic approach to break this 
+lock would be to guess different combinations of digits so as to get the
+ right sequence which opens the lock. </p>
+<blockquote>
+<p>This way of guessing or trying out all possible ways to break an encryption is called bruteforce. </p>
+</blockquote>
+<p><strong>Key length</strong>, as the name says, is the length of the key whereas <strong>key space</strong> is the possible keys available for encryption. <strong>Message space</strong> is the number of possible values that a plain text might be encrypted as.</p>
+<p>If the key length and the key space of an encryption system is 
+limited then it becomes very easy for the attacker to try out different 
+possible keys ( as there are only a limited number to try out ) and 
+carry out a bruteforce attack easily. Also, if the message space is 
+limited it becomes easy for the attacker to easily guess which plain 
+text was encrypted.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/crypto/encryption/" title="What is Encryption" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+What is Encryption
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/crypto/encoding/" title="Encoding" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Encoding
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>SOP - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/web/sop.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567872509667" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="same-origin-policy">Same Origin Policy<a class="headerlink" href="#same-origin-policy" title="Permanent link">¶</a></h1>
+<hr>
+<p><strong>Same Origin Policy (SOP)</strong> also called as <strong>Single Origin Policy</strong>
+ is a security measure implemented in Web Browser programming languages 
+such as JavaScript and AJAX and is one of the most fundamental concepts 
+in the Web Application Security Model.</p>
+<blockquote>
+<p>It states that the Web Browser allows scripts contained in one web 
+page to access the data or resources of another web page if and only if 
+both the web pages have the <strong>SAME ORIGIN</strong>.</p>
+</blockquote>
+<p>Origin is based on a number of parameters:
+1. Protocol
+2. Host Name
+3. Port Number</p>
+<p>SOP, originally made to protect access to the DOM is an important 
+cornerstone of all browsers since 1995 and it prevents malicious scripts
+ from one website from trying to access and manipulate sensitive date 
+from another website through that page's DOM (Document Object Model).</p>
+<p>Most modern websites use HTTP cookies to maintatin authenticated user
+ sessions and logins and in revealing sensitive information regarding 
+the user and SOP plays a very significant role in such web applications.
+ And it would have been very easy to steal this sensitive user data and 
+session cookies for the attacker website's malicious scripts if this 
+policy was not in place. </p>
+<p>Lets see the practical implementation of this policy. Say that you 
+have a social networking site opened with your account on one tab, and 
+in another tab he/she has opened a website with a malicious Java Script 
+Code that steals user login cookies from the browser. Lets assume that 
+the SOP is currently not in place, then since the user is still actively
+ using the social networking site with valid session cookies, the 
+attacker can either steal those cookies, or can send requests on your 
+behalf to that social networking site's server, while that server thinks
+ that it is getting requests from the user, whereas you are not even 
+aware of this. This can lead to serious problems and has a great 
+potential as to how to hacker wants to manipulate the data. The attacker
+ can read chats, send fake messages, post things from your account and 
+do all sorts of illegal activities, and its really important that the 
+web browser detects which JS is trusted to access the social networking 
+site's data and which JS is untrusted. This is where Same Origin Policy 
+comes into the picture and prevents the JS from accessing the social 
+networking site's data.</p>
+<p>SOP thus creates a kind of a sandbox that seperates these websites 
+from one another, and prevents the loss of data confidentiality and 
+integrity and prevents client side attacks on the user.</p>
+<p>Let us consider an example URL: <code>http://attack.example.com/dir/index.html</code>.</p>
+<p>From the above URL, we can infer that the:
+1. Protcol/Scheme: <code>http</code><br>
+2. Host: <code>attack.example.com</code><br>
+3. Subdomain: <code>attack</code><br>
+4. Domain: <code>example.com</code><br>
+5. Resource: <code>/dir/index.html</code><br>
+6. Directory: <code>/dir</code><br>
+7. File name: <code>index.html</code></p>
+<p>Here is how the Same-Orgin-Policy works for the above URL.</p>
+<div class="md-typeset__scrollwrap"><div class="md-typeset__table"><table>
+<thead>
+<tr>
+<th>URL</th>
+<th align="center">Outcome</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>http://attack.example.com/dir/page.html</code></td>
+<td align="center">Success</td>
+<td>Same origin</td>
+</tr>
+<tr>
+<td><code>http://attack.example.com/dir/dir2/index.html</code></td>
+<td align="center">Success</td>
+<td>Same origin</td>
+</tr>
+<tr>
+<td><code>http://ping.example.com/dir/index.html</code></td>
+<td align="center">Failure</td>
+<td>Different host</td>
+</tr>
+<tr>
+<td><code>http://example.com/dir/index.html</code></td>
+<td align="center">Failure</td>
+<td>Different Host</td>
+</tr>
+<tr>
+<td><code>http://attack.example.com:12/dir/index.html</code></td>
+<td align="center">Failure</td>
+<td>Different Port</td>
+</tr>
+<tr>
+<td><code>https://attack.example.com/dir/index.html</code></td>
+<td align="center">Failure</td>
+<td>Different protocol</td>
+</tr>
+</tbody>
+</table></div></div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/web/xss/" title="XSS" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+XSS
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/references/" title="Refer" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Refer
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

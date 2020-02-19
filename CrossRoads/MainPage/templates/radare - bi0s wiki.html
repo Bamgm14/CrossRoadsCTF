@@ -1,0 +1,214 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>radare - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#binary-info" title="Binary info" class="md-nav__link">
+Binary info
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#command-line-arguments" title="Command Line Arguments" class="md-nav__link">
+Command Line Arguments
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#analysis" title="Analysis" class="md-nav__link">
+Analysis
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#list-function" title="List function" class="md-nav__link">
+List function
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#seek" title="Seek" class="md-nav__link">
+Seek
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#visual-modes" title="Visual Modes" class="md-nav__link">
+Visual Modes
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#graph-mode" title="Graph Mode" class="md-nav__link">
+Graph Mode
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#navigation-in-visual-modes" title="Navigation in Visual modes" class="md-nav__link">
+Navigation in Visual modes
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#patching" title="Patching" class="md-nav__link">
+Patching
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/reversing/essentials/radare.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871586645" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="introduction-to-radare2">Introduction to radare2<a class="headerlink" href="#introduction-to-radare2" title="Permanent link">¶</a></h1>
+<p><a href="http://rada.re/r/"><em>Radare2</em></a><img name="kl_1567871586645" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+ (r2) is an open source framework for reverse engineering and binary 
+analysis which has a rich command line interface for disassembling 
+,analysing data, patching binaries, and much more. Radare has a ton of 
+features and utilities which takes a lot of time to explore and 
+understand. One of the main reason why we use radare is due to its 
+Visual mode, this enables us to see the binary in a graphical way ,thus 
+making it pretty easy to understand the control flow of the binary.</p>
+<p>To examine a binary in radare we need to use the following command</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>r2 binary
+</pre></div>
+</td></tr></tbody></table>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span> <span class="c1">-- Coffee time!</span>
+<span class="p">[</span><span class="mi">0</span><span class="n">x080484b0</span><span class="p">]</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Now in the terminal , a radare2 shell is opened ,and it greets us 
+with one of its greeting message.Initially you can see a address 
+enclosed in a square bracket ,it is the entry point of the binary.</p>
+<h2 id="binary-info">Binary info<a class="headerlink" href="#binary-info" title="Permanent link">¶</a></h2>
+<p>Usually what we do first when we first get a binary is to get the 
+information about the binary. Using a tool of r2 framework ,this could 
+be easily done.The tool is rabin2.</p>
+<p>rabin2 allows extracting information from binary files including 
+Sections, Headers, Imports, Strings, Entrypoints, etc. We will use 
+rabin2 with -I flag for printing out all these information.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span>rabin2 -I binary
+</pre></div>
+</td></tr></tbody></table>
+<p>You can also get all the information from the r2 shell by giving <code>iI</code> , for mode detail see <code>i?</code></p>
+<h2 id="command-line-arguments">Command Line Arguments<a class="headerlink" href="#command-line-arguments" title="Permanent link">¶</a></h2>
+<p>All the command could be listed by executing the program with the -h flag.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_3"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">r2</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>But here we will be discussing over few frequently used commands.Also
+ radare is a self documenting ie ,Whenever you don't know any command or
+ what it does etc. use <code>?</code>.before the command that you are not sure about.</p>
+<p><strong>Example:</strong> Just running <code>?</code> will give you a list of all commands. Now let us consider a command called <code>s</code> ,To get more information,run <code>s?</code></p>
+<h2 id="analysis">Analysis<a class="headerlink" href="#analysis" title="Permanent link">¶</a></h2>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_4"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="p">[</span><span class="mi">0</span><span class="n">x080484b0</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">aaa</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Radare doesn't analyse the file by default ,because it's a time consuming process based on the size of the file. Basically what <code>aaa</code> does is it analyse the binary completely.</p>
+<h2 id="list-function">List function<a class="headerlink" href="#list-function" title="Permanent link">¶</a></h2>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_5"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="p">[</span><span class="mi">0</span><span class="n">x080484b0</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">afl</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>After analysing , when we run this command all the function in the binary gets printed.</p>
+<h2 id="seek">Seek<a class="headerlink" href="#seek" title="Permanent link">¶</a></h2>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_6"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="p">[</span><span class="mi">0</span><span class="n">x080484b0</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">&lt;</span><span class="k">offset</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Using this command we can navigate to a particular address in 
+radare.When we open a binary in radare,by default the address is the 
+entry point.Now when we run <code>s main</code> (seek main) , we can seek to the main function.</p>
+<h2 id="visual-modes">Visual Modes<a class="headerlink" href="#visual-modes" title="Permanent link">¶</a></h2>
+<h3 id="graph-mode">Graph Mode<a class="headerlink" href="#graph-mode" title="Permanent link">¶</a></h3>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_7"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">Command</span> <span class="o">:</span> <span class="n">VV</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Using this visual mode we can get a graphical view of the binary.The 
+Visual Mode is much more user-friendly and makes the reverse Engineering
+ using r2 much easier.Using the command <code>p</code> we can switch between different Visual modes.</p>
+<p>One thing that you need to remember is that, if you want to use any 
+command inside the visual mode first you need to give a colon followed 
+by your command , and for getting help you can just press <code>?</code>.</p>
+<h3 id="navigation-in-visual-modes">Navigation in Visual modes<a class="headerlink" href="#navigation-in-visual-modes" title="Permanent link">¶</a></h3>
+<p>You can go up and down using <code>k</code> and <code>j</code> 
+respectively. Or this could be simply done using the arrow keys. In the 
+visual mode if you want to go to a function,Just type the 2 or 3 
+characters as shown after the function</p>
+<p><strong>Example:</strong> call <code>sym.func;[ga]</code></p>
+<p>In this case, if you type <code>ga</code> then it goes to this function.</p>
+<h2 id="patching">Patching<a class="headerlink" href="#patching" title="Permanent link">¶</a></h2>
+<p>In order to patch, At first we need to open the binary in write mode ie, by using the following code.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_8"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ r2 -w binaryname
+</pre></div>
+</td></tr></tbody></table>
+<p>Now go to the visual mode,use the command <code>p</code> to change modes so as to get the address of the instruction,ie after entering visual mode if you enter command <code>p</code> ,then you will get address and byte code in front of the instruction.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_9"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="mi">0</span><span class="n">x08049174</span> <span class="mi">85</span><span class="n">c0</span> <span class="n">test</span> <span class="n">eax</span><span class="p">,</span> <span class="n">eax</span> 
+<span class="mi">0</span><span class="n">x08049176</span> <span class="mi">7420</span> <span class="n">je</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>In this example, consider our aim is to patch this jump 
+instruction.We can do it either by adding a nop instruction or giving a 
+instruction that have the same byte code size ie, Here the byte code 
+size is 2 (74 20) so either we can replace this jump instruction either 
+by 2 nop instructions or we can give another instruction of similar size
+ of byte code.</p>
+<p>Now for patching, you need to seek the address where we will be patching .After that ,</p>
+<p><strong><em> Using nop</em></strong></p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_10"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">command</span> <span class="p">:</span> <span class="err">“</span><span class="n">wa</span> <span class="n">nop</span><span class="p">;</span><span class="n">nop</span><span class="err">”</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Here we used two nop instruction since the size of the byte code in 
+the example is 2.We can give any number of nop instruction based on the 
+size of byte code.</p>
+<p><strong><em> Using other instruction</em></strong></p>
+<p>Before choosing any other convinent instruction ,we have to make sure
+ that the byte code size is similar for both instruction.Suppose if we 
+are going to replace this jump instruction from the example with another
+ jump instruction, The command to be used is</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_11"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">Command</span> <span class="o">:</span> <span class="n">wa</span> <span class="n">jmp</span> <span class="mh">0x8087560</span>
+</pre></div>
+</td></tr></tbody></table>
+<details class="tip"><summary>Introductory CTF Challenges</summary><ul>
+<li>BioTerra CTF 2016 - <a href="https://wiki.bi0s.in/reversing/essentials/radare/basic-re-challenges/BioTerra-CTF-2016-Wathzefugg/wathzefugg">Wathzefugg</a></li>
+<li>RC3 CTF - <a href="https://wiki.bi0s.in/reversing/essentials/radare/basic-re-challenges/RC3CTF-2016-Logmein">Logmein</a></li>
+<li>VolgaCTF 2017 - <a href="https://wiki.bi0s.in/reversing/essentials/radare/basic-re-challenges/VolgaCTF-2017-keypass">KeyPass</a></li>
+</ul>
+</details>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/reversing/gdb/" title="GDB" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+GDB
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/reversing/procexp/" title="Process Explorer" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Process Explorer
+</span>
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

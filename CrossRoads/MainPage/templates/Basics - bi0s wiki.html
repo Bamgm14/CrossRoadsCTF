@@ -1,0 +1,583 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Basics - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#input-output-methods" title="Input-Output Methods" class="md-nav__link">
+Input-Output Methods
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#operations" title="Operations" class="md-nav__link">
+Operations
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#comparision-operators" title="Comparision operators:" class="md-nav__link">
+Comparision operators:
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#assignment-operator" title="Assignment Operator '='" class="md-nav__link">
+Assignment Operator '='
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#binary-operations" title="Binary Operations" class="md-nav__link">
+Binary Operations
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#ab-bitwise-and-of-ab" title="a&amp;b bitwise AND of a,b:" class="md-nav__link">
+a&amp;b bitwise AND of a,b:
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#ab-bitwise-or-of-ab" title="a|b bitwise OR of a,b:" class="md-nav__link">
+a|b bitwise OR of a,b:
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#ab-bitwise-xor-of-ab" title="a^b bitwise XOR of a,b:" class="md-nav__link">
+a^b bitwise XOR of a,b:
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#ab-left-shift" title="a&lt;&lt;b Left Shift" class="md-nav__link">
+a&lt;&lt;b Left Shift
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#ab-right-shift" title="a&gt;&gt;b Right Shift" class="md-nav__link">
+a&gt;&gt;b Right Shift
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#conditional-statements" title="Conditional Statements" class="md-nav__link">
+Conditional Statements
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#if-statements" title="if statements" class="md-nav__link">
+if statements
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#while-loop" title="While loop" class="md-nav__link">
+While loop
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#nested-loops" title="Nested Loops:" class="md-nav__link">
+Nested Loops:
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/python/basics.md" title="Edit this page" class="md-icon md-content__icon"></a>
+<h1 id="basics">Basics<a class="headerlink" href="#basics" title="Permanent link">¶</a></h1>
+<h2 id="input-output-methods">Input-Output Methods<a class="headerlink" href="#input-output-methods" title="Permanent link">¶</a></h2>
+<p>For taking input in python 2, we use <code>raw_input()</code>.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python
+&gt;&gt;&gt;raw_input<span class="o">()</span>
+this is taken as input 
+<span class="s1">'this is taken as input'</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>In python3, there is no need for we use <code>input()</code>.</p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python3
+&gt;&gt;&gt;input<span class="o">()</span>
+this is taken as input
+<span class="s1">'this is taken as input'</span>
+</pre></div>
+</td></tr></tbody></table>
+By default input is taken as string.<p></p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt;n<span class="o">=</span>input<span class="o">()</span>
+<span class="m">3</span>
+&gt;&gt;&gt;print<span class="o">(</span>type<span class="o">(</span>n<span class="o">))</span>
+&lt;class <span class="s1">'str'</span>&gt;
+</pre></div>
+</td></tr></tbody></table>
+To convert the datatype, we need to typecast it separately.<p></p>
+<blockquote>
+<p>Typecast: Converting the datatype of a variable from one to another.</p>
+</blockquote>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_3"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt;n<span class="o">=</span>int<span class="o">(</span>input<span class="o">())</span>
+<span class="m">3</span>
+&gt;&gt;&gt;print<span class="o">(</span>type<span class="o">(</span>n<span class="o">))</span>
+&lt;class <span class="s1">'int'</span>&gt;
+</pre></div>
+</td></tr></tbody></table>
+In a similar way we can change the data type from int to float and many more.<p></p>
+<hr>
+<ul>
+<li>
+<p><strong><em>In all the above cases, if python 2 is used then, in place of input() use raw_input().</em></strong></p>
+</li>
+<li>
+<p><strong><em>For print statememt in python3, the synatx is <code>print("Secure")</code>. While in python 2, there is no need of parenthesis () but it won't show any error even if we use parenthesis (). It is <code>print "Secure"</code> or <code>print ("Secure" )</code> .</em></strong></p>
+</li>
+</ul>
+<hr>
+<h2 id="operations">Operations<a class="headerlink" href="#operations" title="Permanent link">¶</a></h2>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="codehilite" id="__code_4"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt; <span class="nv">a</span><span class="o">=</span><span class="m">5</span>
+&gt;&gt;&gt; <span class="nv">b</span><span class="o">=</span><span class="m">6</span>
+&gt;&gt;&gt;a + b
+<span class="m">11</span>
+&gt;&gt;&gt;a - b
+-1
+&gt;&gt;&gt;a * b
+<span class="m">30</span>
+&gt;&gt;&gt;a / b
+<span class="m">0</span>.8333333333333334
+&gt;&gt;&gt;a // b
+<span class="m">0</span>
+&gt;&gt;&gt;a % b
+<span class="m">5</span>
+&gt;&gt;&gt;a ** b
+<span class="m">15625</span>
+</pre></div>
+</td></tr></tbody></table>
+<ul>
+<li>// shows the quotient.</li>
+<li>% show the remainder.</li>
+<li>** is a to the power b or a raised to b.</li>
+</ul>
+<p>In python 2 when '/ ' operation is used, the integer is printed while
+ in case python 3 it will show value after decimal place also. So to 
+obtain the float value in python 2 you need to specify atleast one, 
+either denominator or numerator as float.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite" id="__code_5"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python
+&gt;&gt;&gt; <span class="m">3</span>/2
+<span class="m">1</span>
+&gt;&gt;&gt;3.0/2
+<span class="m">1</span>.5
+</pre></div>
+</td></tr></tbody></table>
+<h2 id="comparision-operators">Comparision operators:<a class="headerlink" href="#comparision-operators" title="Permanent link">¶</a></h2>
+<ul>
+<li>a == b
+Equal to condition.</li>
+<li>a &lt; b
+Less than condition. </li>
+<li>a &gt; b
+Greater than condition.</li>
+<li>a &lt;= b
+Less than or equal to condition.</li>
+<li>a &gt;= b
+Greater than or equal to condition. </li>
+<li>a != b
+Not equal to condition.</li>
+</ul>
+<h2 id="assignment-operator">Assignment Operator '='<a class="headerlink" href="#assignment-operator" title="Permanent link">¶</a></h2>
+<p>a=b the value of b is assigned to a.</p>
+<h2 id="binary-operations">Binary Operations<a class="headerlink" href="#binary-operations" title="Permanent link">¶</a></h2>
+<p>To understand this, use python built in funtion <code>bin(n)</code>. It will show the binary form of number n.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_6"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt; bin<span class="o">(</span><span class="m">3</span><span class="o">)</span>
+<span class="s1">'0b11'</span>
+&gt;&gt;&gt; bin<span class="o">(</span><span class="m">2</span><span class="o">)</span>
+<span class="s1">'0b10'</span>
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="ab-bitwise-and-of-ab">a&amp;b bitwise AND of a,b:<a class="headerlink" href="#ab-bitwise-and-of-ab" title="Permanent link">¶</a></h4>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_7"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt; <span class="m">3</span><span class="p">&amp;</span><span class="m">2</span>
+<span class="m">2</span>
+</pre></div>
+</td></tr></tbody></table>
+Each bit is taken taken and AND opeartion is performed.
+so the result we get is 0b010, which is 2. <p></p>
+<p><img alt="home" src="{% static "bi0s_wiki/AND.png" %}"></p>
+<h4 id="ab-bitwise-or-of-ab">a|b bitwise OR of a,b:<a class="headerlink" href="#ab-bitwise-or-of-ab" title="Permanent link">¶</a></h4>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_8"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt; <span class="m">3</span><span class="p">|</span><span class="m">2</span>
+<span class="m">3</span>
+</pre></div>
+</td></tr></tbody></table>
+Each bit is taken and OR opeartion is performed.
+so the result we get is 0b11, which is 3. <p></p>
+<p><img alt="home" src="{% static "bi0s_wiki/OR.png" %}"></p>
+<h4 id="ab-bitwise-xor-of-ab">a^b bitwise XOR of a,b:<a class="headerlink" href="#ab-bitwise-xor-of-ab" title="Permanent link">¶</a></h4>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_9"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt; <span class="m">3</span>^2
+<span class="m">1</span>
+</pre></div>
+</td></tr></tbody></table>
+Each bit is taken and XOR opeartion is performed. In XOR, if both bits 
+are same then the result is 0, else 1. So 1^1 is 0 while 1^0 is 1.
+Hence, the result we get for 3^2 (0b11^0b10) is 0b001, which is 1. <p></p>
+<p><img alt="home" src="{% static "bi0s_wiki/XOR.png" %}"></p>
+<h3 id="ab-left-shift">a&lt;&lt;b Left Shift<a class="headerlink" href="#ab-left-shift" title="Permanent link">¶</a></h3>
+<p><strong><em>a&lt;&lt;b it will shift the bits of a in binary format to left, this shift is done b times:</em></strong>
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_10"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt; <span class="m">3</span><span class="s">&lt;&lt;2</span>
+<span class="s">12</span>
+&gt;&gt;&gt;bin<span class="o">(</span><span class="m">12</span><span class="o">)</span>
+0b1100
+</pre></div>
+</td></tr></tbody></table>
+Binary representation of 3 is 0b11, which is shifted twice to left. So the result is 0b1100 that is 12.<p></p>
+<p><img alt="home" src="{% static "bi0s_wiki/LeftShift.png" %}"></p>
+<h3 id="ab-right-shift">a&gt;&gt;b Right Shift<a class="headerlink" href="#ab-right-shift" title="Permanent link">¶</a></h3>
+<p><strong><em>a&gt;&gt;b it will shift the bits of a in binary format to right, this shift is done b times:</em></strong>
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_11"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt; <span class="m">3</span>&gt;&gt;1
+<span class="m">1</span>
+</pre></div>
+</td></tr></tbody></table>
+Binary representation of 3 is 0b11, which is shifted once to right. So the result is 0b1 that is 1.<p></p>
+<p><img alt="home" src="{% static "bi0s_wiki/RightShift.png" %}"></p>
+<p>Python can also understand logical operations when written in english :
+- and
+- or
+- not
+- in</p>
+<h2 id="conditional-statements">Conditional Statements<a class="headerlink" href="#conditional-statements" title="Permanent link">¶</a></h2>
+<h3 id="if-statements">if statements<a class="headerlink" href="#if-statements" title="Permanent link">¶</a></h3>
+<p>If condition statements are to be used when you have a set of 
+statements which is to be executed when a particular condition is 
+satisfied.
+For example if a person's age is above 18, he is eligible to vote. If 
+not, he is not eligible to vote. </p>
+<p>Example 1 </p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite" id="__code_12"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python3
+&gt;&gt;&gt;age<span class="o">=</span>int<span class="o">(</span>input<span class="o">())</span>
+<span class="m">32</span>
+&gt;&gt;&gt;if<span class="o">(</span>age&gt;<span class="o">=</span><span class="m">18</span><span class="o">)</span>:
+...    print<span class="o">(</span>“you are eligible to vote”<span class="o">)</span>
+...else:
+...    print<span class="o">(</span>“you are not eligible to vote”<span class="o">)</span>
+</pre></div>
+</td></tr></tbody></table>
+Press enter button twice for output.<p></p>
+<p><strong><em>Output</em></strong></p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_13"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><pre><span></span>you are eligible to vote
+&gt;&gt;&gt;
+</pre></div>
+</td></tr></tbody></table>
+Example 2<p></p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite" id="__code_14"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python
+&gt;&gt;&gt;age<span class="o">=</span>int<span class="o">(</span>raw_input<span class="o">())</span>
+<span class="m">32</span>
+&gt;&gt;&gt;if age&gt;<span class="o">=</span><span class="m">18</span>:
+...    print “you are eligible to vote”
+...else:
+...    print “you are not eligible to vote”
+</pre></div>
+</td></tr></tbody></table>
+Press enter button twice for output.<p></p>
+<p><strong><em>Output</em></strong></p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_15"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><pre><span></span>you are eligible to vote
+&gt;&gt;&gt;
+</pre></div>
+</td></tr></tbody></table>
+Example 3<p></p>
+<p>If we have more than one condition to check we can use elif statements.</p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite" id="__code_16"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python3
+&gt;&gt;&gt;age<span class="o">=</span>int<span class="o">(</span>input<span class="o">())</span>
+<span class="m">32</span>
+&gt;&gt;&gt;if<span class="o">(</span>age&lt;<span class="o">=</span><span class="m">12</span><span class="o">)</span>:
+...     print<span class="o">(</span>“you are a kid”<span class="o">)</span>
+...elif<span class="o">(</span>age&gt;12 and age &lt;<span class="o">=</span> <span class="m">19</span><span class="o">)</span>:
+...     print <span class="o">(</span>“you are a teenager”<span class="o">)</span>
+...elif<span class="o">(</span>age &gt;19 and age &lt; <span class="m">30</span> <span class="o">)</span>:
+...     print<span class="o">(</span>“you are an adult”<span class="o">)</span>
+...else:
+        print<span class="o">(</span>“you are a senior citizen”<span class="o">)</span>
+</pre></div>
+</td></tr></tbody></table>
+Press enter button twice for output.<p></p>
+<p><strong><em>Output</em></strong>
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_17"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><pre><span></span>you are a senior citizen
+&gt;&gt;&gt;
+</pre></div>
+</td></tr></tbody></table>
+Example 4<p></p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite" id="__code_18"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python
+&gt;&gt;&gt;age<span class="o">=</span>int<span class="o">(</span>raw_input<span class="o">())</span>
+<span class="m">32</span>
+&gt;&gt;&gt;if age&lt;<span class="o">=</span><span class="m">12</span> :
+...     print “you are a kid”
+...elif age&gt;12 and age &lt;<span class="o">=</span> <span class="m">19</span> :
+...     print “you are a teenager”
+...elif age &gt;19 and age &lt; <span class="m">30</span> :
+...     print “you are an adult”
+...else:
+        print “you are a senior citizen”
+</pre></div>
+</td></tr></tbody></table>
+<p>Press enter button twice for output.</p>
+<p><strong><em>Output</em></strong></p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="codehilite" id="__code_19"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><pre><span></span>you are a senior citizen
+ &gt;&gt;&gt;
+ <span class="sb">```</span>
+
+<span class="c1">## Loops</span>
+
+<span class="c1">### For loop </span>
+
+It is used when you need to execute a <span class="nb">set</span> of statements n times.
+
+Syntax :
+
+<span class="sb">```</span>sh
+<span class="k">for</span> variable in range<span class="o">(</span>start,end,incrementation<span class="o">)</span>:
+    statments
+</pre></div>
+</td></tr></tbody></table>
+<p>If not mentioned then starting is taken as 0 and incrementation as 1 to the specified end point.</p>
+<p>This code is valid for both python 3 and python 2.</p>
+<p>Example 1</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_20"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python
+&gt;&gt;&gt;for i in range<span class="o">(</span><span class="m">3</span><span class="o">)</span>:
+...     print<span class="o">(</span>“welcome to the world of security”<span class="o">)</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Press enter button twice for output.
+<strong><em>Output</em></strong>
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_21"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><pre><span></span>welcome to the world of security
+welcome to the world of security
+welcome to the world of security
+&gt;&gt;&gt;
+</pre></div>
+</td></tr></tbody></table>
+Example 2<p></p>
+<p>This code is valid for both python 3 and python 2.</p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_22"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_22 pre, #__code_22 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python3
+&gt;&gt;&gt;i <span class="o">=</span> <span class="s2">"teambi0s"</span>
+&gt;&gt;&gt;for i in c:
+...     print<span class="o">(</span>i<span class="o">)</span>
+</pre></div>
+</td></tr></tbody></table>
+Press enter button twice for output.
+<strong><em>Output</em></strong>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite" id="__code_23"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_23 pre, #__code_23 code"><span class="md-clipboard__message"></span></button><pre><span></span>t
+e
+a
+m
+b
+i
+<span class="m">0</span>
+s
+&gt;&gt;&gt;
+</pre></div>
+</td></tr></tbody></table><p></p>
+<h3 id="while-loop">While loop<a class="headerlink" href="#while-loop" title="Permanent link">¶</a></h3>
+<p>It is used to execute a set of statements until the condition is 
+satisfied and hence the loop will end as the condition becomes false. </p>
+<p>Syntax :
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_24"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_24 pre, #__code_24 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">while</span><span class="o">(</span>condition<span class="o">)</span>:
+    statments
+</pre></div>
+</td></tr></tbody></table>
+Example 1<p></p>
+<p>This code is valid for both python 3 and python 2.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite" id="__code_25"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_25 pre, #__code_25 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python3
+&gt;&gt;&gt;flag<span class="o">=</span><span class="m">0</span>
+&gt;&gt;&gt;while<span class="o">(</span>flag!<span class="o">=</span><span class="m">3</span><span class="o">)</span>:
+...     print<span class="o">(</span>flag<span class="o">)</span>
+...     <span class="nv">flag</span><span class="o">=</span>flag+1
+</pre></div>
+</td></tr></tbody></table>
+Press enter button twice for output.<p></p>
+<p><strong><em>Output</em></strong>
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_26"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_26 pre, #__code_26 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="m">0</span>
+<span class="m">1</span>
+<span class="m">2</span>
+&gt;&gt;&gt;
+</pre></div>
+</td></tr></tbody></table><p></p>
+<h3 id="nested-loops">Nested Loops:<a class="headerlink" href="#nested-loops" title="Permanent link">¶</a></h3>
+<p>Loop inside a loop is termed as nested. </p>
+<p>This code is valid for both python 3 and python 2.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_27"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_27 pre, #__code_27 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python3
+&gt;&gt;&gt;for i in range <span class="o">(</span><span class="m">3</span><span class="o">)</span>:
+...     <span class="k">for</span> j in range <span class="o">(</span><span class="m">2</span><span class="o">)</span>:
+...         print<span class="o">(</span>“this is nested”<span class="o">)</span>
+</pre></div>
+</td></tr></tbody></table>
+Press enter button twice for output.<p></p>
+<p><strong><em>Output</em></strong></p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite" id="__code_28"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_28 pre, #__code_28 code"><span class="md-clipboard__message"></span></button><pre><span></span>this is nested
+this is nested
+this is nested
+this is nested
+this is nested
+this is nested
+&gt;&gt;&gt;
+</pre></div>
+</td></tr></tbody></table>
+<p>It will print 6 times.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/python/getting_started/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Getting Started
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/python/functions/" title="Functions" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Functions
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

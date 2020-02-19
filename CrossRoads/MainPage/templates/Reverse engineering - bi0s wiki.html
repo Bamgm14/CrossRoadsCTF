@@ -1,0 +1,272 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Reverse engineering - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/reversing/basic-re.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871623519" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="reverse-engineering">Reverse engineering<a class="headerlink" href="#reverse-engineering" title="Permanent link">¶</a></h1>
+<p>Reverse engineering is the process of analysing low level code and extracting
+higher level information(eg: code in higher level language, design information
+etc). Specifically, here it is about analysing assembly code in executables and
+understand their behaviour.</p>
+<p>In this section, we will learn some reverse engineering but it is best learnt by
+a lot of practice: we can help you by giving some general guidelines and
+directions but without effort from your side, it is not possible to learn
+effectively. With that said, let's begin reversing some very simple Linux
+programs. Just like before, we will assume you are using a <strong>recent version of
+Ubuntu GNU/Linux(any LTS version &gt;= 14.04)</strong>.</p>
+<h1 id="tool-setup">Tool setup<a class="headerlink" href="#tool-setup" title="Permanent link">¶</a></h1>
+<p>Reverse engineering requires use of several tools. The two most popular kinds of
+tools we will use are:</p>
+<ol>
+<li>Disassemblers: These allow us to view the assembly code.</li>
+<li>Debuggers: These allow us to analyse a program when it is running to inspect
+memory values, register values and more.</li>
+</ol>
+<p>From the previous sections, you are already familiar with using gdb for
+debuggers. We will use IDA Pro, the most widely used disassembler tool in the
+industry. IDA Pro is not free software: it is very expensive. However, the
+developers have made a freeware version available for many popular operating
+systems. Click here to go to the IDA Freeware download
+page download the installer for Linux. After downloading the idafree70_linux.run
+installer file, execute it by double clicking on the file to start the
+installation process. Follow the instructions displayed there to complete the
+installation.</p>
+<h2 id="baby-steps-in-reverse-engineering">Baby steps in reverse engineering<a class="headerlink" href="#baby-steps-in-reverse-engineering" title="Permanent link">¶</a></h2>
+<p>Alright let's get started with reverse engineering using the many tools you
+installed above. We will start with a very simple crackme challenge. A crackme
+is a binary which expects a specific input as answer and that input should be
+discovered by analysing the binary. Click here to download the crackme
+binary and let's get started.</p>
+<p>As a first step, try running the binary without any arguments to understand
+something about it's behaviour. Open a terminal, navigate to the folder where
+you downloaded the binary and give the binary execute permission by running the
+following command:</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ chmod +x ./simplecrackme0x00
+</pre></div>
+</td></tr></tbody></table>
+<p>After the above step, run the binary using the following command and give it some inputs:</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ ./simplecrackme00
+Enter answer: <span class="nb">test</span>
+Incorrect! Try again!
+</pre></div>
+</td></tr></tbody></table>
+<p>Play around with the binary giving different inputs to gain some understanding
+of the binary for sometime and then return here.</p>
+<p>From the several executions of the binary, we can conclude the following:</p>
+<ol>
+<li>The binary takes some input from user.</li>
+<li>The binary performs some kind of validation on the input.</li>
+<li>Depending on the result of the validation, the binary concludes that the
+input is valid or not.</li>
+</ol>
+<p>By multiple executions of the binary, we were able to infer useful information
+about the binary! This is an important step: executing the binary can reveal
+useful information. You can do this step as long as you can to infer as much
+useful information as possible. However, in majority of the cases, the amount of
+useful information you can derive from this kind of analysis is limited.</p>
+<p>So now what should be our next step? That's right - we have to analyse the
+validation performed on the input to understand it and hopefully find out the
+correct input. There are several ways. We will use IDA Pro to see how
+helpful(powerful) it can be. When you run IDA Pro, you will get a screen as
+below:</p>
+<p><img alt="ida-startup-screen" src="{% static "bi0s_wiki/ida-startup-screen.png" %}"></p>
+<p><em>Figure: IDA startup screen.</em></p>
+<p>Click on the "New" button, choose the binary you downloaded and click "Open" to
+load the binary into IDA Pro. On loading the binary, IDA Pro does a lot of
+preprocessing and finally displays a window similar to below:</p>
+<p><img alt="ida-main-cfg-screen" src="{% static "bi0s_wiki/ida-main-cfg-screen.png"%}">
+<em>Figure: IDA screen after loading executable(click to expand).</em></p>
+<p>The graph displayed is a nice representation of the execution of the assembly
+instructions in main. Such a graph is called as the Control Flow Graph(CFG) of
+the function: it represents the control flow execution as a graph. As you can
+see, there are 4 nodes in the graph. Each node is called a basic block. The
+arrows connecting the nodes indicate the flow of execution between the basic
+blocks. There are 3 kinds of arrows in the graph displayed in the CFG:</p>
+<ol>
+<li>Blue arrows: These indicate that control always along this path.</li>
+<li>Green arrows: These indicate that the control flows along this path only if a
+condition is true.</li>
+<li>Red arrows: These indicate that the control flows along this path only if a
+condition is false.</li>
+</ol>
+<p>On analysing the 4 basic blocks in the function main and using some lessons we
+learnt in the assembly programing section, we arrive at following conclusions:</p>
+<ol>
+<li>At address 0x80484B5, the string "Enter answer:" is displayed by the printf
+function.</li>
+<li>At address 0x80484C9, the user input is read by the scanf function.</li>
+<li>The basic block 3 is executed if the input we supplied is wrong because the
+string "Incorrect! Try again!" is printed in that basic block. From the
+initial analysis by executing the binary, we found that "Incorrect! Try
+again!" is printed only if wrong input is supplied.</li>
+<li>The basic block 2 is probably executed if we give the right input because the
+string "Correct!" is printed by instructions in this block.</li>
+</ol>
+<p>Thus, we can further refine our earlier understanding of the binary as follows:</p>
+<ol>
+<li>The program reads input at address 0x80484C9 and validates it few instructions later.</li>
+<li>The program makes some condition checking at or near 0x80484D6 and prints
+"Correct" or "Incorrect" depending on the result of the condition check.</li>
+<li>We want the message "Correct" to be displayed and so the condition check at
+0x80484D6 should evaluate to false since only then is the message displayed.</li>
+</ol>
+<p>Now with the above knowledge and your experience with assembly programming and
+using a debugger, can you analyse the binary and find out the correct answer?
+Attempt solving it on your own before looking at the solution. It's good
+practice to try: even if you can't solve, you will have learnt a lot by
+attempting.</p>
+<p>If you are stuck, here is some hints to help you.</p>
+<ol>
+<li>Find out where is the input stored after being read by scanf.</li>
+<li>We saw that some kind of validation of the input is performed. Try to find
+out where is the validation performed. After that, try to understand what
+validation is performed.</li>
+</ol>
+<h1 id="baby-steps-in-reverse-engineering-detailed-walkthrough">Baby steps in reverse engineering detailed walkthrough<a class="headerlink" href="#baby-steps-in-reverse-engineering-detailed-walkthrough" title="Permanent link">¶</a></h1>
+<p>Let's now perform a detailed analysis of the given executable.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you have not attempted finding the answer on your own, we recommend you
+do so before reading ahead. It is alright if you don't solve it on your own:
+you will learn a lot by attempting to solve it.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is one of the many approaches possible: this one uses only IDA Pro to
+find the answer. This can be solved using both IDA Pro and gdb or using gdb
+alone. In most reversing exercises, you will need to use both a disassembler
+and a debugger also to solve the challenges.</p>
+</div>
+<p>If we analyse main, we can see that at address 0x80484A6, the value 0x12345678
+is stored somewhere in memory. If we carefully look at the instruction, we see
+that ESP register is used to compute the address and thus, this value is stored
+somewhere on the stack. More specifically, it is a local variable because it is
+stored in the stack frame of the function main (if this is not clear, go back to
+assembly programming and refresh this part). Let's convert the memory location
+[esp + 0x1c] into a variable. To do so, click on the instruction at 0x80484A6
+and press the key 'k'. You will see that a new local variable has been added
+with the name "var_4". You can rename this variable to something more
+meaningful, say "unknown_number". There are two ways to do so:</p>
+<ol>
+<li>Click on "var_4" and press 'n' key.</li>
+<li>Right click on "var_4" and choose "rename".</li>
+</ol>
+<p>The next 2 instructions at addresses 0x80484AE and 0x80484B5 are storing some
+value on the stack and calling the function puts. From our assembly programming
+sections, we recall that as per the function calling convention on Linux, the
+arguments are stored on the stack before the function is called. Here, we see
+that the function puts is called and as per the man page documentation for
+printf, the first argument is a pointer to a string as argument. IDA has very
+cleverly dereferenced the pointer and displays the string beside the copy
+instruction. Thus, we can conclude that puts call at address 0x80484B5 displays
+the string "Enter answer: ".</p>
+<p>Let us know look at the next 4 instructions from address 0x80484BA to 0x80484C9.
+At 0x80484C9, we see that scanf is invoked and we know from our previous
+experience(and also from man page for scanf) that is accepts multiple arguments:
+the first argument is a format string and all the other arguments are addresses
+of variables for storing the input. Here, we see that only 2 arguments are
+passed to scanf and hence, we can conclude that scanf is reading 1 input from
+user. This is also what we observed from when executed the binary before
+analysing it in IDA Pro: it accepted one input and then validated it.
+Additionally, at address 0x80484C2, we see that the first argument is set and it
+happens to be the string "%ld". Based on this input format, we can conclude that
+scanf is reading a long integer from the user.</p>
+<div class="admonition note">
+<p class="admonition-title">Exercise</p>
+<p>Try to draw the stack frame just before scanf is called. Show which the
+arguments are present on stack, in what order and the type of each argument
+on the stack.</p>
+</div>
+<p>To summarize what we have discovered till now by analysing the binary in IDA:</p>
+<ol>
+<li>The binary stores the value 0x12345678 in <em>unknown_number</em>.</li>
+<li>The binary prints the string "Enter number: " using puts.</li>
+<li>The binary accepts a long integer as input using scanf and stores the input
+value in <em>user_input</em>.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be sure that you are clear with all 3 discoveries listed above. If you are
+not, go back and read the solution again till you are clear with all of them
+and only then continue below.</p>
+</div>
+<p>Now, let's look at the instructions from address 0x80484CE to 0x80484D6. In the
+instructions at address 0x80484CE and 0x80484D2, we see two local variables
+being accessed. Convert them to local variables by clicking on the instruction
+and pressing the key 'k'. You will see that IDA identifies as the two local
+variables we created earlier: <em>user_input</em> and <em>unknown_number</em>. In instruction at
+0x804849E, we can see that the <em>user_input</em> is stored in the EAX register and in
+the following instruction, we see that the value in the EAX register is compared
+with <em>unknown_number</em> using <em>cmp</em> instruction. From the assembly programming
+section, recall that <em>cmp</em> instruction compares two values and sets few flags
+depending on the result of the compare operation. After the comparison between
+<em>user_input</em> and <em>unknown_number</em>, we see the <em>jnz</em> instruction to 0x80484D6. From
+assembly programming, recall that</p>
+<ol>
+<li><em>jnz</em> will jump if the zero flag is set.</li>
+<li>The <em>cmp</em> instruction sets the zero flag if the 2 values being compared are
+equal.</li>
+</ol>
+<p>To summarize the instructions 0x80484CE to 0x80484D6:</p>
+<ol>
+<li>The values <em>user_input</em> and <em>unknown_number</em> are compared.</li>
+<li>If they are equal, the "Correct!" is printed else "Incorrect!" is printed.</li>
+</ol>
+<p>Thus, we have found what is the expected input: 0x12345678(305419896 in
+decimal), the value of <em>unknown_number</em>. Let's try giving the number as input:</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ ./simplecrackme0x00
+Enter answer: <span class="m">305419896</span>
+Correct!
+</pre></div>
+</td></tr></tbody></table>
+<p>Great work! You just solved the crackme!</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/reversing/windows/" title="Windows" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Windows
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/pwning/intro/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Introduction
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

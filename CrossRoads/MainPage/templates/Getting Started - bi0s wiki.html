@@ -1,0 +1,235 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Getting Started - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#using-python-shell" title="Using python shell" class="md-nav__link">
+Using python shell
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#basic-data-types" title="Basic Data Types" class="md-nav__link">
+Basic Data Types
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#strings" title="Strings" class="md-nav__link">
+Strings
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/python/getting_started.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871391161" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">¶</a></h1>
+<h2 id="using-python-shell">Using python shell<a class="headerlink" href="#using-python-shell" title="Permanent link">¶</a></h2>
+<ul>
+<li>Open terminal (ctrl+alt+t). </li>
+<li>Type:</li>
+</ul>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python
+</pre></div>
+</td></tr></tbody></table>
+- If you have python 3 then type:
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python3
+</pre></div>
+</td></tr></tbody></table>
+This will open python shell in your terminal. <p></p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt;
+</pre></div>
+</td></tr></tbody></table>
+<p>Lets tryout a simple python code to print "Unlock the world of security", all you need is to use print function.</p>
+<ul>
+<li>open terminal and type: </li>
+</ul>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_3"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python3
+&gt;&gt;&gt; print<span class="o">(</span><span class="s2">"Unlock the world of security"</span><span class="o">)</span>
+</pre></div>
+</td></tr></tbody></table>
+- In case of python 2 the above syntax will also work along with the following syntax :
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_4"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ python
+&gt;&gt;&gt; print <span class="s2">"Unlock the world of security"</span> 
+</pre></div>
+</td></tr></tbody></table>
+The output will be displayed in the python shell as:
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_5"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt; Unlock the world of security
+</pre></div>
+</td></tr></tbody></table><p></p>
+<h2 id="basic-data-types">Basic Data Types<a class="headerlink" href="#basic-data-types" title="Permanent link">¶</a></h2>
+<ul>
+<li>Integer eg: -4, 0, 32 </li>
+<li>Float eg: -44.3, 0.55, 7.0</li>
+<li>Complex eg: 3+2i, 4-i, -2-3i</li>
+<li>Boolean true or false</li>
+<li>String eg: 'Smile', '44', 'disc0ver'</li>
+</ul>
+<blockquote>
+<p>To check the datatype, python has built in function type().</p>
+</blockquote>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite" id="__code_6"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt; <span class="nv">n</span><span class="o">=</span><span class="m">1729</span>
+&gt;&gt;&gt;type<span class="o">(</span>n<span class="o">)</span>
+&lt;class <span class="s1">'int'</span>&gt;
+&gt;&gt;&gt;s<span class="o">=</span><span class="s2">"H4cker"</span>
+&gt;&gt;&gt;type<span class="o">(</span>s<span class="o">)</span>
+&lt;class <span class="s1">'str'</span>&gt;
+&gt;&gt;&gt;f<span class="o">=</span><span class="m">17</span>.29
+&gt;&gt;&gt;type<span class="o">(</span>f<span class="o">)</span>
+&lt;class <span class="s1">'float'</span>&gt;
+</pre></div>
+</td></tr></tbody></table>
+Convertion to a valid datatype is possible with the help of typecasting.<p></p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite" id="__code_7"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt;f<span class="o">=</span><span class="m">212</span>.34
+&gt;&gt;&gt;int<span class="o">(</span>f<span class="o">)</span>
+<span class="m">212</span>
+&gt;&gt;&gt;num<span class="o">=</span><span class="m">33</span>
+&gt;&gt;&gt;float<span class="o">(</span>num<span class="o">)</span>
+<span class="m">33</span>.0
+</pre></div>
+</td></tr></tbody></table>
+<h2 id="strings">Strings<a class="headerlink" href="#strings" title="Permanent link">¶</a></h2>
+<p>These are set of characters closed with double or single quotes. </p>
+<p>string="security"</p>
+<p>Here security is written in double quotes, hence is taken as a string.</p>
+<p>With length as 8.</p>
+<p>To check length, python has built-in funtion, <code>len(string name)</code>.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_8"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt; <span class="nv">string</span><span class="o">=</span><span class="s2">"security"</span>
+&gt;&gt;&gt;len<span class="o">(</span>string<span class="o">)</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Press enter.</p>
+<p><strong><em>Output</em></strong></p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_9"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="m">8</span>
+</pre></div>
+</td></tr></tbody></table>
+Index value starts from 0.<p></p>
+<p><img alt="home" src="{% static "bi0s_wiki/string.png"%}"></p>
+<p><strong>Things to know:</strong></p>
+<p>Syntax for extracting a part of the string : </p>
+<p><strong>string_name[starting:ending:incrementation]</strong></p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_10"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt;a<span class="o">=</span><span class="s1">'I can crack your password'</span>
+&gt;&gt;&gt;len<span class="o">(</span>a<span class="o">)</span>
+</pre></div>
+</td></tr></tbody></table>
+<p><strong><em>Output</em></strong></p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_11"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="m">25</span>
+</pre></div>
+</td></tr></tbody></table>
+It starts from 0 to 24, thus in total 25 characters. <p></p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_12"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt;a<span class="o">[</span><span class="m">0</span>:24<span class="o">]</span>
+</pre></div>
+</td></tr></tbody></table>
+<p><strong><em>Output</em></strong></p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_13"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="s1">'I can crack your password'</span>
+</pre></div>
+</td></tr></tbody></table>
+For only the fisrt 5 characters.
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_14"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt;a<span class="o">[</span><span class="m">0</span>:5<span class="o">]</span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p><strong><em>Output</em></strong></p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_15"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="s1">'I can'</span>
+</pre></div>
+</td></tr></tbody></table>
+For the 10<sup>th</sup> character.
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_16"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt;a<span class="o">[</span><span class="m">10</span><span class="o">]</span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p><strong><em>Output</em></strong></p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_17"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="s1">'k'</span>
+</pre></div>
+</td></tr></tbody></table>
+To Extract the characters at even indices.<p></p>
+<p>To include the last character, we need to specify the ending point as 25.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_18"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt;a<span class="o">[</span><span class="m">0</span>:25:2<span class="o">]</span>
+</pre></div>
+</td></tr></tbody></table>
+<p><strong><em>Output</em></strong></p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_19"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="s1">'Icncakyu asod'</span>
+</pre></div>
+</td></tr></tbody></table>
+Python has built-in funtion <code>string_name.split("")</code>.<p></p>
+<p>It will split the string into substrings when it encounters the character in quotations.
+If nothing is specifed in the quotes, then it will dispaly error.</p>
+<p>Example 1 </p>
+<p>If we want to separate the string into subtrings, when there is a space:</p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_20"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt;a.split<span class="o">(</span><span class="s2">" "</span><span class="o">)</span>
+</pre></div>
+</td></tr></tbody></table>
+It will give us a list with the substrings which are separated by what is specified in quotations (here split(" ") i.e. space).<p></p>
+<p><strong><em>Output</em></strong></p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_21"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="o">[</span><span class="s1">'I'</span>, <span class="s1">'can'</span>, <span class="s1">'crack'</span>, <span class="s1">'your'</span>, <span class="s1">'password'</span><span class="o">]</span>
+</pre></div>
+</td></tr></tbody></table>
+Example 2<p></p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_22"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_22 pre, #__code_22 code"><span class="md-clipboard__message"></span></button><pre><span></span>&gt;&gt;&gt;new<span class="o">=</span><span class="s1">'safe, secure, security'</span>
+&gt;&gt;&gt;new.split<span class="o">(</span><span class="s2">","</span><span class="o">)</span>
+</pre></div>
+</td></tr></tbody></table>
+<p><strong><em>Output</em></strong></p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_23"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_23 pre, #__code_23 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="o">[</span><span class="s1">'safe'</span>, <span class="s1">' secure'</span>, <span class="s1">' security'</span><span class="o">]</span>
+</pre></div>
+</td></tr></tbody></table>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/python/intro/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Introduction
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/python/basics/" title="Basics" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Basics
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

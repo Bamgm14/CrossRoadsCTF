@@ -1,0 +1,124 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Windows - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#disassemblers-and-decompilers" title="Disassemblers and Decompilers" class="md-nav__link">
+Disassemblers and Decompilers
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#idapro" title="IDAPro" class="md-nav__link">
+IDAPro
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#dotpeek" title="DotPeek" class="md-nav__link">
+DotPeek
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#debuggers" title="Debuggers" class="md-nav__link">
+Debuggers
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#ollydbg" title="OllyDbg" class="md-nav__link">
+OllyDbg
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#x64dbg" title="x64dbg" class="md-nav__link">
+x64dbg
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#dnspy" title="dnspy" class="md-nav__link">
+dnspy
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#windbg" title="WinDbg" class="md-nav__link">
+WinDbg
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/reversing/more-tools/windows.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871615097" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1>Windows</h1>
+<h2 id="disassemblers-and-decompilers">Disassemblers and Decompilers<a class="headerlink" href="#disassemblers-and-decompilers" title="Permanent link">¶</a></h2>
+<h3 id="idapro">IDAPro<a class="headerlink" href="#idapro" title="Permanent link">¶</a></h3>
+<p>IDA is a Windows, Linux or Mac OS X hosted multi-processor disassembler and debugger.</p>
+<h3 id="dotpeek">DotPeek<a class="headerlink" href="#dotpeek" title="Permanent link">¶</a></h3>
+<p>DotPeek is a tool used for decompiling .NET windows executables.
+Installion Link: <a href="https://www.jetbrains.com/decompiler/download/">DotPeek</a>
+<h2 id="debuggers">Debuggers<a class="headerlink" href="#debuggers" title="Permanent link">¶</a></h2>
+<h3 id="ollydbg">OllyDbg<a class="headerlink" href="#ollydbg" title="Permanent link">¶</a></h3>
+<p>Used for debugging windows executables written in c and c++.
+Installation Link: <a href="http://www.ollydbg.de/">OllyDbg</a>
+<h3 id="x64dbg">x64dbg<a class="headerlink" href="#x64dbg" title="Permanent link">¶</a></h3>
+<p>Used for debugging windows executables.
+Installation Link: <a href="https://x64dbg.com/">x64dbg</a>
+<h3 id="dnspy">dnspy<a class="headerlink" href="#dnspy" title="Permanent link">¶</a></h3>
+<p>Used for debugging and decompiling windows .NET executables.
+Installation Link: <a href="https://github.com/0xd4d/dnSpy">Dnspy</a>
+<h3 id="windbg">WinDbg<a class="headerlink" href="#windbg" title="Permanent link">¶</a></h3>
+<p>Used for kernel mode debugging.
+Installation Link: <a href="https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk">WinDbg</a>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/reversing/procexp/" title="Process Explorer" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Process Explorer
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/reversing/basic-re/" title="Reverse engineering" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Reverse engineering
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

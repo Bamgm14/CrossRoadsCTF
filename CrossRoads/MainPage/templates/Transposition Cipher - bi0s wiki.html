@@ -1,0 +1,86 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Transposition Cipher - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#route-cipher" title="Route Cipher" class="md-nav__link">
+Route Cipher
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/crypto/transpostion-cipher.md" title="Edit this page" class="md-icon md-content__icon"></a>
+<h1>Transposition Cipher</h1>
+<p>Transposition cipher is a cipher in which the characters of the 
+plaintext are changed without any change in their identity. That is, 
+this cipher changes the arrangement of the characteristics of plaintext 
+to get the ciohertext.</p>
+<p>Let’s see an example of transposition cipher:</p>
+<h3 id="route-cipher">Route Cipher<a class="headerlink" href="#route-cipher" title="Permanent link">¶</a></h3>
+<p>Suppose we have this sentence: <em>THE ENEMY IS CLOSE</em>. So, this could be written in the following pattern:</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>                             <span class="n">T</span> <span class="n">E</span> <span class="n">M</span> <span class="n">S</span> <span class="n">O</span>
+                             <span class="n">H</span> <span class="n">N</span> <span class="n">Y</span> <span class="k">C</span> <span class="n">S</span>
+                             <span class="n">E</span> <span class="n">E</span> <span class="n">I</span> <span class="n">L</span> <span class="n">E</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>And this could be encrypted along the “route” as specified in the 
+key. If the order in the key is to follow along the top-left side to 
+down right-side then the ciphertext would be TEM SOHNY CS EEILE. These 
+secure routes would often leak away important parts of the message 
+thereby breaking the encryption. Hence, it was not widely used or used 
+with another cipher.</p>
+<p>Just like how substitution ciphers can be broken with the help of 
+frequency analysis of each letter in the ciphertext similarly 
+transposition ciphers can be broken too! This is done with the help of 
+similar method of frequency analysis of the adjacent letters of 
+plaintext which may help to identify the algorithm that has been used to
+ do the transposition.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/crypto/caesar-cipher/" title="Substitution Cipher" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Substitution Cipher
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/crypto/xor/" title="XOR Encryption" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+XOR Encryption
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

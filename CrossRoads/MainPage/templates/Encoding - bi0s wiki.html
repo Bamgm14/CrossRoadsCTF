@@ -1,0 +1,265 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Encoding - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#what-is-encoding" title="What is Encoding?" class="md-nav__link">
+What is Encoding?
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#number-systems" title="Number Systems" class="md-nav__link">
+Number Systems
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#hex-encoding" title="Hex Encoding" class="md-nav__link">
+Hex Encoding
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#a-quick-example" title="A quick Example:" class="md-nav__link">
+A quick Example:
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#the-encoding-part" title="The Encoding part" class="md-nav__link">
+The Encoding part
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#python-implementation" title="Python Implementation" class="md-nav__link">
+Python Implementation
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#base64-encoding" title="Base64 Encoding" class="md-nav__link">
+Base64 Encoding
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#encoding_1" title="Encoding" class="md-nav__link">
+Encoding
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#python-implementation_1" title="Python Implementation" class="md-nav__link">
+Python Implementation
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/crypto/encoding.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567872061495" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="encoding">Encoding<a class="headerlink" href="#encoding" title="Permanent link">¶</a></h1>
+<h2 id="what-is-encoding">What is Encoding?<a class="headerlink" href="#what-is-encoding" title="Permanent link">¶</a></h2>
+<p>To get started, <em>"Encoding is the process of changing data representation"</em>.</p>
+<p>Rather, may be we should check this out : </p>
+<blockquote>
+<p><em>In computer terminology, encoding is the process of applying a 
+specific code, such as letters, symbols and numbers, to data for 
+conversion into an equivalent cipher.</em>
+The most common example would be changing "abc" to "ABC", the lower-to-upper encoding.</p>
+</blockquote>
+<p>That was pretty basic! Similarly, ASCII (American Standard Code for 
+Information Interchange) is the most common encoding format for text 
+files, be it on your computer or the internet. In an ASCII file, each 
+alphanumeric, digit or special character is represented by an unique 
+decimal number (from 0 to 127). For example, the character 'A' is given 
+code 65, 'B' 66 and so on. </p>
+<div class="admonition note">
+<p class="admonition-title">ASCII Table</p>
+<p>You can see the complete reference by typing the following in your linux terminal.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ man ascii
+</pre></div>
+</td></tr></tbody></table><p></p>
+</div>
+<p>In addition to just alphabets and digits, ASCII also accounts for 
+non-printable characters (such as newline, backspace etc). So a string, 
+"Hello" can be converted to ASCII as "72 101 108 108 111". This is how 
+computers process information.</p>
+<p>In addition to just alphabets and digits, ASCII also accounts for 
+non-printable characters (such as newline, backspace etc). So a string, 
+"Hello" can be converted to ASCII as "72 101 108 108 111". This is how 
+computers process information.</p>
+<h3 id="number-systems">Number Systems<a class="headerlink" href="#number-systems" title="Permanent link">¶</a></h3>
+<ul>
+<li>Binary</li>
+<li>Octal</li>
+<li>Decimal</li>
+<li>Hexadecimal</li>
+</ul>
+<p>Decimal is the number system used around the world. But if you peep into Mathematical Computing, we have many number systems.
+The most prevalent is <strong>Binary</strong>, which uses just 1's and 0's to represent data [Thus it is a base 2 number system]. Next we have <strong>Octal</strong>
+ number system with base 8. Here, we use 8 digits to represent data, 
+from 0,1,2 to 7. We also have hexadecimal, another commonly used system.
+ Hexadecimal in fact means a base of 16. Since we only have 10 digits, 
+we also use characters from A to F. So hex characters include 
+1,2,..,9,A,B,C,D,E and F, making a total of 16 digits. It is possible to
+ convert data from
+one system to another, but that is beyond the scope of this tutorial.</p>
+<h2 id="hex-encoding">Hex Encoding<a class="headerlink" href="#hex-encoding" title="Permanent link">¶</a></h2>
+<p>Hex encoding is the process of changing data into hexadecimal 
+representation. Having said that, Hexadecimal numerals are widely used 
+by computer system designers and programmers, as they provide a more 
+human-friendly representation of binary values. You can also try 
+converting decimals and Strings to hex.
+Each hexadecimal character can be expanded into binary digits (A 
+nibble). And it implies that a byte of data can be represented using two
+ hex chars. Isn't that cool?</p>
+<div class="admonition note">
+<p class="admonition-title">Note on Prefixes</p>
+<p>In order to differentiate between the representations, we have different prefixes added to the data.
+<strong>\x</strong> or <strong>0x</strong> is the generally accepted prefix added to hexadecimal string.</p>
+</div>
+<h3 id="a-quick-example">A quick Example:<a class="headerlink" href="#a-quick-example" title="Permanent link">¶</a></h3>
+<ul>
+<li><em>0000</em> of binary will convert to <strong>'0'</strong> of hex. </li>
+<li><em>0001</em> of binary will convert to <strong>'1'</strong> of hex.
+Similarly, <strong>'f'</strong> of hex will be <em>1111</em> of binary.</li>
+</ul>
+<p>Now if we take 8 bits at a time,
+* <strong>0x00</strong> is <strong>0b00000000</strong>,
+* <strong>0x01</strong> is <strong>0b00000001</strong>,
+and so and so forth till
+* <strong>0x0f</strong> is <strong>0b00001111</strong> (The Decimal equivalent is <em>15</em>).
+When we move further,
+* <strong>0x10</strong> is <strong>0b00010000</strong> (Decimal <em>16</em>) till
+* <strong>0xff</strong> which is <strong>0b11111111</strong> (Decimal <em>255</em>).</p>
+<h3 id="the-encoding-part">The Encoding part<a class="headerlink" href="#the-encoding-part" title="Permanent link">¶</a></h3>
+<p>Recollect that each character is assigned a decimal equivalent in ASCII [from 0 to 127].
+If we try to map it together, it turns out that each of the decimal equivalent can then be converted into hex.
+That's it! The character '<strong>A</strong>' has decimal value of <strong>65</strong>, which converts to <strong>0x41</strong> in hex.</p>
+<p>So next time we say <strong>0x68656c6c6f</strong>, be sure to convert it into <strong>ASCII</strong>. If you are too lazy (its common among hackers,) it's just "Hello" !</p>
+<h3 id="python-implementation">Python Implementation<a class="headerlink" href="#python-implementation" title="Permanent link">¶</a></h3>
+<p>Implementing Hex encoding in python is pretty simple. In your python shell, a <strong>''.encode('hex')</strong> will convery any string inside the quotes to hex string.</p>
+<div class="superfences-tabs">
+<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked">
+<label for="__tab_1_0">Python</label>
+<div class="superfences-content"><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span>    <span class="k">print</span> <span class="s2">"This_is_cool!"</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">'hex'</span><span class="p">)</span>
+</pre></div>
+</td></tr></tbody></table></div>
+<input name="__tabs_1" type="radio" id="__tab_1_1">
+<label for="__tab_1_1">Output</label>
+<div class="superfences-content"><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span>    <span class="mi">546869735</span><span class="n">f69735f636f6f6c21</span>
+</pre></div>
+</td></tr></tbody></table></div>
+</div>
+<p>To decode a hex string, just change it to <strong>''.decode('hex')</strong>.</p>
+<div class="superfences-tabs">
+<input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked">
+<label for="__tab_2_0">Python</label>
+<div class="superfences-content"><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_3"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><pre><span></span>    <span class="k">print</span> <span class="s2">"546869735f69735f636f6f6c21"</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'hex'</span><span class="p">)</span>
+</pre></div>
+</td></tr></tbody></table></div>
+<input name="__tabs_2" type="radio" id="__tab_2_1">
+<label for="__tab_2_1">Output</label>
+<div class="superfences-content"><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_4"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre><span></span>    <span class="n">This_is_cool</span><span class="err">!</span>
+</pre></div>
+</td></tr></tbody></table></div>
+</div>
+<h2 id="base64-encoding">Base64 Encoding<a class="headerlink" href="#base64-encoding" title="Permanent link">¶</a></h2>
+<p>As mentioned, Hex had only 16 characters. But this one is still 
+awesome. Meet the Base64, with 64 characters. Base64 encoding takes 
+three bytes, each consisting of 8 bits. The following is the character 
+set for Base64 -
+1. [a-z] - 26 characters
+2. [A-Z] - 26 characters
+3. [0-9] - 10 characters
+4. [+] - 1 character
+5. [/] - 1 character
+Now that if you count, it will add up to 64. It also have '=' character,
+ which is solely used for padding purposes.<br>
+<img alt="Base64 Character chart" src="{% static "bi0s_wiki/base64chart.jpg" %}"></p>
+<h3 id="encoding_1">Encoding<a class="headerlink" href="#encoding_1" title="Permanent link">¶</a></h3>
+<p>The process is really simple. Write down the binary of the message, 
+taking groups of 6 in one block. Now compare each block with the binary 
+or decimal value of the corresponding character in the Base64 Chart. 
+Join the characters, and that's it. You're done! </p>
+<div class="admonition tip">
+<p class="admonition-title">Pro Tips</p>
+<p>And if you happen to see '=' at the end of the string, don't hesitate, try a Base64 decode!</p>
+</div>
+<h3 id="python-implementation_1">Python Implementation<a class="headerlink" href="#python-implementation_1" title="Permanent link">¶</a></h3>
+<p>To encode data to base64, we have the following python function.</p>
+<p>Similar is the decode function for base64.</p>
+<div class="superfences-tabs">
+<input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked">
+<label for="__tab_3_0">Python</label>
+<div class="superfences-content"><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_5"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><pre><span></span>    <span class="k">print</span> <span class="s2">"This_is_cool!"</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">'base64'</span><span class="p">)</span>
+</pre></div>
+</td></tr></tbody></table></div>
+<input name="__tabs_3" type="radio" id="__tab_3_1">
+<label for="__tab_3_1">Output</label>
+<div class="superfences-content"><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_6"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre><span></span>    <span class="n">VGhpc19pc19jb29sIQ</span><span class="o">==</span>
+</pre></div>
+</td></tr></tbody></table></div>
+<input name="__tabs_3" type="radio" id="__tab_3_1">
+<label for="__tab_3_1">Python</label>
+<div class="superfences-content"><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_7"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><pre><span></span>    <span class="k">print</span> <span class="s2">"VGhpc19pc19jb29sIQ=="</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'base64'</span><span class="p">)</span>
+</pre></div>
+</td></tr></tbody></table></div>
+<input name="__tabs_3" type="radio" id="__tab_3_2">
+<label for="__tab_3_2">Output</label>
+<div class="superfences-content"><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_8"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre><span></span>    <span class="n">This_is_cool</span><span class="err">!</span>
+</pre></div>
+</td></tr></tbody></table></div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/crypto/brute/" title="Bruteforce" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Bruteforce
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/crypto/classification/" title="Classification Of Cryptosystems" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Classification Of Cryptosystems
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

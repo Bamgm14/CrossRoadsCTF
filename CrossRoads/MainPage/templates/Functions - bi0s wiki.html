@@ -1,0 +1,292 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Functions - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#what-is-function" title="What is Function?" class="md-nav__link">
+What is Function?
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#basics-of-functions" title="Basics of Functions" class="md-nav__link">
+Basics of Functions
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#defining-a-function" title="Defining a Function" class="md-nav__link">
+Defining a Function
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#sample-function" title="Sample Function" class="md-nav__link">
+Sample Function
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#return-statement" title="Return Statement" class="md-nav__link">
+Return Statement
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#more-on-functions" title="More on functions" class="md-nav__link">
+More on functions
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#global-and-local-variables" title="Global and local variables" class="md-nav__link">
+Global and local variables
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#default-aruments" title="Default aruments" class="md-nav__link">
+Default aruments
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#recursive-function" title="Recursive function" class="md-nav__link">
+Recursive function
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#imported-functions" title="Imported Functions" class="md-nav__link">
+Imported Functions
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/python/function.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871409439" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">¶</a></h1>
+<h2 id="what-is-function">What is Function?<a class="headerlink" href="#what-is-function" title="Permanent link">¶</a></h2>
+<p>Think of a situation where you do a particualar job over and over 
+again. Now what if you could teach someone else to do the job and 
+whenever you need that particular task done you can call him. Taking 
+this situation into programming we get the concept of functions. A 
+function is a block of reusable code that can be used to perform a 
+particular function.</p>
+<h2 id="basics-of-functions">Basics of Functions<a class="headerlink" href="#basics-of-functions" title="Permanent link">¶</a></h2>
+<h3 id="defining-a-function">Defining a Function<a class="headerlink" href="#defining-a-function" title="Permanent link">¶</a></h3>
+<p>Defining a function in python requires the use of the keyword <strong>def</strong> followed by the function name and arguments.<br>
+<em><strong>Syntax:</strong></em>
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">def</span> <span class="nf">function_name</span><span class="p">(</span><span class="n">argument1</span><span class="p">,</span><span class="n">argument2</span><span class="p">):</span>
+    <span class="c1"># Code for the function   </span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="n">expression</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></tbody></table>
+You can call the function by:
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">function_name</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span><span class="n">arg2</span><span class="p">)</span>
+</pre></div>
+</td></tr></tbody></table>
+where arg1,arg2 are the values you are passing to the function.<p></p>
+<h3 id="sample-function">Sample Function<a class="headerlink" href="#sample-function" title="Permanent link">¶</a></h3>
+<p>Let's define a function to print the sum of two numbers.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="n">b</span>
+    <span class="k">print</span> <span class="s2">"Sum is"</span><span class="p">,</span><span class="n">c</span>
+</pre></div>
+</td></tr></tbody></table>
+Now we can call the function:
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_3"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">sum</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</td></tr></tbody></table>
+The output for the following function call will be
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_4"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">Sum</span> <span class="k">is</span> <span class="mi">15</span>
+<span class="k">Sum</span> <span class="k">is</span> <span class="mi">12</span>
+</pre></div>
+</td></tr></tbody></table>
+Here on the first function call a takes the value 5 and b takes 10. So the output is <code>Sum is 15</code>. And in the second function call a takes 4 and b takes 8 and output is <code>Sum is 12</code>.<p></p>
+<h3 id="return-statement">Return Statement<a class="headerlink" href="#return-statement" title="Permanent link">¶</a></h3>
+<p>The <strong>return</strong> statement can be used exit a function.It can also be used to send a value back from the function.<br>
+Syntax is :-
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_5"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">return</span> <span class="o">&lt;</span><span class="n">expression</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></tbody></table>
+Let's take a look at a function to calculate the sum of first <strong>n</strong> natural numbers :-
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite" id="__code_6"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">n</span>
+        <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">s</span>
+</pre></div>
+</td></tr></tbody></table>
+And we can call this function :-
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_7"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">su</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">"sum is"</span><span class="p">,</span><span class="n">su</span>
+</pre></div>
+</td></tr></tbody></table>
+And the output will be:-
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_8"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">sum</span> <span class="k">is</span> <span class="mi">55</span>
+</pre></div>
+</td></tr></tbody></table>
+Here the sum is calculated by the function and stored in the variable <strong>s</strong>. The value in s is returned by the function and stored in a variable <strong>su</strong> and thus we get the output mentioned above.<p></p>
+<h2 id="more-on-functions">More on functions<a class="headerlink" href="#more-on-functions" title="Permanent link">¶</a></h2>
+<h3 id="global-and-local-variables">Global and local variables<a class="headerlink" href="#global-and-local-variables" title="Permanent link">¶</a></h3>
+<p>The variables declared within a function is a local variable of that 
+particular function. And the variables outside a function is called 
+global variable. The value of the variable depends on the scope of the 
+variable.<br>
+Consider the following code:-
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite" id="__code_9"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span>
+    <span class="k">print</span> <span class="s2">"Output is"</span><span class="p">,</span><span class="n">out</span>
+<span class="n">out</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">func</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">"Output is"</span><span class="p">,</span><span class="n">out</span>
+</pre></div>
+</td></tr></tbody></table>
+The output of the following code will be:-
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_10"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">Output</span> <span class="k">is</span> <span class="mi">42</span>
+<span class="k">Output</span> <span class="k">is</span> <span class="mi">50</span>
+</pre></div>
+</td></tr></tbody></table>
+Here the global <strong>out</strong> is given the value 50. When the <code>func()</code> is called, the local <strong>out</strong> will have a value 42 since preference is given to local variables and we get <code>Output is 42</code>. After the function is called, the global <strong>out</strong> comes into scope. So for the second print <strong>out</strong> will have the value 50 and thus we get <code>Output is 50</code>.<p></p>
+<h3 id="default-aruments">Default aruments<a class="headerlink" href="#default-aruments" title="Permanent link">¶</a></h3>
+<p>You can set a default value for a particular argument of a function. 
+So when you dont pass a certain argument to the function the function 
+will assume the default value for that argument.<br>
+Consider the following code:-
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_11"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">grt</span> <span class="o">=</span> <span class="s2">"Hi"</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">grt</span><span class="p">,</span><span class="n">name</span>
+<span class="n">greet</span><span class="p">(</span><span class="s2">"Robert"</span><span class="p">)</span>
+<span class="n">greet</span><span class="p">(</span><span class="s2">"Joe"</span><span class="p">,</span><span class="s2">"Hello"</span><span class="p">)</span>
+</pre></div>
+</td></tr></tbody></table>
+The output for the code will be:-
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_12"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">Hi</span> <span class="n">Robert</span>
+<span class="n">Hello</span> <span class="n">Joe</span>
+</pre></div>
+</td></tr></tbody></table>
+On the first call of <code>greet()</code>, only one argument is given so grt assumes its default value <code>Hi</code> and we get the output <code>Hi Robert</code>. On the second call two arguments are passed to the funtion and so the <code>Hello</code> will overwrite the defalt value of <strong>grt</strong> and thus we will get the output <code>Hello Joe</code>.<p></p>
+<h3 id="recursive-function">Recursive function<a class="headerlink" href="#recursive-function" title="Permanent link">¶</a></h3>
+<p>Recursion is a tricky concept. It can be used when a certain problem 
+can be divided into smaller sections of the same problem.Just consider 
+calculating the factorial of a number. <code>6!</code> is <code>6*5*4*3*2*1</code> which can be written as <code>6x5!</code>, similarly <code>5!</code> can be written as <code>5x4!</code> and so on. So as you can see calculating factorial of 5 is divided into smaller and similar task.<br>
+Now with this idea lets write a recursive function which returns the factorial of a number:-
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_13"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">n</span><span class="o">*</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</td></tr></tbody></table>
+So the above function will return the factorial of a number. Now we can call the function:-
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_14"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">"6! is"</span><span class="p">,</span><span class="n">f</span>
+</pre></div>
+</td></tr></tbody></table>
+The output is predictable, but still :-
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_15"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="mi">6</span><span class="o">!</span> <span class="k">is</span> <span class="mi">720</span>
+</pre></div>
+</td></tr></tbody></table>
+In the factorial() the <code>n==0</code> is called ext condition. We need the recursive function call to stop at when this condtion is satisfied. And we returned <strong>1</strong> in that case because <code>0! = 1</code>. The statement <code>n*factorial(n-1)</code> will execute the recursion process.<br>
+In the above mentioned case, for <code>6!</code> we will get <code>6*factorial(5)</code>, and for <code>5!</code> we will get <code>5*factorial(4)</code> and so on till <strong>n</strong>
+ is 0, In that case that particular call will return 1 to its previous 
+call, and that that function call will return whatever value it will get
+ to its previous function call and after all the returning back to the 
+previous funtion call it will return the desired value.<p></p>
+<h2 id="imported-functions">Imported Functions<a class="headerlink" href="#imported-functions" title="Permanent link">¶</a></h2>
+<p>Till now we spend time defining functions to do a particular task. 
+Now we can use pre-defined functions to do a particular task. All we 
+have to do is import the library which contains that particular 
+function.<br>
+The syntax to import a function from a module is :-
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_16"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="kn">from</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span> <span class="kn">import</span> <span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></tbody></table>
+For example, to find the square root of a number you can use <code>sqrt()</code> from the math library
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_17"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+</pre></div>
+</td></tr></tbody></table>
+You can call this function like any other function:-
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_18"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">print</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</td></tr></tbody></table>
+And output will be :-
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_19"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="mi">3</span>
+<span class="mi">2</span><span class="p">.</span><span class="mi">2360679775</span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/python/functions/" title="Basics" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Basics
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/reversing/intro/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Introduction
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

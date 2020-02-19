@@ -1,0 +1,234 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>SQL Injection - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/web/sql.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567872492116" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h2 id="what-is-sql">What is sql?<a class="headerlink" href="#what-is-sql" title="Permanent link">¶</a></h2>
+<p>SQL stands for Structured Query Language and refers to a 
+domain-specific programming language used to manipulate data stored in a
+ RDBMS.</p>
+<p><strong>What is rdms and how data is organized in the back-end?</strong></p>
+<p>A relational database management system (RDBMS) is a collection of 
+programs and capabilities that enable IT teams and others to create, 
+update, administer and otherwise interact with a relational database. 
+Most commercial RDBMSs use Structured Query Language (SQL) to access the
+ database, although SQL was invented after the initial development of 
+the relational model and is not necessary for its use. Some top RDMS 
+include Mysql, Microsoft sql server,Oracle database etc.These RDMS helps
+ a lot in managing the data.</p>
+<h1 id="sql-vulnerability">SQL vulnerability<a class="headerlink" href="#sql-vulnerability" title="Permanent link">¶</a></h1>
+<p>SQL Injection vulnerability is one of the most basic, common and 
+oldest vulnerabilities that enables us to get access to the website 
+backend. The backend data may include credit card details, usernames, 
+passwords and any such sensitive data.</p>
+<h2 id="sql-injection">SQL injection<a class="headerlink" href="#sql-injection" title="Permanent link">¶</a></h2>
+<p>SQL injection is a kind of web application attack where attacker can 
+execute malicious scripts that run in the back-end and can steal the 
+data from the back-end.</p>
+<h3 id="types-of-sql-injection">Types of SQL injection<a class="headerlink" href="#types-of-sql-injection" title="Permanent link">¶</a></h3>
+<p>SQL injection is broadly classified into two kinds.</p>
+<ul>
+<li>Error based injection</li>
+<li>Blind injection</li>
+</ul>
+<h4 id="error-based-injections">Error based injections<a class="headerlink" href="#error-based-injections" title="Permanent link">¶</a></h4>
+<p>Error based SQLi is an in-band SQL Injection technique that relies on
+ error messages thrown by the database server to obtain information 
+about the structure of the database.</p>
+<h4 id="blind-injections">Blind injections<a class="headerlink" href="#blind-injections" title="Permanent link">¶</a></h4>
+<p>Blind based SQL injection is a where no data is actually transfered 
+via the web application and the attacked would not be able to see the 
+result of an attack. The attacker is instead able to reconstruct the 
+database structure by sending payloads, observing the web app’s response
+ and the resulting behaviour of the database server.. This attack is 
+often used when the web application is configured to show generic error 
+messages, but has not mitigated the code that is vulnerable to SQL 
+injection. </p>
+<h2 id="basic-database-query">Basic database query<a class="headerlink" href="#basic-database-query" title="Permanent link">¶</a></h2>
+<p>The basic database query(SQL syntax) in the most cases be like:</p>
+<blockquote>
+<p>Select attribute1,attribute2 from TABLE_NAME where attribute1 = ‘string1’ and attribute2 = ‘string2’</p>
+</blockquote>
+<p>The above shown is the solid format for a basic database query.
+It could be</p>
+<ul>
+<li>Single quoted ''</li>
+<li>Double quoted ""</li>
+<li>Single quoted with brackets ('')</li>
+<li>Double quoted with brackets ("") </li>
+</ul>
+<h2 id="injecting-using-error-based">Injecting using error based<a class="headerlink" href="#injecting-using-error-based" title="Permanent link">¶</a></h2>
+<p>First step involves finding what kind or more precisely, we must be 
+able to guess the syntax that is used in the backend. For this we must 
+be able to produce errors in the website , so it shows out the whole 
+syntax along with the error.</p>
+<h3 id="breaking-single-quoted-query">Breaking single quoted query<a class="headerlink" href="#breaking-single-quoted-query" title="Permanent link">¶</a></h3>
+<p>When the query is of single quoted type we shall break using the injection below.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>    <span class="k">Select</span> <span class="n">attribute1</span><span class="p">,</span><span class="n">attribute2</span> <span class="k">from</span> <span class="k">TABLE_NAME</span> <span class="k">where</span> <span class="n">attribute1</span> <span class="o">=</span> <span class="err">‘</span><span class="n">string1</span><span class="err">’</span> <span class="k">and</span> <span class="n">attribute2</span>  <span class="o">=</span> <span class="err">‘</span><span class="n">string2</span><span class="err">’</span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p>Suppose we have two input slots whether it be in POST method or GET method we shall input the following to break the query.</p>
+<p>String1 = ‘ OR 1 -- </p>
+<p>Here you are breaking the left quote using ‘ and making the statement
+ true using OR 1 (Any statement with OR 1 becomes true)and commenting 
+out the rest of the query using -- -</p>
+<p>Similarly you can break the rest of the queries.</p>
+<h3 id="breaking-double-quoted-query">Breaking double quoted query<a class="headerlink" href="#breaking-double-quoted-query" title="Permanent link">¶</a></h3>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span>          <span class="n">String1</span> <span class="o">=</span> <span class="err">“</span> <span class="k">OR</span> <span class="mi">1</span><span class="c1">-- -</span>
+</pre></div>
+</td></tr></tbody></table>
+<h3 id="breaking-single-quote-with-brackets">Breaking single quote with brackets<a class="headerlink" href="#breaking-single-quote-with-brackets" title="Permanent link">¶</a></h3>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span>          <span class="n">String1</span> <span class="o">=</span> <span class="err">‘</span><span class="p">)</span> <span class="k">OR</span> <span class="mi">1</span> <span class="c1">-- -</span>
+</pre></div>
+</td></tr></tbody></table>
+<h3 id="double-quotes-with-brackets">Double quotes with brackets<a class="headerlink" href="#double-quotes-with-brackets" title="Permanent link">¶</a></h3>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_3"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><pre><span></span>          <span class="n">String1</span> <span class="o">=</span> <span class="err">“</span><span class="p">)</span> <span class="k">OR</span> <span class="mi">1</span> <span class="c1">-- -</span>
+</pre></div>
+</td></tr></tbody></table>
+<h2 id="dumping-data-using-injections">Dumping data using injections<a class="headerlink" href="#dumping-data-using-injections" title="Permanent link">¶</a></h2>
+<p>In most of the cases backend uses mysql and let us see how to dump 
+data if the backend uses mysql. Every server using mysql as RDBMS has a 
+common database called information_schema.So one can use this database 
+information_schema to dump the data required.You can see the 
+information_schema database as shown below.</p>
+<p><img alt="" src="{% static "bi0s_wiki/nscreen1.png" %}"> </p>
+<p>Now we need to use this information_schema database to dump the data.</p>
+<h2 id="use-of-union-select-statement">Use of union select statement<a class="headerlink" href="#use-of-union-select-statement" title="Permanent link">¶</a></h2>
+<p>The SQL UNION operator is used to combine the result sets of 2 or 
+more SELECT statements. It removes duplicate rows between the various 
+SELECT statements.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_4"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">SELECT</span> <span class="n">STATEMENT_1</span> <span class="k">UNION</span> <span class="k">SELECT</span> <span class="n">STATEMENT_2</span><span class="p">.</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>NOTE: The select statements used before and after union must have the same number of columns!!!</p>
+<h2 id="now-lets-start-data-dumping">Now let's start data dumping<a class="headerlink" href="#now-lets-start-data-dumping" title="Permanent link">¶</a></h2>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_5"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><pre><span></span>   <span class="n">The</span> <span class="n">below</span> <span class="n">shown</span> <span class="k">is</span> <span class="n">an</span> <span class="n">example</span> <span class="k">of</span> <span class="n">typical</span> <span class="n">web</span> <span class="n">application</span> <span class="n">that</span> <span class="n">triggers</span> <span class="n">error</span><span class="o">!</span>
+</pre></div>
+</td></tr></tbody></table>
+<p><img alt="" src="{% static "bi0s_wiki/nscreen2.png" %}"></p>
+<p>When we inject ?id = ‘ the query breaks and gives the following error.</p>
+<p>Now let us see what conclusions we could draw from this.</p>
+<p>Let’s manipulate the error notice.</p>
+<p><strong>'''' LIMIT 0,1'</strong></p>
+<p>The first most ‘ and the last most ‘ indicates the error statement so let us remove them.</p>
+<p>“‘ LIMIT 0,1
+Now the input we give i.e ‘ goes between the two quotations.</p>
+<p>So we get “‘!!</p>
+<p>By this we can conclude it is single quoted query!!;)</p>
+<p>Now let’s dump the data!</p>
+<p>We shall first make the statement false someway and add an union select statement that dumps data.</p>
+<p>If we put id=-1 the statement turns false as id would never be 
+negative(This is a mere guess and you need to try random guesses to 
+break the query )
+As we came to know that it is of single quoted type we shall break it as
+ below.First let’s guess the statement1.!</p>
+<p>First we need to find out the number of attributes in statement1.For this we shall use union select.Let’s see how it is done!!
+For suppose we give ?id=-1’ union select 1,2 -- (Commenting is to make the query meaningful)</p>
+<p><img alt="" src="{% static "bi0s_wiki/nscreen3.png" %}"></p>
+<p>We get an error as SELECT statements have a different number of queries.</p>
+<p>So we shall guess another random number as the number of columns.
+Let’s give query as
+?id = -1’ union select 1,2,3-- - and see what happens.</p>
+<p><img alt="" src="{% static "bi0s_wiki/nscreen4.png" %}"></p>
+<p>We did not get any error and 2,3 are shown.We could actually say the 
+things we give at second and third position gets reflected in the 
+page.And we also conclude that there exists three columns in the first 
+query. </p>
+<p>So statement1 could be something like
+SELECT id,Loginname,Password from SPECIFIC TABLE where id = ‘OUR input’
+So we need to frame statement2 accordingly and dump the data using information_schema.</p>
+<p>First we shall find what database has all the data of usernames and passwords.We shall give the query as
+?id=-1’ union select 1,database(),version()-- - </p>
+<p>Reminder:All these follows sql syntax which shows the database name and version when we input database() and version().
+Let’s see what happens.</p>
+<p><img alt="" src="{% static "bi0s_wiki/nscreen5.png" %}"></p>
+<p>By this we can figure out that database name is “security”.Now 
+sequentially we shall find out table names ,column names and dump the 
+usernames and passwords.</p>
+<p>Lets see the tables in information_schema database.
+<img alt="" src="{% static "bi0s_wiki/nscreen6.png" %}">
+We can see a table named TABLES which contains data of all the tables in
+ the backend. TABLES table contains a attribute named TABLE_SCHEMA which
+ contains the database names and other attribute TABLE_NAME that 
+contains names of the entire TABLE_NAMES.</p>
+<p>So the query goes as follows.
+?id=-1’ union select 1,group_concat(TABLE_NAME) FROM information_schema.TABLES where TABLE_SCHEMA = database()-- -
+The above query will give the list of all tables in the database the web server is using in the web application.</p>
+<p>How about finding attributes in a specific table??
+The query goes as follows:</p>
+<p>?id=-1 union select 1,group_concat(COLUMN_NAME) from information_schema.COLUMNS where TABLE_NAME = “Your required table name”!</p>
+<p>Using these two we can dump the data.
+Tables in the above example are shown below:</p>
+<p><img alt="" src="{% static "bi0s_wiki/nscreen7.png" %}"></p>
+<p>Columns in the users table can be extracted as shown below.</p>
+<p><img alt="" src="{% static "bi0s_wiki/nscreen8.png" %}">
+And the final query that dumps the data:</p>
+<p>id=-1’ union select 1,group_concat(username),group_concat(password) from users -- -</p>
+<p><img alt="" src="{% static "bi0s_wiki/nscreen9.png" %}"></p>
+<h2 id="blind-injections_1">Blind injections<a class="headerlink" href="#blind-injections_1" title="Permanent link">¶</a></h2>
+<p>Blind injections are similar to that of error based injections but 
+the website does not respond with errors instead it shows a special kind
+ of response for a legal query.</p>
+<p>It is of two kinds </p>
+<ul>
+<li>Boolean based</li>
+<li>Time based</li>
+</ul>
+<h3 id="boolean-based">Boolean based<a class="headerlink" href="#boolean-based" title="Permanent link">¶</a></h3>
+<p>You shall do the all above said information_schema, union select thing using boolean “AND” and “OR”</p>
+<h3 id="time-based">Time based<a class="headerlink" href="#time-based" title="Permanent link">¶</a></h3>
+<p>You shall try dumping using sleep() function in mysql.</p>
+<div class="admonition note">
+<p class="admonition-title">Filters</p>
+<p>Not all sites shall allow everything that is given as a input.There 
+will be sites that shall filter white-spaces ,commenting,Union,select 
+,quotations etc .Try exploiting out them!!;)</p>
+</div>
+<h3>For SQLite3</h3>
+<image src="{% static "bi0s_wiki/sqlite.jpg" %}">
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/web/lfi/" title="Local File Inclusion" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Local File Inclusion
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/web/os-injection/" title="OS Command Injection" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+OS Command Injection
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

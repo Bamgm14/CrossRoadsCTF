@@ -1,0 +1,117 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Evolution - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#symmetric-key-cryptography" title="Symmetric Key Cryptography" class="md-nav__link">
+Symmetric Key Cryptography
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#asymmetric-key-cryptography" title="Asymmetric Key Cryptography" class="md-nav__link">
+Asymmetric Key Cryptography
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/crypto/evolution.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567872075065" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1>Evolution</h1>
+<p>From simple character shifts to involving complex math theorems 
+cryptography went through a lot of stages. The roots of cryptography are
+ very deep. All started with Julius Caesar who tried to secure the 
+messages he sent. So let’s dig back the past to get familiar with 
+cryptographic evolution.</p>
+<p>Cryptography is classified into (according to the time)</p>
+<ul>
+<li>Classical Cryptography</li>
+<li>Modern Cryptography</li>
+</ul>
+<p>Caesar Cipher is an example of classical cryptography as it involved 
+manipulating the characters of the message. Whereas the present modern 
+cryptography is based on computer algorithms, number theory etc. 
+Previous article mentions the classification of Modern Cryptography as 
+follows:</p>
+<ul>
+<li>Symmetric Key Cryptography</li>
+<li>Asymmetric Key Cryptography</li>
+</ul>
+<h4 id="symmetric-key-cryptography">Symmetric Key Cryptography<a class="headerlink" href="#symmetric-key-cryptography" title="Permanent link">¶</a></h4>
+<p>We know that symmetric key cryptography is a simplest way of 
+encryption dependent upon a single randomly generated key. Larger key 
+space is required for it to be secure. Popular examples for symmetric 
+key cryptography is DES, AES etc.
+AES is found to be advantageous over DES, as the key size of AES is 
+double to that of DES.</p>
+<blockquote>
+<p><strong><em>Think Once:</em></strong> How can sender and receiver exchange the key securely over an insecure network?</p>
+</blockquote>
+<p>Trouble with Symmetric Key Crypto is that, sharing a key becomes 
+difficult over a insecure channel. This led to the rise of Asymmetric 
+Key Cryptography. </p>
+<h4 id="asymmetric-key-cryptography">Asymmetric Key Cryptography<a class="headerlink" href="#asymmetric-key-cryptography" title="Permanent link">¶</a></h4>
+<p>Asymmetric Crypto is highly secure when compared to Symmetric Crypto 
+because it uses separate keys for encryption and decryption. Secrecy in 
+private key is the reason for its security. It also includes generating 
+large numbers and making mathematical operations with them. Popular 
+examples are RSA, DLP etc</p>
+<p>RSA is the most popular public key cryptosystem and its security is 
+based on factorisation of a large integer whereas security of DLP is 
+based on calculating the discrete logarithm of a large number. </p>
+<p>Though Asymmetric Crypto is found to be advantageous over Symmetric 
+Crypto, it has its own set of disadvantages. It is expensive and takes a
+ lot of time to compute. Hence, Elliptical Curve Cryptography is gaining
+ popularity over RSA as it is faster as well as efficient. Also the 
+sizes of keys are smaller making it advantageous over the other crypto 
+systems. </p>
+<p>Crypto has a lot of scope in future as the communication through 
+computer systems increases, the need for security and encryption systems
+ increases. From evolution to creating revolution Crypto went through a 
+long path and is still exploring different origins. Above all security 
+is the main motive.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/crypto/classification/" title="Classification Of Cryptosystems" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Classification Of Cryptosystems
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/crypto/hash-function/" title="Hashing" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Hashing
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

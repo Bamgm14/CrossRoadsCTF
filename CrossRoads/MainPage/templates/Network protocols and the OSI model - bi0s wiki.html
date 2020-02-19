@@ -1,0 +1,196 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Network protocols and the OSI model - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/forensics/protocols.md" title="Edit this page" class="md-icon md-content__icon"></a>
+<h1 id="network-protocols-and-the-osi-model">Network Protocols and the OSI model<a class="headerlink" href="#network-protocols-and-the-osi-model" title="Permanent link">¶</a></h1>
+<h2 id="network-protocols">Network Protocols<a class="headerlink" href="#network-protocols" title="Permanent link">¶</a></h2>
+<p>They are a set of rules and regulations to manage the communication 
+between any systems in a network. Each layer has a set of protocols 
+placed to manage the data exchange and effective functioning of the 
+network as well. Data units are transferred across each layer of the 
+network on the basis of the defined protocols.</p>
+<h2 id="the-osi-model">The OSI model<a class="headerlink" href="#the-osi-model" title="Permanent link">¶</a></h2>
+<p>It is a conceptual idea that gives a standardisation to the 
+communication function to a computer system without regard to its 
+internal structure or technology. The model partitions a communication 
+system to seven layers, where each layer serves to the layer above it. 
+This is to enable the operability of diverse communication systems and 
+networks together. This is achieved by standardising all systems with 
+protocols and regulations for each layer of a network.
+Each layer serves in its own ways to establish and ensure communication 
+system to work efficiently. While one layer provides a path for the 
+transfer of data from one node to another above which applications will 
+operate upon, while it calls the next lower layer to receive and send 
+packets which comprise of the data of that session.</p>
+<div class="admonition note">
+<p class="admonition-title">A system is broadly classified into seven layers as</p>
+<ol>
+<li>Physical Layer</li>
+<li>Data link Layer</li>
+<li>Network Layer</li>
+<li>Transport Layer</li>
+<li>Session Layer</li>
+<li>Presentation Layer</li>
+<li>Application Layer</li>
+</ol>
+</div>
+<p>Each layer serves a certain purpose that is necessary for the effective functioning of the network.</p>
+<p><strong>1. Physical layer</strong> : This layer generally represents 
+the medium through which the network data is transferred. For example, 
+an electrical cable or an optical cable provides a physical medium or 
+platform through which all the data is transferred.</p>
+<p><strong>2. Data link layer</strong> : Data link layer is generally 
+the means by which the transport of data happens across a physical 
+network. Bridges and switches are the physical devices that initiate and
+ act as the means of transfer. The common protocol used in this layer is
+ <em>Ethernet</em>. <em>MAC address</em> provides an addressing scheme to identify physical devices.</p>
+<p><strong>3. Network layer</strong> : This layer basically routes data 
+between physical networks and assigns logical addresses to network 
+hosts. They are also basically responsible for handling <em>packet fragmentation</em> and <em>error detection</em>. Protocols like <em>ICMP</em> are present in this layer.</p>
+<p><strong>4. Transport layer</strong> : This layer provides a control 
+flow between two hosts in a network. It acts as a mean for transferring a
+ variety of data through the network maintaining the quality.</p>
+<p><strong>5. Session layer</strong>: It is used mainly to manage the 
+sessions between two computers. It mainly does managing operations like 
+terminating sessions gracefully etc. Example protocols are NetBIOS, 
+NWLink.</p>
+<p><strong>6. Presentation layer</strong>: It encodes/decodes through 
+different forms of encryption/decryption for securing the data. This is 
+basically done to transform the data received to a format that can be 
+read by application layers.</p>
+<p><strong>7. Application layer</strong>: This provides the details for the end user to access network resources. Examples are HTTP, SMTP,FTP,Telnet.</p>
+<h2 id="data-encapsulation">Data Encapsulation<a class="headerlink" href="#data-encapsulation" title="Permanent link">¶</a></h2>
+<p>In order to facilitate the conversation between different layers in a
+ network, each layer in the stack adds a footer or header, the way that 
+different layers in OSI model communicate is through <em>data encapsulation</em>. <strong>Protocol Data Unit</strong> (PDU) created by the encapsulation protocol includes the header and footer information to the packet data.</p>
+<div class="admonition tip">
+<p class="admonition-title">Protocol data unit (PDU)</p>
+<p>It is information that is transferred among the peer entities of a 
+computer network as a single unit. It may contain user data, network 
+addressing or control information. In the communication protocol stack, 
+each layer has a protocol that is made in order to adapt to the specific
+ type or mode of data exchange. For eg; TCP implements a 
+connection-oriented transfer mode, and the PDU is called a <em>segment</em>, whereas, at a lower layer, the IP has a PDU of <em>packet</em>.</p>
+</div>
+<p><img alt="OSI" src="{% static "bi0s_wiki/OSI_Model.jpg" %}"></p>
+<p>Hence packets are nothing but are PDUs that are transferred and are complete with the header and footer.</p>
+<p>Now let us look into some common network protocols :</p>
+<h3 id="arp">ARP<a class="headerlink" href="#arp" title="Permanent link">¶</a></h3>
+<p>In order for devices that are connected to each other with a switch 
+into a single network, a physical address is used as a reference for 
+every device connected. ARP determines which MAC address (physical 
+address) corresponds to a particular IP address. ARP sends two kinds of 
+packets (<em>ARP resolution</em>,<em>ARP request</em>), where a broadcast packet is sent to every device in the network and then wait for the response from the correct client.</p>
+<div class="admonition info">
+<p class="admonition-title">MAC Address</p>
+<p>The MAC address of a device is the UID assigned to a NIC to enable 
+data transmission in the data link layer of a network segment. This 
+address is often assigned by the manufacturer and is stored in the 
+device hardware.</p>
+</div>
+<p><img alt="arp" src="{% static "bi0s_wiki/arp_protocol.png" %}"></p>
+<h3 id="ip">IP<a class="headerlink" href="#ip" title="Permanent link">¶</a></h3>
+<p>It basically delivers packets between hosts based on the IP addresses
+ in the packet header. It is the principal protocol in the Internet 
+protocol suite and relays data across the network.</p>
+<h3 id="tcp">TCP<a class="headerlink" href="#tcp" title="Permanent link">¶</a></h3>
+<p>TCP or transmission control protocol is a transport layer protocol 
+that provides error-checked delivery bytes between hosts connected via a
+ network. TCP provides a reliable data stream service hence major 
+applications and application layer protocols that need assurance of data
+ integrity use TCP, unlike UDP which is also a transport layer protocol.
+ Applications that do not require reliable data stream service may use 
+the User Datagram Protocol (UDP). The communication between two hosts is
+ established by the three-way handshake.</p>
+<h4 id="three-way-handshake">Three-way handshake<a class="headerlink" href="#three-way-handshake" title="Permanent link">¶</a></h4>
+<p>Consider the scenario where Alice(host1) is trying to connect via a 
+TCP connection with Bob(host2). The connection is established after 
+three separate steps:</p>
+<ol>
+<li>The first host Alice sends a SYN message ("Synchronise") with a particular sequence number x to Bob.</li>
+<li>Bob replies with a SYN-ACK(Synchronise-Acknowledgement) message with
+ its own sequence number y and acknowledgement number y+1 to Alice.</li>
+<li>Alice replies with an acknowledgement (ACK) message with 
+acknowledgement number y + 1, which Bob receives to which he doesn't 
+necessarily need to reply.</li>
+</ol>
+<p><img alt="threewayhandshake" src="{% static "bi0s_wiki/3wayhandshake.jpg" %}"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this handshake the synchronise messages act as service requests 
+from one host to another, while the acknowledgement messages return to 
+the requesting server as an acknowledgement to the request message.</p>
+</div>
+<h3 id="udp">UDP<a class="headerlink" href="#udp" title="Permanent link">¶</a></h3>
+<p>UDP is also a transport layer protocol and an alternative to the TCP.
+ It is used for establishing connections between applications on the 
+network that have more data loss. Unlike TCP, UDP doesn't provide any 
+error and flow control mechanisms. Hence UDP is implemented when the 
+connection required has to be fast and the applications can tolerate a 
+certain amount of data loss.</p>
+<h3 id="icmp">ICMP<a class="headerlink" href="#icmp" title="Permanent link">¶</a></h3>
+<p>Internet control message protocol is a protocol used by network 
+devices like routers to send an error message that a requested service 
+is not available or that the device is currently unreachable.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In packet capture with ICMP packets, external data can be sent as 
+payload once the packet data is sent. The payload is appended to the 
+packet data of each packet. By using scripts we can extract the payload 
+from the PCAP file. In CTFs often challenges come where certain files 
+like a ZIP or PNG image is broken and send as payload through each ICMP 
+packet. This data can be extracted by scripting.</p>
+</div>
+<h3 id="http">HTTP<a class="headerlink" href="#http" title="Permanent link">¶</a></h3>
+<p>Hyper Text Transfer Protocol<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>
+ is the protocol to exchange or transfer hypertext. It is an application
+ layer protocol and is the foundation for data transfer for the World 
+Wide Web.</p>
+<p>Click the below link to see a write up of a challenge from a CTF which involved analysis of a PCAP file using Wireshark.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Refer <a href="https://wiki.bi0s.in/forensics/wireshark/">here</a>.&nbsp;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/forensics/network-forensics/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Introduction
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/forensics/wireshark/" title="Basic Wireshark Usage" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Basic Wireshark Usage
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

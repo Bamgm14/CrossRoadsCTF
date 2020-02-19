@@ -1,0 +1,105 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Basic Wireshark Usage - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/forensics/wireshark.md" title="Edit this page" class="md-icon md-content__icon"></a>
+<h1 id="basic-wireshark-usage">Basic Wireshark Usage<a class="headerlink" href="#basic-wireshark-usage" title="Permanent link">¶</a></h1>
+<p>Wireshark is the most commonly used network protocol analyser and the
+ de facto standard across many commercial and non-profit enterprises. </p>
+<p><strong>Some notable features:</strong>
+* Shows the protocol of each packet captured and also the protocol hierarchy of the network whose pcap was made.
+* The hex buffer of each packet can be analysed separately and layer by layer.</p>
+<p><strong>How to Install?</strong></p>
+<p>To install Wireshark give the following command :
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>    $ sudo apt install wireshark-qt
+</pre></div>
+</td></tr></tbody></table>
+<strong>Let's try analysing a pcap file</strong><p></p>
+<p>This challenge came as part of a high school CTF(Angstrom CTF 2018).</p>
+<p>The given is a pcap file that has many protocols like DNS, ICMP, TCP etc.
+By analysing the file closely using pcap we can see that there are 28 packets out of which there are 2 HTTP packets.
+<img alt="wire" src="{% static "bi0s_wiki/image1.png" %}"></p>
+<p>The two rows below the packet list show us details regarding the 
+packet structure and also the buffer data in each packet respectively. 
+The first row shows the packet structure of each packet in a capture.</p>
+<p>By double-clicking and selecting a particular packet a detailed view of the different layers of a packet can be viewed.
+<img alt="pktdets" src="{% static "bi0s_wiki/pkt_details.png" %}"></p>
+<p>The second row shows the buffer data that is transferred through the 
+network in each packet. For example, in the packet where the PNG image 
+is transferred will have the image data present in the buffer that was 
+transferred through the network as shown. <br>
+<img alt="buffer" src="{% static "bi0s_wiki/buffer.png" %}"> </p>
+<p>For any transfer of packets occurring in a network each of the 
+packets transferred has a hierarchy of layers followed as per the OSI 
+model for a network.
+Wireshark allows you to examine the protocol hierarchy of a packet 
+capture. For doing so go to<strong>Statistics&gt;&gt;Protocol hierarchy</strong> on the toolbar.
+<img alt="hierarchy" src="{% static "bi0s_wiki/hierarchy.png" %}"> </p>
+<p>Of the given challenge's pcap we can see that there are 7 columns 
+that show the packet number the source and destination IP of a 
+particular packet and also the protocol followed by the image and the 
+time and an info about the packet and also the bytes of data transferred
+ in the packet under the length.</p>
+<p>Since HTTP protocol is concerned with specifying the format and 
+transmission of messages, the chance of any multimedia being transferred
+ in these packets is high. Hence using Wireshark we can analyse and dump
+ if any multimedia is transferred through these packets.
+For doing so go to: <strong>File&gt;&gt;Export Objects&gt;&gt; HTTP</strong>.</p>
+<p>By doing so we get a dialogue box as shown.
+<img alt="dial" src="{% static "bi0s_wiki/dialogue.png" %}"></p>
+<p>This a list of all multimedia files transferred in these stream of 
+HTTP packets. By saving this image and opening we get the flag as the 
+image.</p>
+<p>Flag:actf{0ver_th3_w1re}
+<img alt="flag" src="{% static "bi0s_wiki/flag.jpg" %}"></p>
+<p>Wireshark can be hence used to efficiently look at and analyse any network packet captures. </p>
+<details class="question"><summary>Challenge file</summary><ul>
+<li><a href="https://wiki.bi0s.in/forensics/Challenges/Angstrom'18/file%20transfer/Chal_wire.pcap">File Transfer</a></li>
+</ul>
+</details>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/forensics/protocols/" title="Network protocols and the OSI model" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Network protocols and the OSI model
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/forensics/memory-forensics/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Introduction
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

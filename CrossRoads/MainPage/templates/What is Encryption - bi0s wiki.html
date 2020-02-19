@@ -1,0 +1,96 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>What is Encryption - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#ram-sita-and-crypto" title="Ram, Sita and Crypto!" class="md-nav__link">
+Ram, Sita and Crypto!
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/crypto/encryption.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567872046879" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1>What is Encryption</h1>
+<p>Encryption simply implies applying key to your plain messages in a 
+clever way to produce an unbreakable cipher. On the other hand, 
+decryption implies taking encrypted text and changing it back to your 
+plain messages.
+Now, we'll try to understand some terms used in the above definition 
+with the help of the following story.</p>
+<h3 id="ram-sita-and-crypto">Ram, Sita and Crypto!<a class="headerlink" href="#ram-sita-and-crypto" title="Permanent link">¶</a></h3>
+<p>Let's go back in the ancient times and see how the use of cryptography would had made a difference then.</p>
+<p>Ram and Sita wanted to have a secure communication between them while
+ Sita was in Lanka. The only way for exchanging messages between them 
+was using pigeons as message carriers. But the evil Ravana got hold of 
+the pigeons and read all their messages.</p>
+<p>So now both of them decided to change their message using a secret 
+code so that even if Ravana got hold of their messages he would not 
+understand them.This way of converting simple messages to a secretive 
+form is known as <strong>encryption</strong>. A message that is converted to hidden form is known as the plaintext. The hidden form of a message is known as the <strong>ciphertext</strong>. The secret code that is used to convert messages to a secret form is called as <strong>cipher</strong>.</p>
+<p>Now suppose Ravana is intelligent enough to understand their secret 
+way of converting messages and somehow cracks the secret messages. So 
+now the couple will have to think of sending their messages to each 
+other in more secured manner.</p>
+<p>Let’s assume that the couple had a magical box which only opened with
+ a specific key which both of them always had with them (as dangers come
+ without telling). So now Ram planned to lock their letters in this 
+magical box and the pigeon would carry it to Sita. At the other end, 
+Sita would open it with the help of the key which she has. So Ravana 
+again would have to figure out some another way to break the secret lock
+ and get hold of their letters.</p>
+<p>A <strong>key</strong>, in cryptography, is a sequence of bits used 
+by a cryptographic algorithm (or a kind of a cipher) to transform plain 
+text into cipher text or vice versa. A key is usually not shared 
+publicly. A longer key ensures a secure encryption. We will see this in 
+the next section.</p>
+<p>Well, in real life scenarios, our everyday communication over 
+Internet, phone calls or any other media takes place in a similar way as
+ explained in the above story. It is done in such a way such that no 
+intruder can understand them or get back the original messages.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/crypto/intro/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Introduction
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/crypto/brute/" title="Bruteforce" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Bruteforce
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

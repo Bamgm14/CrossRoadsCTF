@@ -1,0 +1,77 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Introduction - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/pwning/intro.md" title="Edit this page" class="md-icon md-content__icon"></a>
+<h1 id="binary-exploitation">Binary Exploitation ?<a class="headerlink" href="#binary-exploitation" title="Permanent link">¶</a></h1>
+<p>Binary exploitation is the art of triggering vulnerabilities and 
+redirecting code execution to perform functions that are unintended by 
+the developer and further executing malicious code on the system. 
+Exploitation vulnerabilities are mainly found in C, C++, etc.</p>
+<h1 id="aim">Aim<a class="headerlink" href="#aim" title="Permanent link">¶</a></h1>
+<p>Ok, ok so we have thrown some new terms at you. <code>Vulnerabilities</code>, <code>Exploitation</code>, <code>Program Crash</code>! But why are we actually learning this? </p>
+<p>What do we plan to do once we spot a <code>Vulnerability</code>? How do we <code>exploit</code>
+ it? Well, our main aim is to compromise the security of the machine on 
+which the vulnerable program is running. So how do we do that?</p>
+<p>There are a variety of ways in which this can be achieved. The idea 
+in most CTF challenges is to get a shell, which is basically like 
+getting a linux terminal on another machine. Now a program crash means 
+the program exits abruptly in the middle while it's running. This is 
+obviously bad. Imagine a banking application suddenly stopping in the 
+middle after you give your card details. Ah, you can imagine how it 
+feels.</p>
+<p>Keep in mind that though we usually try to get a shell, there are 
+various other ways to exploit a program which we will discuss in the 
+comming sections. Eventually you will understand the real dangers of 
+insecure coding and how this can be avoided.</p>
+<p>So what are we waiting for? Let's get started!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CRsCTF{d0n't_think_if_u_r_n0t_pr3p4r3d_2_4ct}</p>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/reversing/basic-re/" title="Reverse engineering" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Reverse engineering
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/pwning/getting_started/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Getting Started
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

@@ -1,0 +1,259 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Cookies - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#how-these-can-be-misused" title="How these can be misused" class="md-nav__link">
+How these can be misused
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#types-of-cookies" title="Types of Cookies" class="md-nav__link">
+Types of Cookies
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#session-cookies" title="Session cookies" class="md-nav__link">
+Session cookies
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#persistent-cookies" title="Persistent Cookies" class="md-nav__link">
+Persistent Cookies
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#secure-cookies" title="Secure Cookies" class="md-nav__link">
+Secure Cookies
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#http-only" title="Http-only" class="md-nav__link">
+Http-only
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#same-site-cookies" title="Same-site cookies" class="md-nav__link">
+Same-site cookies
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#third-party-cookie" title="Third-party cookie" class="md-nav__link">
+Third-party cookie
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#super-cookie" title="Super cookie" class="md-nav__link">
+Super cookie
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#note" title="Note" class="md-nav__link">
+Note
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#how-to-edit-the-cookie" title="How to edit the cookie" class="md-nav__link">
+How to edit the cookie
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#how-to-change-the-cookie" title="How to change the cookie" class="md-nav__link">
+How to change the cookie
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/web/cookies.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567872448829" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="cookies">Cookies<a class="headerlink" href="#cookies" title="Permanent link">¶</a></h1>
+<div class="admonition quote">
+<p class="admonition-title">Cookies</p>
+<p>HTTP cookies also called web cookies, internet cookies, browser 
+cookies or simply as cookies. These are some kind of encoded form of 
+text which is sent from the website. These are stored in the client 
+system or the user's system. These do record every information that is 
+done by the client like logging in clicking on some advertisement, 
+adding something to the cart, and the pages visited by the client(the 
+user). These are also used to remember the previously entered usernames,
+ passwords, and some previously used card details </p>
+</div>
+<p>There are some kind of special cookies like authentication cookies so
+ these are used for some authentication purposes, such that the user is 
+logged in or not ,is that account is logged in in some other devices or 
+not.T he security of the authentication is mainly dependent upon the 
+cookie issued by the website and the level of encryption. Such that the 
+vulnerabilities could make the hacker to read the cookies and gets the 
+access to the data in the user's accounts </p>
+<h2 id="how-these-can-be-misused">How these can be misused<a class="headerlink" href="#how-these-can-be-misused" title="Permanent link">¶</a></h2>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">As</span> <span class="k">of</span> <span class="n">now</span> <span class="n">many</span> <span class="n">people</span> <span class="n">who</span> <span class="n">use</span> <span class="n">the</span> <span class="n">internet</span> <span class="n">don</span><span class="err">'</span><span class="n">t</span> <span class="n">know</span> <span class="n">the</span> <span class="n">use</span> <span class="k">of</span> <span class="n">the</span> <span class="n">cookies</span> <span class="n">so</span> <span class="n">these</span> <span class="n">can</span> <span class="n">be</span> <span class="n">easily</span> <span class="n">taken</span> <span class="k">from</span> <span class="n">them</span> <span class="k">in</span> <span class="n">so</span> <span class="n">other</span> <span class="n">ways</span><span class="p">,</span> <span class="k">like</span> <span class="n">so</span> <span class="n">malicious</span> <span class="n">scripts</span> <span class="n">which</span> <span class="n">would</span> <span class="n">take</span> <span class="n">your</span> <span class="n">cookies</span> <span class="n">just</span> <span class="k">with</span> <span class="n">one</span> <span class="n">click</span><span class="p">.</span> <span class="k">With</span> <span class="n">these</span> <span class="n">cookies</span><span class="p">,</span> <span class="n">they</span> <span class="n">can</span> <span class="k">get</span> <span class="k">all</span> <span class="n">our</span> <span class="n">login</span> <span class="k">access</span> <span class="k">and</span> <span class="n">a</span> <span class="n">chance</span> <span class="k">of</span> <span class="n">getting</span> <span class="k">all</span> <span class="n">our</span> <span class="n">usernames</span> <span class="k">and</span> <span class="n">passwords</span> <span class="k">and</span> <span class="k">some</span> <span class="k">sensitive</span> <span class="n">information</span> <span class="k">like</span> <span class="n">our</span> <span class="n">bank</span> <span class="n">details</span><span class="p">.</span>
+</pre></div>
+</td></tr></tbody></table>
+<hr>
+<h2 id="types-of-cookies">Types of Cookies<a class="headerlink" href="#types-of-cookies" title="Permanent link">¶</a></h2>
+<ul>
+<li>Session Cookies.<br></li>
+<li>Persistent Cookies.<br></li>
+<li>Secure Cookies.<br></li>
+<li>HTTP-only Cookies.<br></li>
+<li>Same-site Cookies.<br></li>
+<li>Third-party Cookies.<br></li>
+<li>Super Cookies.<br></li>
+<li>Zombie Cookies.</li>
+</ul>
+<h2 id="session-cookies">Session cookies<a class="headerlink" href="#session-cookies" title="Permanent link">¶</a></h2>
+<p>These cookies are also known as in-memory cookies, transient cookies,
+ and non-persistent cookies. These exist only in temporary memory and 
+while user travels forms one website to another website. These cookies 
+will be deleted by the web browser after the user closes the web 
+browser. These cookies do not have any type of expiry date or expiration
+ time assigned to them, this is how the browser knows how to use session
+ cookies.</p>
+<h2 id="persistent-cookies">Persistent Cookies<a class="headerlink" href="#persistent-cookies" title="Permanent link">¶</a></h2>
+<p>As we know that session cookies don't have any time-related 
+expiration time or some expiry date, but persistent cookies do have an 
+expiry date so some length of time for expiration. So it means that as 
+long as these cookies expire the cookie will be sending the data to the 
+server as the client or the user uses visits the website or if the user 
+uses the information belonging to the website from another website.</p>
+<p>So these cookies or also called as <em>Tracking Cookies</em> so these
+ can be used by the advertisers to track the list of the sites visited 
+by the user over a period of time. These are also used for the 
+legitimate reasons (keep some logged in accounts to avoid the reentry of
+ our credentials for every visit) <em>However these cookies would be rested after the expiration time or if it is deleted manually</em>. </p>
+<h2 id="secure-cookies">Secure Cookies<a class="headerlink" href="#secure-cookies" title="Permanent link">¶</a></h2>
+<p>These Secure cookies or transmitted only when the connections are 
+secure so that these might no be captures while the connection was 
+insecure (unencrypted connections). And these cookies are made more 
+secure by adding some kind of <em>Flag</em> to the cookie.</p>
+<h2 id="http-only">Http-only<a class="headerlink" href="#http-only" title="Permanent link">¶</a></h2>
+<p>Http-only is the type of cookies that cannot be captured by the 
+client-side API's. These restrictions do not allow the cookie theft via 
+cross-site scripting (XSS) However these cookies are vulnerable to the 
+cross-site tracing(XST) and cross-site request forgery(XSRF) attacks. A 
+cookie is given this characteristic by adding the HttpOnly flag to the 
+cookie.</p>
+<h2 id="same-site-cookies">Same-site cookies<a class="headerlink" href="#same-site-cookies" title="Permanent link">¶</a></h2>
+<p>These cookies are introduced in Google version 51, called <em>Same-site cookies</em>
+ these cookies will only be sent in the request of the originating from 
+the same origin to the target domain, so to restrict some types of 
+attacks like cross-site request forgery. These cookies are given 
+characteristic by setting the same-site flag to <em>Strict or Lax</em>.</p>
+<h2 id="third-party-cookie">Third-party cookie<a class="headerlink" href="#third-party-cookie" title="Permanent link">¶</a></h2>
+<p>Normally a cookie's domain attribute will match the domain that is 
+shown in the address bar of the web browser. These are called first 
+party cookies. Whereas the third-party cookie belongs to a different 
+domain that is shown in the address bar. This type of cookies will 
+appear when a webpage contains some external contents from other 
+websites such as advertisements or visiting their website. If we are 
+using some website named xyz.com we will be having the cookies of xyz 
+and an advertisement for some another website called abc.com. So it is 
+eventually both these cookies are sent to the advertiser when loading or
+ visiting their website. So the advertiser can use the cookies to know 
+the browsing history of the user that have his advertisements from this 
+advertiser.</p>
+<p>Some years back some companies have set the cookies that are readable
+ by 100 third-party domains. On an average website are setting 10 
+cookies with a maximum limit of 800 cookies </p>
+<p>But the modern web browsers containing the privacy settings can block the third-party cookies.</p>
+<h2 id="super-cookie">Super cookie<a class="headerlink" href="#super-cookie" title="Permanent link">¶</a></h2>
+<p>Super cookie is a cookie which is originated with the top level 
+domains such as .com or for some public suffix such as .co .uk. But 
+ordinary cookies have an origin of a specific domain name, such as 
+abc.com.</p>
+<p>These cookies are having some high-security concern and are therefore
+ often blocked by the web browsers.In case if the web browser accepts 
+the cookie and if the attacker is in control of the malicious website he
+ could set a super cookie which would redirects the user to another 
+website that shares the top level domain or public suffix as the 
+malicious websites. For example, if a super cookie with an origin of 
+.com could affect the request of the abc.com even if the cookie does not
+ originate from abc.com.So that it can be used for the fake logins and 
+change in the user information.</p>
+<p>The public suffix helps to migrate the risks that super cookie could 
+cause. The public suffix list cross-vendor initiative that aims to 
+provide an accurate and up-to-date list of domain names and suffixes. </p>
+<h2 id="note">Note<a class="headerlink" href="#note" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>This super cookie sometimes is also used for tracking purposes that 
+do not relate to HTTP cookies. These mechanisms were found at Microsoft 
+website in August 2011. Due to media attention, they disabled these 
+cookies </p>
+</blockquote>
+<p><img alt="cookie details" src="{% static "bi0s_wiki/extension.png" %}"><br></p>
+<h2 id="how-to-edit-the-cookie">How to edit the cookie<a class="headerlink" href="#how-to-edit-the-cookie" title="Permanent link">¶</a></h2>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">TO</span> <span class="n">edit</span> <span class="n">a</span> <span class="n">cookie</span> <span class="n">one</span> <span class="n">of</span> <span class="n">the</span> <span class="n">easiest</span> <span class="n">ways</span> <span class="n">is</span> <span class="n">Edit</span> <span class="n">the</span> <span class="n">cookie</span><span class="p">.</span> <span class="n">This</span> <span class="n">is</span> <span class="n">also</span> <span class="n">available</span> <span class="k">in</span> <span class="n">the</span> <span class="n">form</span> <span class="n">of</span> <span class="n">google</span> <span class="n">extension</span><span class="p">.</span> <span class="n">IN</span> <span class="n">which</span> <span class="n">we</span> <span class="n">can</span> <span class="n">change</span> <span class="n">the</span> <span class="n">cookie</span> <span class="n">a</span> <span class="n">bit</span> <span class="n">easier</span><span class="p">.</span> <span class="n">Just</span> <span class="n">we</span> <span class="n">have</span> <span class="n">to</span> <span class="n">add</span> <span class="n">the</span> <span class="n">google</span> <span class="n">extension</span>
+
+<span class="o">!</span><span class="p">[</span><span class="n">cookie</span> <span class="n">details</span><span class="p">](</span><span class="n">img</span><span class="o">/</span><span class="n">edit_the_cookie</span><span class="p">.</span><span class="n">png</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">br</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></tbody></table>
+<h3 id="how-to-change-the-cookie">How to change the cookie<a class="headerlink" href="#how-to-change-the-cookie" title="Permanent link">¶</a></h3>
+<ul>
+<li>
+<p>You should click on the icon and delete the cookie in your browser by
+ clicking on the delete button that is the first button from left.</p>
+</li>
+<li>
+<p>To add a new cookie click on import button that is fourth from the left side, by pasting the cookie in the given space</p>
+</li>
+<li>
+<p>To export or to send the cookie click on the export button and it 
+gets copied to the clipboard and you can paste and send where ever you 
+want.</p>
+</li>
+<li>
+<p>After adding some cookie we have to click on the tick mark that is below to confirm the changes </p>
+</li>
+</ul>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/web/intro/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Introduction
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/web/file-upload/" title="File upload vulnerability" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+File upload vulnerability
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

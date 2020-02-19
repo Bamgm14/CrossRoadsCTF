@@ -1,0 +1,134 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Introduction - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#how-to-reverse-engineer-software" title="How to reverse engineer software?" class="md-nav__link">
+How to reverse engineer software?
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#reverse-engineering-analysis-approaches" title="Reverse engineering analysis approaches" class="md-nav__link">
+Reverse engineering analysis approaches
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#general-things-to-remember-before-starting" title="General things to remember before starting" class="md-nav__link">
+General things to remember before starting
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/reversing/intro.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871418205" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">¶</a></h1>
+<p>Reverse engineering is the process of analysing and understanding a system, a
+process etc. It is not solely restricted to software: you can reverse
+engineering watches, televisions, cars, bikes, camera - basically any system you
+can think of.</p>
+<p>In cybersecurity, we usually deal with reverse engineering software: analysing
+executables using several tools and techniques to understand what it does, how
+it performs those actions and act on it. The primary application area is in
+malware analysis where analysts take apart a malware(virus, worm, trojans, bots
+etc) to understand how it works and develop defences against them. Software
+reverse engineering is also used in other areas such as finding vulnerabilities,
+performance and binary analysis and more. It is also an independent field of
+research on it’s own. There are several job opportunities for skilled reverse
+engineers in the field since it is not a very popular skill and there is a
+shortage of skilled reverse engineers in the industry.</p>
+<p>(Off late, reverse engineering hardware has also gained a lot of attention but
+it requires significantly advanced knowledge and several specialized tools.
+Hence we will not focus on hardware reversing here.)</p>
+<h2 id="how-to-reverse-engineer-software">How to reverse engineer software?<a class="headerlink" href="#how-to-reverse-engineer-software" title="Permanent link">¶</a></h2>
+<p>There is no standard methodology or technique to reverse engineering software.
+Every executable you analyse will likely require a different approach depending
+on the executable itself and what your objective for the reverse engineering
+process is. However, we will some basic techniques and approaches that will be
+useful and required in most scenarios. Additionally, these are a necessary
+foundation for developing further skills in reverse engineering.</p>
+<h2 id="reverse-engineering-analysis-approaches">Reverse engineering analysis approaches<a class="headerlink" href="#reverse-engineering-analysis-approaches" title="Permanent link">¶</a></h2>
+<p>Broadly speaking, there are two approaches to analysing and reverse engineering
+executables:</p>
+<ol>
+<li>
+<p><strong>Static analysis</strong>: In this approach, we do not execute the executable.
+Instead, we use specialized tools and prior knowledge to infer several
+useful information about the executable.</p>
+</li>
+<li>
+<p><strong>Dynamic analysis</strong>: In this approach, we execute the executable and
+observe its behaviour during execution, using a different set of
+specialized tools. By observing its behaviour, we can infer useful
+information about the executable.</p>
+</li>
+</ol>
+<p>In most cases, you will need a combination of static and dynamic analysis to
+gain a better and complete understanding of the executable. Both analyses
+approach reveal usually distinct pieces of information and sometimes, one might
+be faster than the other. By combining the two, the reverse engineering process
+can become much faster. Don’t worry: we will learn all the tools needed and some
+examples to demonstrate(and also test your skills in) these tools.</p>
+<h2 id="general-things-to-remember-before-starting">General things to remember before starting<a class="headerlink" href="#general-things-to-remember-before-starting" title="Permanent link">¶</a></h2>
+<p>Reverse engineering is a difficult and time consuming task. It requires paying
+great attention to detail and connecting various concepts together to make
+inferences about program behaviour. Very often, it’s also not necessary to
+reverse engineering the entire executable: depending on the objective for
+reverse engineering, it might enough to focus on a specific part of the
+executable. You will find that you will get frustrated several times through the
+process: that is very normal! Take breaks and work through it at your own pace.
+Do not rush through to find the answer; focus on learning concepts and
+approaches well. We have chosen very simple examples to illustrate the concepts
+clearly but without your efforts and focus, it will be hard to learn. This is
+not to discourage you, it is something you have to remember when reversing.
+Reverse engineering is an extremely fun activity because it’s very engaging and
+frustrating at the same time. After you arrive at the solution and satisfy the
+objective, there is a strong sense of joy and accomplishment but that requires
+in many cases persisting continuously at the task. So it is a difficult task but
+can be extremely rewarding(financially and personally).</p>
+<p>With that said, let’s get started!</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/python/functions/" title="Functions" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Functions
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/reversing/c-lang/" title="C Language" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+C Language
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

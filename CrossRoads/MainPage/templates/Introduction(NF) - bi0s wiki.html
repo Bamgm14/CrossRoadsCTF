@@ -1,0 +1,104 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Introduction - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;" data-md-state="">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#what-is-network-forensics" title="What is Network Forensics?" class="md-nav__link" data-md-state="">
+What is Network Forensics?
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#why-do-we-need-network-forensics" title="Why do we need Network Forensics ?" class="md-nav__link" data-md-state="">
+Why do we need Network Forensics ?
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#what-is-a-pcap" title="What is a PCAP ?" class="md-nav__link">
+What is a PCAP ?
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/forensics/network-forensics.md" title="Edit this page" class="md-icon md-content__icon"></a>
+<h1 id="network-forensics">Network Forensics<a class="headerlink" href="#network-forensics" title="Permanent link">¶</a></h1>
+<h3 id="what-is-network-forensics">What is Network Forensics?<a class="headerlink" href="#what-is-network-forensics" title="Permanent link">¶</a></h3>
+<p>This branch of digital forensics basically deals with monitoring and 
+analysis of a computer network. This is mainly for the purpose of 
+information gathering, legal evidence or intrusion detection. Network 
+forensics generally has two uses. The first, relating to security, 
+involves monitoring a network for anomalous traffic and identifying 
+intrusions. The main purpose of network forensics is henceforth </p>
+<ul>
+<li>Intrusion Detection</li>
+<li>Recording and logging the events</li>
+</ul>
+<h3 id="why-do-we-need-network-forensics">Why do we need Network Forensics ?<a class="headerlink" href="#why-do-we-need-network-forensics" title="Permanent link">¶</a></h3>
+<p>An attacker might be able to erase all log files on a compromised 
+host, network-based evidence might therefore be the only evidence 
+available for forensic analysis.
+In this case, analysis of captured network traffic can include tasks 
+such as reassembling transferred files, searching for keywords and 
+parsing human communication such as emails or chat sessions.
+The network traffic can give us a lot of clues like
++ The websites that the attacker communicated with
++ The files transferred(which includes bank details, chats, pictures 
+etc.)
++ It can also include evidence about the activity of certain types of 
+malware.
+In a computer network the data is transferred across as packets.</p>
+<h3 id="what-is-a-pcap">What is a PCAP ?<a class="headerlink" href="#what-is-a-pcap" title="Permanent link">¶</a></h3>
+<p>PCAP files are data files that have the data of a network session.
+These files contain data regarding what kind of connection was 
+established between the hosts, how did the attacker penetrate the 
+system(in case of an intrusion), all data that was transferred through 
+the network, like files transferred etc are all recorded and kept. Hence
+ they are analysed thoroughly for clues regarding an attack.
+Commonly used tool for analysing a PCAP file is <a href="https://wiki.bi0s.in/forensics/network-forensics/wireshark/">Wireshark</a>.</p>
+<p><strong>Wireshark</strong> is an open-source tool used by professionals and amateurs alike.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/forensics/LSB/" title="LSB Encoding" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+LSB Encoding
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/forensics/protocols/" title="Network protocols and the OSI model" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Network protocols and the OSI model
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

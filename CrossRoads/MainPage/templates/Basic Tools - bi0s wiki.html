@@ -1,0 +1,403 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Basic Tools - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/forensics/Tools.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871878525" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="basic-tools"><strong>Basic Tools</strong><a class="headerlink" href="#basic-tools" title="Permanent link">¶</a></h1>
+<p>This page introduces you too a large collection of open source tools 
+some of which are regularly used and others used very rarely.</p>
+<h3 id="exiftool"><strong>Exiftool</strong><a class="headerlink" href="#exiftool" title="Permanent link">¶</a></h3>
+<p>It is a tool that is used mainly to read metadata in files.</p>
+<h4 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo apt install exiftool
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ exiftool &lt;file-name&gt;
+</pre></div>
+</td></tr></tbody></table>
+<p><img alt="" src="{% static "bi0s_wiki/Screenshot%2520from%25202018-09-22%252001-53-33.png" %}"></p>
+<p>Exiftool gives the metadata of a file as its output. This data can be
+ used for further analysis regarding the file type and its data. On a 
+CTF point-of-view, we might get clues and hints or information that 
+might turn out to be crucial for finding the flag.</p>
+<blockquote>
+<p>Tip</p>
+<p><em>strings</em> is a bash command that shows all the ASCII strings 
+in the file that is passed into the command. In CTFs it is often seen 
+that sometimes some clues or even the flag can be found as an ASCII 
+string inside the given challenge file. Way to use:</p>
+</blockquote>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ strings  &lt;file-name&gt;
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="references">References<a class="headerlink" href="#references" title="Permanent link">¶</a></h4>
+<p>For more information about the tool,</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_3"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ man exiftool
+</pre></div>
+</td></tr></tbody></table>
+<h3 id="ghex"><strong>Ghex</strong><a class="headerlink" href="#ghex" title="Permanent link">¶</a></h3>
+<p>Ghex is a tool which helps us to view and edit the hex data or hex dump of an image.</p>
+<h4 id="installation_1">Installation<a class="headerlink" href="#installation_1" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_4"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo apt install ghex
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="usage_1">Usage<a class="headerlink" href="#usage_1" title="Permanent link">¶</a></h4>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_5"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ ghex image.jpg
+</pre></div>
+</td></tr></tbody></table>
+<img alt="" src="{% static "bi0s_wiki/ghex.png" %}">
+Using ghex we can see the headers, footers, and the data chunks of an 
+image. It is to be noted that ghex can be used for all types of files 
+not only images.<p></p>
+<h4 id="references_1">References<a class="headerlink" href="#references_1" title="Permanent link">¶</a></h4>
+<p>For more information about the tool,</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_6"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ man ghex
+</pre></div>
+</td></tr></tbody></table>
+<h3 id="binwalk"><strong>Binwalk</strong><a class="headerlink" href="#binwalk" title="Permanent link">¶</a></h3>
+<p>It is a tool used mainly for searching embedded files and executable code within another data file.</p>
+<h4 id="installation_2">Installation<a class="headerlink" href="#installation_2" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_7"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo apt install binwalk
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="usage_2">Usage<a class="headerlink" href="#usage_2" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_8"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ binwalk -e &lt;file-name&gt;
+</pre></div>
+</td></tr></tbody></table>
+<p><img alt="alt text" src="{% static "bi0s_wiki/bh.png" %}"></p>
+<p>Here in the above image, we see that there is a 'jpg image' that has a
+ compressed 'images' in it and we see that it is, it is embedded within 
+the jpg image file. To extract it we can make use of a carving tool <strong>dd</strong>.
+ It can carve out data from specific offsets that are passed as 
+arguments to the tool along the with the file that needs to be read. 
+Give the following command:
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_9"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ dd <span class="k">if</span><span class="o">=</span>deeper.jpg <span class="nv">of</span><span class="o">=</span>image1.jpg <span class="nv">bs</span><span class="o">=</span><span class="m">1</span> <span class="nv">skip</span><span class="o">=</span><span class="m">202</span>
+</pre></div>
+</td></tr></tbody></table>
+Where at <em>if=</em> the file from which data has to be extracted is passed as an argument and <em>of=</em> has the name of the file that we give after extraction. <em>skip=</em> is the offset of the file that has to be read and <em>bs=</em> i the byte skip argument that specifies the frequency of reading data from the given file.<p></p>
+<h4 id="references_2">References<a class="headerlink" href="#references_2" title="Permanent link">¶</a></h4>
+<p>For more information about the tool,</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_10"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ man binwalk
+</pre></div>
+</td></tr></tbody></table>
+<h3 id="steghide"><strong>Steghide</strong><a class="headerlink" href="#steghide" title="Permanent link">¶</a></h3>
+<p>It is used to embed and extract secret messages in images. It supports all the general formats of images like .png, .jpg etc.</p>
+<h4 id="installation_3">Installation<a class="headerlink" href="#installation_3" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_11"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo apt install steghide
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="usage_3">Usage<a class="headerlink" href="#usage_3" title="Permanent link">¶</a></h4>
+<p>To embed a secret message into an image
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_12"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ steghide embed -cf image.jpg -ef secret_message.txt
+Enter passphrase : ********
+Re-Enter passphrase : ********
+embedding <span class="s2">"secret_message.txt"</span> in <span class="s2">"image.jpg"</span>... <span class="k">done</span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p>To extract the secret message from the image
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_13"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ steghide extract -sf image.jpg
+Enter passphrase : ********
+wrote extracted data to <span class="s2">"secret_message.txt"</span>.
+</pre></div>
+</td></tr></tbody></table>
+For any help with the commands type
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_14"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ steghide --help
+</pre></div>
+</td></tr></tbody></table>
+It is important to note that the password may not always be a plain text
+ sentence.
+Sometimes it may be hashed. Some examples of hashes include MD5, sha1 
+etc. We all know that there is no specific way to reverse the hashes. 
+But, there are websites which store hashes of certain commonly used 
+strings.<p></p>
+<p>Some of such websites are:</p>
+<p>a. <a href="https://hashkiller.co.uk/md5-decrypter.aspx">HashKiller</a>
+<h4 id="references_3">References<a class="headerlink" href="#references_3" title="Permanent link">¶</a></h4>
+<p>For more information about the tool,</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_15"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ man steghide
+</pre></div>
+</td></tr></tbody></table>
+<h3 id="stegsolve"><strong>Stegsolve</strong><a class="headerlink" href="#stegsolve" title="Permanent link">¶</a></h3>
+<p>It is used to analyze images in different planes by taking off bits of the image.</p>
+<h4 id="installation_4">Installation<a class="headerlink" href="#installation_4" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_16"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ wget http://www.caesum.com/handbook/Stegsolve.jar -O stegsolve.jar
+$ chmod +x stegsolve.jar
+$ mkdir bin
+$ mv stegsolve.jar bin/
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="usage_4">Usage<a class="headerlink" href="#usage_4" title="Permanent link">¶</a></h4>
+<p>Stegsolve can be invoked by placing the image in the /bin folder and running stegsolve.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_17"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ java -jar stegsolve.jar
+</pre></div>
+</td></tr></tbody></table>
+<img alt="" src="{% static "bi0s_wiki/stegsolve-blue.png" %}"><p></p>
+<p><img alt="" src="{% static "bi0s_wiki/stegsolve-green.png" %}">
+There are over 10 different planes supported by stegsolve like Alpha, Blue, Green, Red, XOR etc.</p>
+<h3 id="stegcracker"><strong>Stegcracker</strong><a class="headerlink" href="#stegcracker" title="Permanent link">¶</a></h3>
+<p>It is a tool used to crack passwords in files which contains hidden data.</p>
+<h4 id="installation_5">Installation<a class="headerlink" href="#installation_5" title="Permanent link">¶</a></h4>
+<p>For installing stegcracker we would require steghide, for installing steghide try</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_18"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo apt-get install steghide -y
+
+$ pip3 install stegcracker
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="usage_5">Usage<a class="headerlink" href="#usage_5" title="Permanent link">¶</a></h4>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_19"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ stegcracker &lt;file&gt; <span class="o">[</span>&lt;wordlist&gt;<span class="o">]</span>
+</pre></div>
+</td></tr></tbody></table>
+For the wordlist, an example is to use rockyou.txt<p></p>
+<h3 id="stegdetect"><strong>Stegdetect</strong><a class="headerlink" href="#stegdetect" title="Permanent link">¶</a></h3>
+<p>It is a tool which detects whether the given file has steganographic content or not.</p>
+<h4 id="installation_6">Installation<a class="headerlink" href="#installation_6" title="Permanent link">¶</a></h4>
+<p>Please clone <a href="https://github.com/abeluck/stegdetect">this</a><img name="kl_1567871878525" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12"> repository before executing the following commands.</p>
+<p>If using a 64-bit system,</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_20"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ linux32 ./configure
+
+$ linux32 make
+</pre></div>
+</td></tr></tbody></table>
+<p>You can now run stegdetect from the local directory:
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_21"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ ./stegdetect
+</pre></div>
+</td></tr></tbody></table>
+<strong>Note</strong>: Stegdetect tool works only for JPEG image formats.<p></p>
+<h4 id="usage_6">Usage<a class="headerlink" href="#usage_6" title="Permanent link">¶</a></h4>
+<p>To run stegdetect on a directory of JPEGs use:</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_22"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_22 pre, #__code_22 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="k">for</span> img in <span class="sb">`</span>find /path/to/images/ -iname <span class="s2">"*jpg"</span><span class="sb">`</span><span class="p">;</span> <span class="k">do</span>
+  ./stegdetect -tF <span class="nv">$img</span><span class="p">;</span>
+<span class="k">done</span>
+</pre></div>
+</td></tr></tbody></table>
+<h3 id="zbarimg"><strong>Zbarimg</strong><a class="headerlink" href="#zbarimg" title="Permanent link">¶</a></h3>
+<p>It is a tool used to scan and decode QR codes from image files</p>
+<h4 id="installation_7">Installation<a class="headerlink" href="#installation_7" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_23"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_23 pre, #__code_23 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo apt-get install zbar-tools
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="usage_7">Usage<a class="headerlink" href="#usage_7" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_24"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_24 pre, #__code_24 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ zbarimg &lt;file-name&gt;
+</pre></div>
+</td></tr></tbody></table>
+<p><strong>Note</strong>: Zbar can also decode QR code by webcam, for this install the following tool,</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_25"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_25 pre, #__code_25 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo apt-get install zbarcam
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="references_4">References<a class="headerlink" href="#references_4" title="Permanent link">¶</a></h4>
+<p>For more information about the tool,</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_26"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_26 pre, #__code_26 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ man zbarimg
+</pre></div>
+</td></tr></tbody></table>
+<h3 id="stegoveritas"><strong>StegoVeritas</strong><a class="headerlink" href="#stegoveritas" title="Permanent link">¶</a></h3>
+<p>It is a python based steganography tool used to give various 
+information about any particular stego file and prints out any data 
+embedded inside it.</p>
+<h4 id="installation_8">Installation<a class="headerlink" href="#installation_8" title="Permanent link">¶</a></h4>
+<p>using pip</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_27"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_27 pre, #__code_27 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ pip3 install stegoVeritas
+
+$ stegoVeritas_install_deps
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="usage_8">Usage<a class="headerlink" href="#usage_8" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_28"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_28 pre, #__code_28 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ stegoveritas &lt;file&gt;
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="references_5">References<a class="headerlink" href="#references_5" title="Permanent link">¶</a></h4>
+<p>For more information about the tool,</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_29"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_29 pre, #__code_29 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ stegoveritas -h
+</pre></div>
+</td></tr></tbody></table>
+<h3 id="gpg"><strong>GPG</strong><a class="headerlink" href="#gpg" title="Permanent link">¶</a></h3>
+<p>GNU Privacy Guard (GnuPG or GPG),replacement of PGP(Pretty Good 
+Privacy) a free-software tool used to bring out encryption, it features a
+ versatile key management system.</p>
+<h4 id="installation_9">Installation<a class="headerlink" href="#installation_9" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_30"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_30 pre, #__code_30 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo apt install gnupg
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="usage_9">Usage<a class="headerlink" href="#usage_9" title="Permanent link">¶</a></h4>
+<h6 id="to-create-public-and-private-keys">To create Public and Private Keys<a class="headerlink" href="#to-create-public-and-private-keys" title="Permanent link">¶</a></h6>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_31"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_31 pre, #__code_31 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ gpg --gen-key
+</pre></div>
+</td></tr></tbody></table>
+<h6 id="list-keys">List Keys<a class="headerlink" href="#list-keys" title="Permanent link">¶</a></h6>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_32"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_32 pre, #__code_32 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ gpg --fingerprint ibaydan
+</pre></div>
+</td></tr></tbody></table>
+<h6 id="register-to-keyserver">Register To Keyserver<a class="headerlink" href="#register-to-keyserver" title="Permanent link">¶</a></h6>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_33"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_33 pre, #__code_33 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ gpg --keyserver gpg.mit.edu --send-keys 003D114F
+</pre></div>
+</td></tr></tbody></table>
+<h6 id="export-public-key-in-ascii-formats">Export Public Key in ASCII formats<a class="headerlink" href="#export-public-key-in-ascii-formats" title="Permanent link">¶</a></h6>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_34"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_34 pre, #__code_34 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ gpg --armor --output pubkey.txt --export <span class="s1">'ibaydan'</span>
+</pre></div>
+</td></tr></tbody></table>
+<h6 id="encrypt-a-file">Encrypt A file<a class="headerlink" href="#encrypt-a-file" title="Permanent link">¶</a></h6>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_35"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_35 pre, #__code_35 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ gpg --encrypt --recipient <span class="s1">'ibayadan'</span> --output ServerPass.txt.enc ServerPass.txt
+</pre></div>
+</td></tr></tbody></table>
+<h6 id="decrypt-a-file">Decrypt A file<a class="headerlink" href="#decrypt-a-file" title="Permanent link">¶</a></h6>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_36"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_36 pre, #__code_36 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ gpg --output foo.txt --decrypt ServerPass.txt.enc
+</pre></div>
+</td></tr></tbody></table>
+<h6 id="list-installed-keys">List Installed Keys<a class="headerlink" href="#list-installed-keys" title="Permanent link">¶</a></h6>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_37"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_37 pre, #__code_37 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ gpg --list-keys
+</pre></div>
+</td></tr></tbody></table>
+<h6 id="delete-key">Delete Key<a class="headerlink" href="#delete-key" title="Permanent link">¶</a></h6>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_38"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_38 pre, #__code_38 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ gpg --delete-key ibayadan
+</pre></div>
+</td></tr></tbody></table>
+<h6 id="delete-key-with-secret-keys">Delete Key with Secret Keys<a class="headerlink" href="#delete-key-with-secret-keys" title="Permanent link">¶</a></h6>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_39"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_39 pre, #__code_39 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ gpg --delete-secret-keys <span class="s1">'ibaydan@poftut.com'</span>
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="references_6">References<a class="headerlink" href="#references_6" title="Permanent link">¶</a></h4>
+<p>For more information about the tool,</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_40"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_40 pre, #__code_40 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ man gpg
+</pre></div>
+</td></tr></tbody></table>
+<h3 id="stegsnow"><strong>Stegsnow</strong><a class="headerlink" href="#stegsnow" title="Permanent link">¶</a></h3>
+<p><em>Stegsnow</em> is a tool for concealing messages in text files by 
+appending tabs and whitespaces at the end of lines.The encoding used by 
+snow relies on the fact that whitespaces and new lines won't be 
+displayed in text editors.</p>
+<h4 id="installation_10">Installation<a class="headerlink" href="#installation_10" title="Permanent link">¶</a></h4>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_41"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_41 pre, #__code_41 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ sudo apt install stegsnow
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="usage_10">Usage<a class="headerlink" href="#usage_10" title="Permanent link">¶</a></h4>
+<h5 id="encryption">Encryption<a class="headerlink" href="#encryption" title="Permanent link">¶</a></h5>
+<p>Original Text File
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="codehilite" id="__code_42"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_42 pre, #__code_42 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="nv">Not</span> <span class="nv">like</span> <span class="nv">the</span> <span class="nv">brazen</span> <span class="nv">giant</span> <span class="nv">of</span> <span class="nv">Greek</span> <span class="nv">fame</span>,
+<span class="nv">With</span> <span class="nv">conquering</span> <span class="nv">limbs</span> <span class="nv">astride</span> <span class="nv">from</span> <span class="nv">land</span> <span class="nv">to</span> <span class="nv">land</span><span class="c1">;</span>
+<span class="nv">Here</span> <span class="nv">at</span> <span class="nv">our</span> <span class="nv">sea</span><span class="o">-</span><span class="nv">washed</span>, <span class="nv">sunset</span> <span class="nv">gates</span> <span class="nv">shall</span> <span class="nv">stand</span>
+<span class="nv">A</span> <span class="nv">mighty</span> <span class="nv">woman</span> <span class="nv">with</span> <span class="nv">a</span> <span class="nv">torch</span>, <span class="nv">whose</span> <span class="nv">flame</span>
+<span class="nv">Is</span> <span class="nv">the</span> <span class="nv">imprisoned</span> <span class="nv">lightning</span>, <span class="nv">and</span> <span class="nv">her</span> <span class="nv">name</span>
+<span class="nv">Mother</span> <span class="nv">of</span> <span class="nv">Exiles</span>. <span class="nv">From</span> <span class="nv">her</span> <span class="nv">beacon</span><span class="o">-</span><span class="nv">hand</span>
+<span class="nv">Glows</span> <span class="nv">world</span><span class="o">-</span><span class="nv">wide</span> <span class="nv">welcome</span><span class="c1">; her mild eyes command</span>
+<span class="nv">The</span> <span class="nv">air</span><span class="o">-</span><span class="nv">bridged</span> <span class="nv">harbor</span> <span class="nv">that</span> <span class="nv">twin</span> <span class="nv">cities</span> <span class="nv">frame</span>.
+“<span class="nv">Keep</span>, <span class="nv">ancient</span> <span class="nv">lands</span>, <span class="nv">your</span> <span class="nv">storied</span> <span class="nv">pomp</span><span class="o">!</span>” <span class="nv">cries</span> <span class="nv">she</span>
+<span class="nv">With</span> <span class="nv">silent</span> <span class="nv">lips</span>. “<span class="nv">Give</span> <span class="nv">me</span> <span class="nv">your</span> <span class="nv">tired</span>, <span class="nv">your</span> <span class="nv">poor</span>,
+<span class="nv">Your</span> <span class="nv">huddled</span> <span class="nv">masses</span> <span class="nv">yearning</span> <span class="nv">to</span> <span class="nv">breathe</span> <span class="nv">free</span>,
+<span class="nv">The</span> <span class="nv">wretched</span> <span class="nv">refuse</span> <span class="nv">of</span> <span class="nv">your</span> <span class="nv">teeming</span> <span class="nv">shore</span>.
+<span class="k">Send</span> <span class="nv">these</span>, <span class="nv">the</span> <span class="nv">homeless</span>, <span class="nv">tempest</span><span class="o">-</span><span class="nv">tossed</span> <span class="nv">to</span> <span class="nv">me</span>,
+<span class="nv">I</span> <span class="nv">lift</span> <span class="nv">my</span> <span class="nv">lamp</span> <span class="nv">beside</span> <span class="nv">the</span> <span class="nv">golden</span> <span class="nv">door</span><span class="o">!</span>”
+</pre></div>
+</td></tr></tbody></table><p></p>
+<h6 id="command">Command<a class="headerlink" href="#command" title="Permanent link">¶</a></h6>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_43"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_43 pre, #__code_43 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ stegsnow -C -m <span class="s2">"Attack At Dawn"</span> -p <span class="s2">"hail-hydra"</span> NewColossus.txt NewColossusMod.txt
+</pre></div>
+</td></tr></tbody></table>
+Modified Text File
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="codehilite" id="__code_44"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_44 pre, #__code_44 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="nv">Not</span> <span class="nv">like</span> <span class="nv">the</span> <span class="nv">brazen</span> <span class="nv">giant</span> <span class="nv">of</span> <span class="nv">Greek</span> <span class="nv">fame</span>,                      
+<span class="nv">With</span> <span class="nv">conquering</span> <span class="nv">limbs</span> <span class="nv">astride</span> <span class="nv">from</span> <span class="nv">land</span> <span class="nv">to</span> <span class="nv">land</span><span class="c1">;                     </span>
+<span class="nv">Here</span> <span class="nv">at</span> <span class="nv">our</span> <span class="nv">sea</span><span class="o">-</span><span class="nv">washed</span>, <span class="nv">sunset</span> <span class="nv">gates</span> <span class="nv">shall</span> <span class="nv">stand</span>                      
+<span class="nv">A</span> <span class="nv">mighty</span> <span class="nv">woman</span> <span class="nv">with</span> <span class="nv">a</span> <span class="nv">torch</span>, <span class="nv">whose</span> <span class="nv">flame</span>                             
+<span class="nv">Is</span> <span class="nv">the</span> <span class="nv">imprisoned</span> <span class="nv">lightning</span>, <span class="nv">and</span> <span class="nv">her</span> <span class="nv">name</span>                         
+<span class="nv">Mother</span> <span class="nv">of</span> <span class="nv">Exiles</span>. <span class="nv">From</span> <span class="nv">her</span> <span class="nv">beacon</span><span class="o">-</span><span class="nv">hand</span>              
+<span class="nv">Glows</span> <span class="nv">world</span><span class="o">-</span><span class="nv">wide</span> <span class="nv">welcome</span><span class="c1">; her mild eyes command</span>
+<span class="nv">The</span> <span class="nv">air</span><span class="o">-</span><span class="nv">bridged</span> <span class="nv">harbor</span> <span class="nv">that</span> <span class="nv">twin</span> <span class="nv">cities</span> <span class="nv">frame</span>.
+“<span class="nv">Keep</span>, <span class="nv">ancient</span> <span class="nv">lands</span>, <span class="nv">your</span> <span class="nv">storied</span> <span class="nv">pomp</span><span class="o">!</span>” <span class="nv">cries</span> <span class="nv">she</span>
+<span class="nv">With</span> <span class="nv">silent</span> <span class="nv">lips</span>. “<span class="nv">Give</span> <span class="nv">me</span> <span class="nv">your</span> <span class="nv">tired</span>, <span class="nv">your</span> <span class="nv">poor</span>,
+<span class="nv">Your</span> <span class="nv">huddled</span> <span class="nv">masses</span> <span class="nv">yearning</span> <span class="nv">to</span> <span class="nv">breathe</span> <span class="nv">free</span>,
+<span class="nv">The</span> <span class="nv">wretched</span> <span class="nv">refuse</span> <span class="nv">of</span> <span class="nv">your</span> <span class="nv">teeming</span> <span class="nv">shore</span>.
+<span class="k">Send</span> <span class="nv">these</span>, <span class="nv">the</span> <span class="nv">homeless</span>, <span class="nv">tempest</span><span class="o">-</span><span class="nv">tossed</span> <span class="nv">to</span> <span class="nv">me</span>,
+<span class="nv">I</span> <span class="nv">lift</span> <span class="nv">my</span> <span class="nv">lamp</span> <span class="nv">beside</span> <span class="nv">the</span> <span class="nv">golden</span> <span class="nv">door</span><span class="o">!</span>”
+</pre></div>
+</td></tr></tbody></table><p></p>
+<h5 id="decryption">Decryption<a class="headerlink" href="#decryption" title="Permanent link">¶</a></h5>
+<h6 id="command_1">Command<a class="headerlink" href="#command_1" title="Permanent link">¶</a></h6>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_45"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_45 pre, #__code_45 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ stegsnow -C -p <span class="s2">"hail-hydra"</span> NewColossusMod.txt
+Encoded Message: Attack At Dawn
+</pre></div>
+</td></tr></tbody></table>
+<h4 id="references_7">References<a class="headerlink" href="#references_7" title="Permanent link">¶</a></h4>
+<p>For more information about the tool,
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite" id="__code_46"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_46 pre, #__code_46 code"><span class="md-clipboard__message"></span></button><pre><span></span>$ man stegsnow
+</pre></div>
+</td></tr></tbody></table><p></p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/forensics/steganography/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Introduction
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/forensics/ToolsContd/" title="Basic Tools Contd." class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Basic Tools Contd.
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

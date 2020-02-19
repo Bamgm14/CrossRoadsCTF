@@ -1,0 +1,67 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Classification Of Cryptosystems - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/crypto/classification.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567872067943" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1>Classification Of Cryptosystems</h1>
+<p>Fundamentally, there are two types of cryptosystems:</p>
+<ul>
+<li><strong>SYMMETRIC CRYPTOSYSTEM</strong>
+It is a cryptosystem where the same key is used for encrypting and decrypting the information.</li>
+</ul>
+<p><img alt="PICTURE" src="{% static "bi0s_wiki/symmetric-1.png" %}"></p>
+<p>As shown above, the sender uses a KEY to encrypt the PLAINTEXT and 
+sends the CIPHERTEXT to the receiver. The receiver uses the same KEY to 
+decrypt the message.
+Because a single key is used, this system is named as symmetric 
+cryptosystem.</p>
+<ul>
+<li><strong>ASYMMETRIC CRYPTOSYSTEM</strong>
+It is a cryptosystem where two different keys are used for encrypting 
+and decrypting the information.This type of cryptosystem is also known 
+as public key cryptosystem.</li>
+</ul>
+<p><img alt="PICTURE" src="{% static "bi0s_wiki/assymeteric_-1.png" %}"></p>
+<p>As shown above, the sender uses a KEY (public key) to encrypt the 
+PLAINTEXT and sends the CIPHERTEXT to the receiver. The receiver uses 
+another KEY (private key) to decrypt the message.
+Because two different keys are used, this system is named as asymmetric 
+cryptosystem.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/crypto/encoding/" title="Encoding" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Encoding
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/crypto/evolution/" title="Evolution" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Evolution
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

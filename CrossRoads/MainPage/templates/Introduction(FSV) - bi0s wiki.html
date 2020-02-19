@@ -1,0 +1,189 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Introduction - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/pwning/format-string/fmt.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871745578" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="format-string-vulnerability">Format String Vulnerability<a class="headerlink" href="#format-string-vulnerability" title="Permanent link">¶</a></h1>
+<p>The format string vulnerability is seen in the incorrect use of printf() function in C.</p>
+<p>Syntax of printf() in C:</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="n">control</span> <span class="n">string</span><span class="err">”</span><span class="p">,</span> <span class="n">variable_list</span><span class="p">)</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>The first argument, the format string, specifies how the variables 
+have to be displayed, printf() also assumes how the variables are passed
+ based on the format specifiers in the format string. The below table 
+consists of the common format specifiers used in printf() and how the 
+variables are perceived as.</p>
+<div class="md-typeset__scrollwrap"><div class="md-typeset__table"><table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Output</th>
+<th>Passed as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%d</td>
+<td>Decimal</td>
+<td>Value</td>
+</tr>
+<tr>
+<td>%u</td>
+<td>Unsigned Decimal</td>
+<td>Value</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>Character</td>
+<td>Value</td>
+</tr>
+<tr>
+<td>%s</td>
+<td>String</td>
+<td>Reference</td>
+</tr>
+<tr>
+<td>%x</td>
+<td>Hexadecimal</td>
+<td>Value</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>Basically %x suffixed with ‘0x’</td>
+<td>Value</td>
+</tr>
+<tr>
+<td>%n</td>
+<td>Writes the characters until “%n” into a pointer</td>
+<td>Reference</td>
+</tr>
+</tbody>
+</table></div></div>
+<p>From now on everything mentioned will be in the assumption that you 
+have a basic knowledge in C, x86 assembly and also a clear idea on how 
+the stack works.</p>
+<p>In a 32-bit environment the arguments of the printf() function is 
+pushed on to the stack, first the variables are pushed on to the stack 
+then the pointer to the control string.</p>
+<p>As shown in the table the values pushed on the stack are printed as per the format specifier pushed on the stack.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+ <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">80</span><span class="p">;</span>
+    <span class="n">puts</span><span class="p">(</span><span class="err">“</span><span class="n">Hello</span> <span class="n">World</span><span class="err">”</span><span class="p">)</span><span class="o">:</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"The decimal is %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span> 
+</pre></div>
+</td></tr></tbody></table>
+<p>Output :</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="n">Hello</span> <span class="n">World</span>
+<span class="n">The</span> <span class="nb">decimal</span> <span class="k">is</span> <span class="mi">80</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>This is what the above code looks like in x86 assembly language.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="codehilite" id="__code_3"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="nf">Dump</span> <span class="nv">of</span> <span class="nv">assembler</span> <span class="nv">code</span> <span class="nv">for</span> <span class="nv">function</span> <span class="nv">main</span><span class="p">:</span>
+   <span class="err">0</span><span class="nf">x0804840b</span> <span class="o">&lt;+</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">:</span>     <span class="nv">lea</span>    <span class="nb">ecx</span><span class="p">,[</span><span class="nb">esp</span><span class="o">+</span><span class="mh">0x4</span><span class="p">]</span>
+   <span class="err">0</span><span class="nf">x0804840f</span> <span class="o">&lt;+</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">:</span>     <span class="nv">and</span>    <span class="nb">esp</span><span class="p">,</span><span class="mh">0xfffffff0</span>
+   <span class="err">0</span><span class="nf">x08048412</span> <span class="o">&lt;+</span><span class="mi">7</span><span class="o">&gt;</span><span class="p">:</span>     <span class="nv">push</span>   <span class="kt">DWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">ecx</span><span class="o">-</span><span class="mh">0x4</span><span class="p">]</span>
+   <span class="err">0</span><span class="nf">x08048415</span> <span class="o">&lt;+</span><span class="mi">10</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">push</span>   <span class="nb">ebp</span>
+   <span class="err">0</span><span class="nf">x08048416</span> <span class="o">&lt;+</span><span class="mi">11</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">mov</span>    <span class="nb">ebp</span><span class="p">,</span><span class="nb">esp</span>
+   <span class="err">0</span><span class="nf">x08048418</span> <span class="o">&lt;+</span><span class="mi">13</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">push</span>   <span class="nb">ecx</span>
+   <span class="err">0</span><span class="nf">x08048419</span> <span class="o">&lt;+</span><span class="mi">14</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">sub</span>    <span class="nb">esp</span><span class="p">,</span><span class="mh">0x14</span>
+   <span class="err">0</span><span class="nf">x0804841c</span> <span class="o">&lt;+</span><span class="mi">17</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">mov</span>    <span class="kt">DWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">ebp</span><span class="o">-</span><span class="mh">0xc</span><span class="p">],</span><span class="mh">0x50</span>
+   <span class="err">0</span><span class="nf">x08048423</span> <span class="o">&lt;+</span><span class="mi">24</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">sub</span>    <span class="nb">esp</span><span class="p">,</span><span class="mh">0x8</span>
+   <span class="err">0</span><span class="nf">x08048426</span> <span class="o">&lt;+</span><span class="mi">27</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">push</span>   <span class="kt">DWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">ebp</span><span class="o">-</span><span class="mh">0xc</span><span class="p">]</span>
+   <span class="err">0</span><span class="nf">x08048429</span> <span class="o">&lt;+</span><span class="mi">30</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">push</span>   <span class="mh">0x80484d0</span>
+   <span class="err">0</span><span class="nf">x0804842e</span> <span class="o">&lt;+</span><span class="mi">35</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">call</span>   <span class="mh">0x80482e0</span> <span class="o">&lt;</span><span class="nv">printf@plt</span><span class="o">&gt;</span>
+   <span class="err">0</span><span class="nf">x08048433</span> <span class="o">&lt;+</span><span class="mi">40</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">add</span>    <span class="nb">esp</span><span class="p">,</span><span class="mh">0x10</span>
+   <span class="err">0</span><span class="nf">x08048436</span> <span class="o">&lt;+</span><span class="mi">43</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">mov</span>    <span class="nb">eax</span><span class="p">,</span><span class="mh">0x0</span>
+   <span class="err">0</span><span class="nf">x0804843b</span> <span class="o">&lt;+</span><span class="mi">48</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">mov</span>    <span class="nb">ecx</span><span class="p">,</span><span class="kt">DWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">ebp</span><span class="o">-</span><span class="mh">0x4</span><span class="p">]</span>
+   <span class="err">0</span><span class="nf">x0804843e</span> <span class="o">&lt;+</span><span class="mi">51</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">leave</span>
+   <span class="err">0</span><span class="nf">x0804843f</span> <span class="o">&lt;+</span><span class="mi">52</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">lea</span>    <span class="nb">esp</span><span class="p">,[</span><span class="nb">ecx</span><span class="o">-</span><span class="mh">0x4</span><span class="p">]</span>
+   <span class="err">0</span><span class="nf">x08048442</span> <span class="o">&lt;+</span><span class="mi">55</span><span class="o">&gt;</span><span class="p">:</span>    <span class="nv">ret</span>
+<span class="nf">End</span> <span class="nv">of</span> <span class="nv">assembler</span> <span class="nv">dump.</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Can you see the two push instructions before the calling printf()? 
+The two arguments to printf() are pushed on to the stack, first the 
+value in the variable, in this case ‘a’ is the variable and ‘80’ is the 
+value, ‘80’ is pushed on to the stack, and then the pointer to the 
+format string(“The decimal is %d”).</p>
+<p>When printf() is called it assumes that the arguments are already on 
+the stack and continues execution. Whatever is on the top of the stack 
+is printed onto the screen, and ‘%d’ is replaced with the value ‘80’ 
+which is right next to the pointer to format string on the stack.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/pwning/return2libc/return-to-shellcode/" title="ret2shellcode" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+ret2shellcode
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/pwning/format-string/leak/" title="Leaking Memory" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Leaking Memory
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

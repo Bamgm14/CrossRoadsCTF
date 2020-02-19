@@ -1,0 +1,341 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Introduction - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;" data-md-state="">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a href="#web-application-security" title="Web application security" class="md-nav__link" data-md-state="">
+Web application security
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#security-threats" title="Security Threats" class="md-nav__link" data-md-state="">
+Security Threats
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#types-of-security-threats" title="Types of Security Threats" class="md-nav__link" data-md-state="">
+Types of Security Threats
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#virus-threats" title="Virus Threats" class="md-nav__link" data-md-state="">
+Virus Threats
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#hackers-and-predator" title="Hackers and Predator" class="md-nav__link" data-md-state="">
+Hackers and Predator
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#phishing" title="Phishing" class="md-nav__link" data-md-state="">
+Phishing
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a href="#top-10-vulnerabilities" title="Top 10 vulnerabilities" class="md-nav__link" data-md-state="">
+Top 10 vulnerabilities
+</a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a href="#injection" title="Injection" class="md-nav__link" data-md-state="">
+Injection
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#broken-authetiacation-and-session-managment" title="Broken Authetiacation and Session Managment" class="md-nav__link" data-md-state="">
+Broken Authetiacation and Session Managment
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#sensitive-data-exposure" title="Sensitive Data Exposure" class="md-nav__link" data-md-state="">
+Sensitive Data Exposure
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#xml-external-entity" title="XML External Entity" class="md-nav__link" data-md-state="">
+XML External Entity
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#broken-access-control" title="Broken Access Control" class="md-nav__link" data-md-state="">
+Broken Access Control
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#security-misconfiguration" title="Security Misconfiguration" class="md-nav__link" data-md-state="">
+Security Misconfiguration
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#cross-site-scripting" title="Cross-Site Scripting" class="md-nav__link" data-md-state="">
+Cross-Site Scripting
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#insecure-deserialization" title="Insecure Deserialization" class="md-nav__link" data-md-state="">
+Insecure Deserialization
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#using-components-with-know-vulnerability" title="Using Components With Know Vulnerability" class="md-nav__link" data-md-state="">
+Using Components With Know Vulnerability
+</a>
+</li>
+<li class="md-nav__item">
+<a href="#insufficient-logging-and-monitoring" title="Insufficient Logging and Monitoring" class="md-nav__link">
+Insufficient Logging and Monitoring
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/web/intro.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567872418249" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">¶</a></h1>
+<h2 id="web-application-security">Web application security<a class="headerlink" href="#web-application-security" title="Permanent link">¶</a></h2>
+<p>Web application security is a branch of Information Security that 
+arrangements particularly with the security of sites, web applications, 
+and web administrations. At an abnormal state, Web application security 
+draws on the standards of application security, however, applies them 
+particularly to Internet and Web frameworks</p>
+<h2 id="security-threats">Security Threats<a class="headerlink" href="#security-threats" title="Permanent link">¶</a></h2>
+<p>A PC risk is a probability of threat that may hurt the helplessness 
+of a PC framework and rupture the security to cause harm. It can have a 
+purposeful reason like hacking or an incidental reason for the 
+catastrophic event or PC glitch.</p>
+<h2 id="types-of-security-threats">Types of Security Threats<a class="headerlink" href="#types-of-security-threats" title="Permanent link">¶</a></h2>
+<h3 id="virus-threats">Virus Threats<a class="headerlink" href="#virus-threats" title="Permanent link">¶</a></h3>
+<p>The most well-known computer threat virus works by inserting itself 
+into an application and destroying users data and alters the way the 
+application works without the permission of user.</p>
+<h3 id="hackers-and-predator">Hackers and Predator<a class="headerlink" href="#hackers-and-predator" title="Permanent link">¶</a></h3>
+<p>It is people not computers who create threats. A computer hacker is 
+any skilled computer expert who uses their knowledge to overcome a 
+problem. The term hacker may refer to anyone with technical skills but 
+is often refers to a person who uses his or her abilities to gain 
+unauthorized access to systems or networks in order to commit crimes.</p>
+<h3 id="phishing">Phishing<a class="headerlink" href="#phishing" title="Permanent link">¶</a></h3>
+<p>The Open Web Application Security Project (OWASP) is a worldwide 
+not-for-profit charitable organization focused on improving the security
+ of software. According to OWASP the top vulnerabilities in 2017 include
+ </p>
+<h2 id="top-10-vulnerabilities">Top 10 vulnerabilities<a class="headerlink" href="#top-10-vulnerabilities" title="Permanent link">¶</a></h2>
+<ul>
+<li>Injection<br></li>
+<li>Broken Authentication and Session Management<br></li>
+<li>Sensitive Data Exposure<br></li>
+<li>XML External Entity<br></li>
+<li>Broken Access Control<br></li>
+<li>Security Misconfiguration<br></li>
+<li>Cross-Site Scripting<br></li>
+<li>Insecure deserialization<br></li>
+<li>Using Components With Known Vulnerabilities<br></li>
+<li>Insufficient Logging and Monitoring <br></li>
+</ul>
+<h3 id="injection">Injection<a class="headerlink" href="#injection" title="Permanent link">¶</a></h3>
+<p>Injection is a category that includes all kinds of vulnerabilities 
+where an application sends queries to the application which lead to some
+ untrusted access or something else. It is often found in database 
+queries, but other examples are OS commands, XML parsers or when user 
+input is sent as program arguments.</p>
+<h3 id="broken-authetiacation-and-session-managment">Broken Authetiacation and Session Managment<a class="headerlink" href="#broken-authetiacation-and-session-managment" title="Permanent link">¶</a></h3>
+<p>Broken Authentication involves all kinds of flaws that are caused by 
+an error in implementations of authentication and/or session management.
+ This category includes some time-based login errors , or if any user 
+forgets to log out from his account when he was logged in any public 
+places such that his account could be hijacked. And sometime this could 
+be also due to some session</p>
+<h3 id="sensitive-data-exposure">Sensitive Data Exposure<a class="headerlink" href="#sensitive-data-exposure" title="Permanent link">¶</a></h3>
+<p>This occurs when the application is not given the adequate protection
+ to the sensitive data. The data can be anything from passwords, session
+ tokens, credit card data to private health data and more can be 
+exposed.</p>
+<h3 id="xml-external-entity">XML External Entity<a class="headerlink" href="#xml-external-entity" title="Permanent link">¶</a></h3>
+<p>XXE allows attackers to abuse external entities when an XML document 
+is parsed. If this happens, the attacker can read local files on the 
+server, force the parser to make network requests within the local 
+network, or use recursive linking to perform a DoS attack.</p>
+<h3 id="broken-access-control">Broken Access Control<a class="headerlink" href="#broken-access-control" title="Permanent link">¶</a></h3>
+<p>Broken Access Control is vulnerability category that covers all 
+access control issues that can make your website vulnerable and can 
+often be found in web applications that have gradually grown in size 
+without any of proper limitation and some access security. The category 
+is the result of merging Insecure Direct Object References and Missing 
+Function level. </p>
+<h3 id="security-misconfiguration">Security Misconfiguration<a class="headerlink" href="#security-misconfiguration" title="Permanent link">¶</a></h3>
+<p>Security misconfiguration is a very common vulnerability category 
+that occurs when a component is susceptible to attack due to an insecure
+ configuration. At worst, exploiting a security misconfiguration can 
+lead to a full takeover.</p>
+<h3 id="cross-site-scripting">Cross-Site Scripting<a class="headerlink" href="#cross-site-scripting" title="Permanent link">¶</a></h3>
+<p>Cross-site Scripting is a type of attack that can be carried out to 
+compromise users of a website. The exploitation of an XSS flaw enables 
+the attacker to inject client-side scripts into web pages viewed by 
+users. This script many a time found in JavaScript some times also found
+ in other languages too.</p>
+<h3 id="insecure-deserialization">Insecure Deserialization<a class="headerlink" href="#insecure-deserialization" title="Permanent link">¶</a></h3>
+<p>Insecure Deserialization allows attackers to transfer a payload using serialized objects. This happens when integrity ch
+ecks are not in place and deserialized data is not sanitized or validated.</p>
+<h3 id="using-components-with-know-vulnerability">Using Components With Know Vulnerability<a class="headerlink" href="#using-components-with-know-vulnerability" title="Permanent link">¶</a></h3>
+<p>It is very common for web services to include a component with a 
+known security vulnerability. The component with a known vulnerability 
+could be the operating system itself, or some internal issues with the 
+system or even a library used by one of these plugins, making this a 
+very frequent finding.</p>
+<h3 id="insufficient-logging-and-monitoring">Insufficient Logging and Monitoring<a class="headerlink" href="#insufficient-logging-and-monitoring" title="Permanent link">¶</a></h3>
+<p>Insufficient Logging and Monitoring covers the lack of best practices
+ that should be in place to prevent or damage control security breaches.
+ The category includes everything from unlogged events, logs that are 
+not stored properly and warnings where no action is taken within a 
+reasonable time.</p>
+<blockquote>
+<p>So for all these we need some high standards of coding and some stuff which we will use for the client side some of them are</p>
+</blockquote>
+<ul>
+<li>HTML</li>
+<li>JAVA SCRIPT </li>
+<li>CSS</li>
+<li>JQUERY </li>
+</ul>
+<p>Server Side languages :</p>
+<ul>
+<li>PHP</li>
+<li>JAVA SCRIPT </li>
+<li>RUBY </li>
+<li>PYTHON</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>And in between these play some key role between the server and the client some of them are:</p>
+<ol>
+<li><a href="https://teambi0s.gitlab.io/bi0s-wiki/web/cookies/">Cookies</a><img name="kl_1567872418249" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAABYklEQVQ4je2TsWoCQRCGZ2f3clcIgYMUASsLYSWVJJDKJkVqDT6Aj5CnyGP4AGfcOkiaS5f6IKKcCIcEDKdELLK6N5fqwhkvJg+Qv5zh+2amGJamKQAAMMYgn1ardUpE10mSgGVZD/1+/zXf/+K+C9rt9rHW+opzLqWUgohYGIZbrfWLbduPnue9Fwo6nY4Tx3EDES8qlQqvVqsohIDxeAyICMaYNAxDkyTJs+u6T91u9wMAQGQrLRaL23K5zGu1mnAcZ+ccIgJEZFJKa71eX06n03MAuNsREJFdr9fhUIwx4DgOJyKe1fAg8Yf8C3ICREyMMb8DiICISdEGk9ls9tfBkz0B53wQBIFerVY/UkIIGI1GmnM+2BMopeac857v+5soigrh4XC4YYz1lFLzrF70TCda65tSqeRKKY+01hBF0Xa5XMa2bd97nvcGcOAbszSbzTMiagAAIKKvlAry/Yz7BLsoqGp37mgQAAAAAElFTkSuQmCC" width="12" height="12"></li>
+<li>Sessions</li>
+<li>HTTP Headers</li>
+<li>HTTP Request</li>
+<li>HTTP Respond</li>
+</ol>
+</div>
+<p>And in http there are some types of methods some of them are :</p>
+<ol>
+<li>GET</li>
+<li>DELETE</li>
+<li>POST</li>
+<li>PUT</li>
+<li>CONNECT</li>
+<li>HEAD</li>
+<li>OPTIONS</li>
+<li>TRACE</li>
+<li>
+<p>PATCH</p>
+<p>So for every process, you do you will have some particular code like 
+some number, for example 200 will be the response of the web in the case
+ of the successful request </p>
+</li>
+</ol>
+<p>Some of them given in the following:</p>
+<ul>
+<li>2xx - OK (success)</li>
+<li>3xx - redirection(eg 302 moved temporarily)</li>
+<li>4xx - client side error(eg 401 unauthorized)</li>
+<li>5xx - server side error(eg 500 Internal Server Error )</li>
+</ul>
+<div class="md-typeset__scrollwrap"><div class="md-typeset__table"><table>
+<thead>
+<tr>
+<th>Compared URL</th>
+<th align="center">Out Come</th>
+<th align="right">Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>http://www.example.com/dir/page.html</td>
+<td align="center">SUCCESS</td>
+<td align="right">Same Protocol and Host</td>
+</tr>
+<tr>
+<td>http://www.example.com/dir2/someother.html</td>
+<td align="center">SUCCESS</td>
+<td align="right">Same Protocol and Host</td>
+</tr>
+<tr>
+<td>http://www.example.com81/dir/someother.html</td>
+<td align="center">FAILURE</td>
+<td align="right">Same protocol and host but difference port</td>
+</tr>
+<tr>
+<td>http://www.example.com/dir/page.html</td>
+<td align="center">FAILURE</td>
+<td align="right">Different protocol</td>
+</tr>
+<tr>
+<td>http://en.xample.com/dir/someother.html</td>
+<td align="center">FAILURE</td>
+<td align="right">Different host</td>
+</tr>
+<tr>
+<td>http://example.com81/dir/someother.html</td>
+<td align="center">FAILURE</td>
+<td align="right">Different host(exact match is required )</td>
+</tr>
+<tr>
+<td>http://V2.example.com/dir/page.html</td>
+<td align="center">FAILURE</td>
+<td align="right">Different host(exact match is required )</td>
+</tr>
+</tbody>
+</table></div></div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/crypto/rsa/" title="RSA" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+RSA
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/web/cookies/" title="Cookies" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Cookies
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}

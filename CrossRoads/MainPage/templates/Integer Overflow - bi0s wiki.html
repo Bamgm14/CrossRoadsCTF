@@ -1,0 +1,182 @@
+{% extends "bi0s_main.html" %}
+{% block title %}
+<title>Integer Overflow - bi0s wiki</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 527px;">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a href="https://gitlab.com/teambi0s/bi0s-wiki/blob/master/docs/pwning/integer.md" title="Edit this page" class="md-icon md-content__icon"></a><img name="kl_1567871789350" style="width: 12px; height: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAB3ElEQVQ4jY2TPWhTURTH/+e8l7QNJg0qCJpCSdEnONTFDk5udfILs9mS6iJYpI4VnURXUcRJrFG3gm3tXLpIxaUUIVA/iLRJayQ2Nk1q7cu99zjUF/JhQv7jOff/O+fcwyERAQAQEaoVjsdOirgP93L+W5svJpeq8xVfPWD/yPkepekBWbjETl8nM0h9XtkRV72xLbmdn5hJ/xdw4OaVkC6U7oBwg6MRH0d7fGTbQDoLIYKUXa2/rO5C6SdWOHh/4/HrLQCwvZZUoZi2Dh/ysdPbRZ0dNeOQCMj2WXTiaMCUtsdUKn0dQHcNAEZCVr+DViJjYAW6/NqI34txS0eVIqEwRgfONMTbApyORDE3PIbF9dX2AKPHTyESCFbMExeGMTL9EguZVHuAxY3vmBscwtkjfS3NTQELuQzi72bwaGAQ8elEUzNQtQUiLsmf3X3eCt/n1uBMPQUy2bqSDCIuNXQgjHnJ5kzTUt47rUQY8w0AG2ZcLX/bkc2t5m5mlJdTv22Y8QZAPjGbBPHl8oePRb2yruu9BjBu8msRGrF8YjZZGb3+mA5ePee4ip9xoKOfj/UGSRuYtR/b+ldxyW/paz+fv/0EtLhGT91DF2NgubtXnu4VXk1N1vzFP99f037PUFbu4yIAAAAASUVORK5CYII=" width="12" height="12">
+<h1 id="integer-overflow">Integer Overflow<a class="headerlink" href="#integer-overflow" title="Permanent link">¶</a></h1>
+<p>When you define a variable in C specific amount of space is allocated to store that data in memory , a variable defined as <code>int</code> data type in C will occupy 4 bytes of space</p>
+<div class="md-typeset__scrollwrap"><div class="md-typeset__table"><table>
+<thead>
+<tr>
+<th>C declaration</th>
+<th></th>
+<th>Bytes</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Signed</td>
+<td>Unsigned</td>
+<td>32bit</td>
+<td>64bit</td>
+</tr>
+<tr>
+<td>char</td>
+<td>unsigned char</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>short</td>
+<td>unsigned short</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>int</td>
+<td>unsigned int</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>long</td>
+<td>unsigned long</td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr>
+<td>char *</td>
+<td></td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr>
+<td>flat</td>
+<td></td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>double</td>
+<td></td>
+<td>8</td>
+<td>8</td>
+</tr>
+</tbody>
+</table></div></div>
+<p>You can't assign values which take more space to store in memory. 
+When you try to do that an overflow will occure , and the overflowed 
+bits will be ignored.</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite" id="__code_0"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">integer</span> <span class="o">=</span> <span class="mi">4294967295</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">integer</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Try running the above code .</p>
+<p>Rather than showing 4294967296 , which is the expected result the 
+program printed 0 . This happed because . integer variable is declared 
+as a unsigned integer and the range of values which can be stored in 4 
+bytes of space is 0 - 0xffffffff (2 ** 32 -1 ). Thus adding one will 
+cause an overflow ( 1 + 0xffffffff = 0x100000000 ) and the extra bit 
+will be ignored and the result becomes 0</p>
+<table class="codehilitetable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite" id="__code_1"><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><pre><span></span>  <span class="mi">11111111111111111111111111111111</span>           <span class="o">:</span> <span class="mh">0xffffffff</span> <span class="p">(</span> <span class="mi">4294967295</span> <span class="p">)</span> 
+    <span class="o">+</span>                            <span class="mi">1</span>
+<span class="o">----------------------------------</span>
+ <span class="mi">100000000000000000000000000000000</span>
+ <span class="o">^^</span>                              <span class="o">|</span>
+ <span class="o">||</span>                              <span class="o">|</span>
+ <span class="o">|--------------------------------</span>
+ <span class="o">|</span>         <span class="mi">32</span> <span class="n">bit</span> <span class="p">(</span> <span class="mi">4</span> <span class="n">bytes</span> <span class="p">)</span>
+ <span class="n">Overflow</span>
+</pre></div>
+</td></tr></tbody></table>
+<div class="md-typeset__scrollwrap"><div class="md-typeset__table"><table>
+<thead>
+<tr>
+<th>C data type</th>
+<th>byte</th>
+<th>range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>4</td>
+<td>-2147483648 - 0 - 2147483647</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td>4</td>
+<td>0 - 4294967295</td>
+</tr>
+</tbody>
+</table></div></div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a href="/help/bi0s_wiki/pwning/format-string/leak/" title="Leaking Memory" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Leaking Memory
+</span>
+</div>
+</a>
+<a href="/help/bi0s_wiki/forensics/intro/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Introduction
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+</a>
+</nav>
+</div>
+{% endblock %}
