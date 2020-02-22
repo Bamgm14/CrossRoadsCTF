@@ -11,6 +11,7 @@ Website Port=8000
 Background Program Port=31337
 </p>
 <h2><b>Requirements</b></h2>
-<p>ncat</p>
-<p>MYSQL</p>
-<p>Python with MYSQL CONNECTOR and DJANGO</p>
+<p><a href="http://nmap.org/dist/ncat-portable-5.59BETA1.zip">ncat</a></p>
+<p><a href="https://dev.mysql.com/downloads/file/?id=492814">MYSQL</a></p>
+<p><a href="https://www.python.org/downloads/release/python-376/">Python with MYSQL CONNECTOR and DJANGO</a></p>
+This Is Purely For Windows. I am making a Docker Branch Soon.
