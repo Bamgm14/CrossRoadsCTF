@@ -10,7 +10,7 @@ Website Port=8000
 </p><p>
 Background Program Port=31337
 </p>
-<h1><b>Requirements</b></h1>
+<h2><b>Requirements</b></h2>
 <p>ncat</p>
 <p>MYSQL</p>
 <p>Python with MYSQL CONNECTOR and DJANGO</p>
