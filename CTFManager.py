@@ -37,9 +37,9 @@ if __name__ == "__main__":
         print("""
         python3 CTFManager.py --ip=<ip address> --cport=<website port> --bport=<background port range>
         Options:
-        --ip/-i [IP Address Going To Be Used]
-        --cport/-c [Website Connection Port]
-        --bport/-b [Background Port Range, by adding ports to background programs]
+        --ip/-i [IP Address Going To Be Used (Default=127.0.0.1)]
+        --cport/-c [Website Connection Port (Default=8000)]
+        --bport/-b [Background Port Range, by adding ports to background programs (Default=31337)]
         """)
         sys.exit(0)
     for x in sys.argv:
