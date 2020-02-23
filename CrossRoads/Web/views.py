@@ -13,7 +13,7 @@ cmds=['create database items',
 'insert into password values("CRsCTF{B33n","_h3r3}")']
 import mysql.connector as m
 user='root'
-password=''
+password='bamgm146'
 mydb=m.connect(host="localhost",
     user=user,
     passwd=password
