@@ -3,9 +3,12 @@ import multiprocessing as m
 import time as t
 import sys
 threads=[]
-settupinfo={'ip':'127.0.0.1','cport':8000,'bport':31337}
+settupinfo={'ip':'0.0.0.0','cport':8000,'bport':31337,'time':300}
+def Clear():
+    while True:
+        os.system("clear || cls")
+        t.sleep(settupinfo['time'])
 def Check(lst):
-    def Check(lst):
     for x in lst:
         if x.lower().endswith('.py'):
             return '"/bin/python3 '+x+'"'
@@ -31,6 +34,7 @@ def Start():
     threads.append(('Server',m.Process(target=StartServer)))
     for x in range(len(os.listdir(os.getcwd()+r'\Background'))):
         threads.append(('Back'+str(x+1),m.Process(target=StartBackGround,args=(x,))))
+    thread.append(('Clear',m.Process(target=Clear)))
     for x in threads:
         print(x[0]+' Starting Up')
         x[1].start()
@@ -38,11 +42,12 @@ if __name__ == "__main__":
     print("CTFManager:The Manager For This CTF")
     if "--help" in sys.argv:
         print("""
-        python3 CTFManager.py --ip=<ip address> --cport=<website port> --bport=<background port range>
+        python3 CTFManager.py --ip="<ip address>" --cport=<website port> --bport=<background port range> --screen-wipe=<time delay>
         Options:
         --ip/-i [IP Address Going To Be Used (Default=127.0.0.1)]
         --cport/-c [Website Connection Port (Default=8000)]
         --bport/-b [Background Port Range, by adding ports to background programs (Default=31337)]
+        --screen-wipe/-sw [Clears The Screen Of Excess Data]
         """)
         sys.exit(0)
     for x in sys.argv:
@@ -52,6 +57,9 @@ if __name__ == "__main__":
             settupinfo['bport']=x.split('=')[1]
         elif '-c' in x or '--cport' in x:
             settupinfo['cport']=x.split('=')[1]
+        elif '-sw' in x or '--screen-wipe' in x:
+            settupinfo['time']=x.split('=')[1]
+    print("Settings:"+str(settupinfo))
     Start()
 settings='''
 """
@@ -81,7 +89,7 @@ SECRET_KEY = '1' #Keep it secret.. set env on herokuapp with name 'KEY'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['{}']
+ALLOWED_HOSTS = ['{}','*']
 
 
 # Application definition
