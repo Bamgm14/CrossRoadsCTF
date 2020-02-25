@@ -6,7 +6,8 @@ threads=[]
 settupinfo={'ip':'0.0.0.0','cport':8000,'bport':31337,'time':300}
 def Clear():
     while True:
-        os.system("clear || cls")
+        if os.system('clear')==1:
+            os.system('cls')
         t.sleep(settupinfo['time'])
 def Check(lst):
     for x in lst:
@@ -15,7 +16,7 @@ def Check(lst):
         elif x.lower().endswith('.elf'):
             return r"./"+x
         elif x.lower().endswith('.exe'):
-            return r".\"+x
+            return r".\\"+x
 def StartServer():
     print('Start')
     lst=[]
@@ -34,7 +35,7 @@ def Start():
     threads.append(('Server',m.Process(target=StartServer)))
     for x in range(len(os.listdir(os.getcwd()+r'\Background'))):
         threads.append(('Back'+str(x+1),m.Process(target=StartBackGround,args=(x,))))
-    thread.append(('Clear',m.Process(target=Clear)))
+    threads.append(('Clear',m.Process(target=Clear)))
     for x in threads:
         print(x[0]+' Starting Up')
         x[1].start()
