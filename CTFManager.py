@@ -5,11 +5,14 @@ import sys
 threads=[]
 settupinfo={'ip':'127.0.0.1','cport':8000,'bport':31337}
 def Check(lst):
+    def Check(lst):
     for x in lst:
         if x.lower().endswith('.py'):
-            return '"python3 '+x+'"'
-        if x.lower().endswith('.exe'):
-            return x
+            return '"/bin/python3 '+x+'"'
+        elif x.lower().endswith('.elf'):
+            return r"./"+x
+        elif x.lower().endswith('.exe'):
+            return r".\"+x
 def StartServer():
     print('Start')
     lst=[]
