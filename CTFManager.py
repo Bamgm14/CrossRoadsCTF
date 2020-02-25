@@ -16,7 +16,7 @@ def Check(lst):
         elif x.lower().endswith('.elf'):
             return r"./"+x
         elif x.lower().endswith('.exe'):
-            return r".\\"+x
+            return r"./"+x
 def StartServer():
     print('Start')
     lst=[]
