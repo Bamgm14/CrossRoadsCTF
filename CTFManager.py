@@ -14,22 +14,22 @@ def Check(lst):
     for x in lst:
         if x.lower().endswith('.py'):
             return '"/bin/python3 '+x+'"'
-        elif x.lower().endswith('.elf'):
+        elif x.lower().endswith('.elf') and sys.platform=='linux':
             return r"./"+x
-        elif x.lower().endswith('.exe'):
+        elif x.lower().endswith('.exe') and sys.platform=='win32':
             return r"./"+x
 def StartServer():
     print('Start')
     lst=[]
-    with open("CrossRoads\\Constant.py",'w') as f:
+    with open("CrossRoads/Constant.py",'w') as f:
         f.write(Constant.format(settupinfo['username'],settupinfo['password'],settupinfo['ip']))
     os.system('cd CrossRoads && python3 manage.py runserver '+str(settupinfo['ip'])+':'+str(settupinfo['cport']))
 def StartBackGround(x):
     print('Start')
-    os.system('cd Background\\'+os.listdir(os.getcwd()+r'\Background')[x]+' && ncat -lvk '+str(settupinfo['ip'])+' '+str(settupinfo['bport']+x)+' -e '+str(Check(os.listdir(os.getcwd()+r'\\Background\\'+os.listdir(os.getcwd()+r'\Background')[x]))))
+    os.system('cd Background/'+os.listdir(os.getcwd()+r'/Background')[x]+' && ncat -lvk '+str(settupinfo['ip'])+' '+str(settupinfo['bport']+x)+' -e '+str(Check(os.listdir(os.getcwd()+r'/Background/'+os.listdir(os.getcwd()+r'/Background')[x]))))
 def Start():
     threads.append(('Server',m.Process(target=StartServer)))
-    for x in range(len(os.listdir(os.getcwd()+r'\Background'))):
+    for x in range(len(os.listdir(os.getcwd()+r'/Background'))):
         threads.append(('Back'+str(x+1),m.Process(target=StartBackGround,args=(x,))))
     threads.append(('Clear',m.Process(target=Clear)))
     for x in threads:
