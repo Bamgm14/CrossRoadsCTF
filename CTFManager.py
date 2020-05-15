@@ -39,7 +39,7 @@ if __name__ == "__main__":
     print("CTFManager:The Manager For This CTF")
     if "--help" in sys.argv or "-h" in sys.argv:
         print("""
-        python3 CTFManager.py --ip="<ip address>" --cport=<website port> --bport=<background port range> --screen-wipe=<time delay>
+        python3 CTFManager.py --ip="<ip address>" --cport=<website port> --bport=<background port range> --screen-wipe=<time delay> --mysqluser="<username>" --mysqlpassword="<password>"[Not Adviced]
         Options:
         --ip/-i [IP Address Going To Be Used (Default=127.0.0.1)]
         --cport/-c [Website Connection Port (Default=8000)]
