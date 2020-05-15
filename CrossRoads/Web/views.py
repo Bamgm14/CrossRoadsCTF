@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import Constant as c
 cmds=['create database items',
 'create database madhatter',
 'use items',
@@ -12,8 +13,8 @@ cmds=['create database items',
 'create table password(Answer1 varchar(25) primary key,Answer2 varchar(25))',
 'insert into password values("CRsCTF{B33n","_h3r3}")']
 import mysql.connector as m
-user='root'
-password='bamgm146'
+user=c.user
+password=c.password
 mydb=m.connect(host="localhost",
     user=user,
     passwd=password
