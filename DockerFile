@@ -1,0 +1,10 @@
+FROM ubuntu:19.10
+RUN apt-get update
+RUN apt-get install apt-utils -y  
+RUN apt-get update 
+RUN apt-get upgrade -y
+RUN apt-get install python3 openssh-server ncat python3-pip rpm alien git libssh2-1 net-tools iputils-ping mysql-server mysql-client wget unzip -y
+RUN pip3 install django mysql-connector-python 
+RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+RUN unzip ngrok-stable-linux-amd64.zip -d /bin/
+RUN git clone https://github.com/Bamgm14/CrossRoadsCTF.git
