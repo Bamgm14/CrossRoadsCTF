@@ -61,6 +61,7 @@ if __name__ == "__main__":
         elif '-mu' in x or '--mysqluser' in x:
             settupinfo['username']=x.split('=')[1]
         elif '-mp' in x or '--mysqlpassword' in x:
+            print("[!]WARNING:It is not advised to put password in command line")
             settupinfo['password']=x.split('=')[1]
     if not settupinfo['username']:
         settupinfo['username']=input("MySQL Username:")
