@@ -48,7 +48,7 @@ def chal1(request):
     context={'rows':row,'e':e,'cmd':cmd}
     return render(request,'test.html',context)
 def chal2(request):
-    row=''()
+    row=''
     e='No Errors'
     mydb=m.connect(host="localhost",
     user=user,
