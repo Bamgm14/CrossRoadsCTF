@@ -18,19 +18,23 @@ def Check(lst):
             return r"./"+x
         elif x.lower().endswith('.exe') and sys.platform=='win32':
             return r"./"+x
-def StartServer():
+def StartServer(info):
     print('Start')
     lst=[]
     with open("CrossRoads/Constant.py",'w') as f:
-        f.write(Constant.format(settupinfo['username'],settupinfo['password'],settupinfo['ip']))
-    os.system('cd CrossRoads && python3 manage.py runserver '+str(settupinfo['ip'])+':'+str(settupinfo['cport']))
-def StartBackGround(x):
+        Constant='''user="{0}"
+password="{1}"
+ip="{2}"
+'''
+        f.write(Constant.format(info['username'],info['password'],info['ip']))
+    os.system('cd CrossRoads && python3 manage.py runserver '+str(info['ip'])+':'+str(info['cport']))
+def StartBackGround(x,info):
     print('Start')
-    os.system('cd Background/'+os.listdir(os.getcwd()+r'/Background')[x]+' && ncat -lvk '+str(settupinfo['ip'])+' '+str(settupinfo['bport']+x)+' -e '+str(Check(os.listdir(os.getcwd()+r'/Background/'+os.listdir(os.getcwd()+r'/Background')[x]))))
-def Start():
-    threads.append(('Server',m.Process(target=StartServer)))
+    os.system('cd Background/'+os.listdir(os.getcwd()+r'/Background')[x]+' && ncat -lvk '+str(info['ip'])+' '+str(info['bport']+x)+' -e '+str(Check(os.listdir(os.getcwd()+r'/Background/'+os.listdir(os.getcwd()+r'/Background')[x]))))
+def Start(info):
+    threads.append(('Server',m.Process(target=StartServer,args=(info,))))
     for x in range(len(os.listdir(os.getcwd()+r'/Background'))):
-        threads.append(('Back'+str(x+1),m.Process(target=StartBackGround,args=(x,))))
+        threads.append(('Back'+str(x+1),m.Process(target=StartBackGround,args=(x,info))))
     threads.append(('Clear',m.Process(target=Clear)))
     for x in threads:
         print(x[0]+' Starting Up')
@@ -67,10 +71,8 @@ if __name__ == "__main__":
         settupinfo['username']=input("MySQL Username:")
     if not settupinfo['password']:
         settupinfo['password']=getpass('MySQL Password:')
+    if sys.platform=='linux':
+        os.system("service mysql start")
     print("Settings:"+str(settupinfo))
-    Start()
-Constant='''
-user="{0}"
-password="{1}"
-ip="{2}"
-'''
+    Start(settupinfo)
+
