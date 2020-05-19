@@ -1,0 +1,10 @@
+FROM ubuntu:20.04
+COPY . .
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install apt-utils net-tools systemctl sudo -y
+RUN apt-get install python3 python3-pip ncat git iputils-ping mysql-server mysql-client -y
+RUN pip3 install django mysql-connector-python
+#When using Docker please add the a Username and Password
+RUN echo Unless You Have Edited this docker, the Username and password is toor
+RUN mysql -e "create user toor identified by 'toor'"
