@@ -1,10 +1,12 @@
 import os
 import multiprocessing as m
+import docker as d
 import time as t
 import sys
 from getpass import getpass
 threads=[]
-settupinfo={'ip':'0.0.0.0','cport':8000,'bport':31337,'time':300,'username':None,'password':None}
+client=d.from_env()
+settupinfo={'ip':'0.0.0.0','cport':8000,'bport':31337,'time':300,'username':None,'password':None,'docker':False}
 try:
     if sys.platform=='linux':
         try:
@@ -23,6 +25,8 @@ def Clear():
 def Check(lst):
     for x in lst:
         if x.lower().endswith('.py'):
+            if sys.platform=='linux':
+                return '"/bin/python3 '+x+'"'
             return '"python3 '+x+'"'
         elif x.lower().endswith('.elf') and sys.platform=='linux':
             return r"./"+x
@@ -61,6 +65,7 @@ if __name__ == "__main__":
         --screen-wipe/-sw [Clears The Screen Of Excess Data]
         --mysqluser/-mu [MySQL Username]
         --mysqlpassword/-mp [MySQL Password]
+        --dockermode/-d [Start a Docker Envirnment]
         """)
         sys.exit(0)
     for x in sys.argv:
@@ -77,11 +82,17 @@ if __name__ == "__main__":
         elif '-mp' in x or '--mysqlpassword' in x:
             print("[!]WARNING:It is not advised to put password in command line")
             settupinfo['password']=x.split('=')[1]
+        elif '-d' in x:
+            settupinfo['docker']=True
     if not settupinfo['username']:
         settupinfo['username']=input("MySQL Username:")
     if not settupinfo['password']:
         settupinfo['password']=getpass('MySQL Password:')
-    if sys.platform=='linux':
-        os.system("service mysql start")
-    Start(settupinfo)
+    if not settupinfo['docker']:
+        Start(settupinfo)
+    if settupinfo['docker']:
+        os.system('docker build -t ctfmanager .')
+        client.containers.run('ctfmanager','python3 CTFManager.py -mu={0} -mp={1}'.format(settupinfo['username'],settupinfo['password']),detach=True,ports={'{0}/tcp'.format(x):x for x in [settupinfo['cport']]+[settupinfo['bport']+x for x in range(len(os.listdir(os.getcwd()+r'/Background')))]})
+        
+    
 
