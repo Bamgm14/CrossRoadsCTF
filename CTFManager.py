@@ -68,6 +68,11 @@ if __name__ == "__main__":
         --dockermode/-d [Start a Docker Envirnment]
         """)
         sys.exit(0)
+    try:
+        os.system('ncat')
+    except:
+        if sys.platform=='linux':
+            os.system('sudo apt get ncat')
     for x in sys.argv:
         if '--ip' in x or '-i' in x:
             settupinfo['ip']=x.split('=')[1]
